@@ -1,0 +1,233 @@
+\chapter{Elementary Theory of Power Series}
+\label{chap:power-series}
+In this short chapter, we provide a very basic exposition of power series; the material should be familiar from real analysis. We are not yet equipped to prove the most general properties of power series (they lie on complex integration), but we are in a position to appreciate why, of all series with analytic terms, the power series with complex coefficients are the simplest.
+
+\section{Sequences}
+Recall:
+\begin{definition}
+	The sequence $\{a_n\}_{n=1}^{\infty}$ is said to have the limit $L$, or that it \emph{converges to $A$}, if for every $\eps>0$ there exists $N \ge 1$ such that for all $n \ge N$, $\abs{a_n-L}<\eps$.
+	
+	A sequence which does not converge is said to \emph{diverge}.
+	
+	If $\lim_{n \rightarrow \infty}a_n=\infty$ (here, all terms are complex), meaning that for every $C \in \RR$, there exists $n \ge 1$ such that $a_n>C$, we say that the sequence is \emph{unbounded}, or that it \emph{diverges to infinity}. 
+\end{definition}
+
+Only in rare cases can the convergence of a sequence be proved by exhibiting the limit, so we need a method to simply prove that a limit exists, even if we do not know what it is. The reader may recall the \textit{Cauchy criterion} for convergence.
+
+\begin{definition}
+	A sequence $\{a_n\}_{n=1}^{\infty}$ is said to be \emph{Cauchy} if for every $\eps>0$, there exists $N \ge 1$ such that for all $m,n \ge N$, $\abs{a_m-a_n}<\eps$.
+\end{definition}
+
+It should be obvious that every convergent sequence is Cauchy. For suppose $a_n \rightarrow L$. Then, for every $\eps>0$, there exists $N$ such that for all $n \ge N$, $\abs{a_n-L}<\eps/2$. By the triangle inequality, for all $m,n \ge N$, $$\abs{a_m-a_n} \le \abs{a_m-L}+\abs{L-a_n}=\abs{a_m-L}+\abs{a_n-L}<\dfrac{\eps}{2}+\dfrac{\eps}{2}=\eps,$$ so $\{a_n\}$ is a Cauchy sequence.
+
+The other direction is not necessarily true for any metric space, only so-called \textit{complete} ones. However, one construction of the real numbers from the rationals $\QQ$ is as the completion of $\QQ$ with respect to the standard Euclidean metric $\abs{\cdot}$, so we can certainly invoke that property to prove that every complex Cauchy sequence is convergent. But let's build it up from more elementary methods.
+
+The real and imaginary parts of a Cauchy sequence are again Cauchy, and if they converge, so does the original sequence. So we just need to prove the sufficiency of the Cauchy condition for real-valued sequences. We first use this opportunity to recall the notion of \emph{limits inferior} and \emph{superior}.
+
+\begin{definition}
+	Given a real sequence $\{a_n\}_{n=1}^{\infty}$, we shall set $\alpha_{1,n}=\max\{a_1,\dots,a_n\}$. The sequence $\{\alpha_{1,n}\}_{n=1}^{\infty}$ is monotonically increasing; hence, it converges to some limit $A_1=\sup_{n \ge 1}\alpha_{1,n}$, which may be $\infty$. Construct in the same way the supremum $A_k$ of the corresponding sequence $\{\alpha_{k,n}\}$ obtained from the successive subsequences $\{a_n\}_{n=k}^{\infty}$ for $k=1,2,\dots$. Note that $$\alpha_{k,n}=\max\{a_k,a_{k+1},\dots,a_n\} \le \max\{a_{k-1},\alpha_k,\alpha_{k+1},\dots,a_n\}=\alpha_{k-1,n},$$ so $\{A_k\}$ is a monotonically decreasing sequence. Denote its limit by $A$, which may be finite, $+\infty$, or $-\infty$. In any case, we write $$A=\limsup_{n \rightarrow \infty} a_n,$$ and this $A$ is called the \emph{limit superior} of $\{a_n\}$.
+	
+	The \emph{limit inferior} is defined in the same way with inequalities reversed.
+\end{definition}
+
+Another way to define the limit superior is as the supremum of the set of subsequential limits of $\{a_n\}$, and the limit inferior as the corresponding infinum. But the easiest property to exploit is the following: if $A$, the limit superior, is finite, and $\eps>0$, then there exists an $N$ such that $A_N<A+\eps$, and it follows that $a_n \le A_N<A+\eps$ for all $n \ge N$. In the opposite direction, if $a_n \le A-\eps$ for $n \ge N$, then $A_N \le A-\eps$, which is impossible by the definition of supremum. In other words, there are arbitrarily large $n$ for which $a_n>A-\eps$. If $A=+\infty$, then there are arbitrarliy large $a_n$, and $A=-\infty$ if and only if $a_n \rightarrow -\infty$. In all cases, there cannot be more than one number $A$ with these properties.
+
+It is quite clear that $\{a_n\}$ converges if and only if $$\liminf_{n \rightarrow \infty} a_n=\lim_{n \rightarrow \infty}a_n=\limsup_{n \rightarrow \infty}a_n.$$
+
+Now we return to the sufficiency of Cauchy's condition. From $\abs{a_n-a_N}<\eps$ we obtain $\abs{a_n}<\abs{a_N}+\eps$ for all $n \ge N$, and it follows that $A=\limsup_{n \rightarrow \infty}a_n$ and $a=\liminf_{n \rightarrow \infty}a_n$ are both finite. If $a \neq A$ choose $$\eps=\dfrac{A-a}{3}>0,$$ and find $N_0$ such that $\abs{a_m-a_n}<\eps$ for all $m,n \ge N_0$. By definition of $a$ and $A$ there also exists $N_1$ such that $a_n<A+\eps$ for all $n \ge N_1$, and an $N_2$ such that $a_n>a-\eps$ for all $n \ge N_2$. Therefore, by the triangle inequality, we have $$A-a=\abs{(A-a_m)+(a_m-a_n)+(a_n-a)} \le \abs{A-a_m}+\abs{a_m-a_n}+\abs{a_n-a}<3\eps,$$ a contradiction. We conclude that $a=A$, and the sequence converges.
+
+\begin{exercise}
+	Prove that $$\limsup_{n \rightarrow \infty}a_n+\limsup_{n \rightarrow \infty} b_n \le \limsup_{n \rightarrow \infty} (a_n+b_n).$$
+	
+	\begin{sol}
+		First of all, if either $\limsup a_n$ or $\limsup b_n$ is $\infty$, then $a_n+b_n$ becomes arbitrarily large, so the inequality holds trivially. Similarly, if either $\limsup a_n$ or $\limsup b_n$ is $-\infty$, then the inequality is vacuously true by the property of the extended real numbers.
+		
+		So assume that both $\limsup a_n$ and $\limsup b_n$ are finite, equal to $A$ and $B$, respectively. Suppose for the sake of contradiction that $C=\limsup (a_n+b_n)<A+B$. Choose $\eps=((A+B)-C)/2>0$. Then there exists $N$ such that for all $n \ge N$, $$a_n+b_n<C+\eps<A+B.$$ Rearranging gives $$(A-a_n)+(B-b_n)>0,$$ so either $A-a_n>0$ or $B-b_n>0$ for all $n \ge N$. This is impossible by the definitions of $A$ and $B$, so we conclude that $C \ge A+B$.
+	\end{sol}
+\end{exercise}
+
+\section{Series}
+Given a sequence $\{a_n\}_{n=1}^{\infty}$, an infinite series is a formal infinite sum $$a_1+a_2+\cdots+a_n+\cdots.$$ Associate with this series is the sequence of (finite) partial sums $$S_N=a_1+a_2+\cdots+a_N.$$
+
+\begin{definition}
+	An infinite series $\sum_{n=1}^{\infty}a_n$ is said to \textit{converge} to $S$ if and only if the sequence of partial sums $S_N=\sum_{n=1}^{N}a_n$ converges to $S$.
+\end{definition}
+
+Applied to a series the Cauchy criterion gives that the series $\sum_{n=1}^{\infty} a_n$ converges if and only if for every $\eps>0$, there exists $N$ such that $\abs{a_n+a_{n+1}+\cdots+a_{n+p}}<\eps$ for all $n \ge N$ and $p \ge 0$. When $p=0$, we get $\abs{a_n}<\eps$. Therefore,
+\begin{proposition}
+	A series $\sum_{n=1}^{\infty}a_n$ converges only if $\lim_{n \rightarrow \infty}a_n=0$.
+\end{proposition}
+
+The condition that the terms of a series tend to $0$ is \textit{not} sufficient, however, for convergence of the series, as the following canonical example shows.
+
+\begin{example}
+	Consider the \emph{harmonic series} $\sum_{n=1}^{\infty} \frac{1}{n}=1+\frac{1}{2}+\frac{1}{3}+\cdots+\frac{1}{n}+\cdots$. This series is divergent. To see why, observe that
+	\begin{align*}
+		1 &\ge 1, \\
+		1+\dfrac{1}{2} &\ge 1+\dfrac{1}{2}, \\
+		1+\dfrac{1}{2}+\dfrac{1}{3}+\dfrac{1}{4} &\ge 1+\dfrac{1}{2}+\dfrac{1}{4}+\dfrac{1}{4}=1+1, \\
+		\vdots.
+	\end{align*}
+	In general, we find that 
+	\begin{align*}
+	S_{2^k} &=\sum_{n=1}^{2^k}\dfrac{1}{n} \\
+	&=1+\sum_{m=0}^{k-1}\sum_{n=2^m+1}^{2^{m+1}}\dfrac{1}{n} \\
+	&\ge \sum_{m=0}^{k-1}\sum_{n=2^m+1}^{2^{m+1}}\dfrac{1}{2^{m+1}} \\
+	&=1+\sum_{m=0}^{k-1} \dfrac{1}{2} \\
+	&=1+\dfrac{k}{2}.
+	\end{align*}
+	Hence, by comparison, the subsequence of partial sums $\{S_{2^k}\}$ diverges, so the series as a whole cannot converge.
+\end{example}
+
+A series $\sum_{n=1}^{\infty}a_n$ can be compared with $\sum_{n=1}^{\infty}\abs{a_n}$. Since $a_n \le \abs{a_n}$, it follows that if a series is absolutely convergent, then it is conditionally convergent, as well.
+
+\section{Uniform Convergence}
+Consider a sequence of functions $\{f_n\}_{n=1}^{\infty}$, all defined on the same set $E$. If the sequence of values $\{f_n(x)\}$ converges for every $x$ that belongs to $E$, then the limits form another function $f(x)$.
+
+\begin{definition}
+	A sequence of functions $\{f_n\}_{n=1}^{\infty}$ is said to \textit{converge uniformly} to $f$ on $E$ if and only if for every $\eps>0$, there exists $N$ such that for all $n \ge N$, $\abs{f_n(x)-f(x)}<\eps$ \textit{for all} $x \in E$.
+	
+	It is said to \textit{converge pointwise} if for all $x \in E$, $f_n(x) \rightarrow f(x)$.
+\end{definition}
+
+Clearly, if a sequence of functions converges uniformly, then it also converges pointwise.
+
+\begin{proposition}
+	The limit function of a uniformly convergent sequence of continuous functions is itself continuous.
+\end{proposition}
+\begin{proof}
+	Suppose that the functions $f_n$ are continuous and tend uniformly to $f$ on the set $E$. For any $\eps>0$ we are able to find an $n$ such that $\abs{f_n(x)-f(x)}<\eps/3$ for all $x \in E$. Let $x_0 \in E$. Because $f_n$ is continuous we can find $\delta>0$ such that $\abs{f_n(x)-f_n(x_0)}<\eps/3$ for all $x \in E$ with $\abs{x-x_0}<\delta$. Therefore, $$\abs{f(x)-f(x_0)} \le \abs{f_n(x)-f_n(x_0)}+\abs{f_n(x_0)-f(x_0)}+\abs{f(x)-f_n(x)}<\dfrac{\eps}{3}+\dfrac{\eps}{3}+\dfrac{\eps}{3}=\eps,$$ and $f$ is continuous.
+\end{proof}
+
+Cauchy's condition translates to the following for function sequences:
+\begin{proposition}
+	The sequence $\{f_n\}$ converges uniformly on $E$ if and only if for every $\eps>0$ there exists an $N$ such that $\abs{f_m(x)-f_n(x)}<\eps$ for all $m,n \ge N$.
+\end{proposition}
+
+The proof of sufficiency is easy; simply let $m \rightarrow \infty$ in $\abs{f_m(x)-f_n(x)}<\eps$.
+
+For practical use the following test is most applicable: let $\{f_n\}$ be a sequence of functions $\{f_n\}$. If there exists a convergent sequence of constants $\{a_n\}$ such that $\abs{f_m(x)-f_n(x)} \le \abs{a_m-a_n}$ for all $x \in E$, then $\{f_n\}$ converges uniformly.
+
+In the case of series this criterion, in a somewhat weaker form, becomes particularly simple. We say that a series with variable terms $$f_1(x)+f_2(x)+\cdots+f_n(x)+\cdots$$ has the series with positive terms $$a_1+a_2+\cdots+a_n+\cdots$$ as a \emph{majorant} if it is true that $\abs{f_n(x)} \le Ma_n$ for some constant $M$ and for all sufficiently large $a_n$; conversely, the first series is a \emph{minorant} of the second. In these circumstances we have $$\abs{f_n(x)+f_{n+1}(x)+\cdots+f_{n+p}(x)} \le \abs{f_n(x)}+\abs{f_{n+1}(x)}+\cdots+\abs{f_{n+p}(x)} \le M(a_n+a_{n+1}+\cdots+a_{n+p}),$$ so if the majorant converges, so does the minorant, uniformly. We have proved:
+\begin{proposition}[Weierstrass $M$-test]
+	Let $\{f_n\}$ be a sequence of functions, and let $\sum_{n=1}^{\infty}a_n$ be a series that converges absolutely. If $\{a_n\}$ majorizes $\{f_n\}$, then the series $\sum_{n=1}^{\infty}f_n(x)$ converges uniformly and absolutely.
+\end{proposition}
+
+\begin{exercise}
+	If $U=u_1+u_2+\cdots$ and $V=v_1+v_2+\cdots$ are convergent series, prove that $UV=u_1v_1+(u_1v_2+u_2v_1)+(u_1v_3+u_2v_2+u_3v_1)+\cdots$ provided that at least one of the series is absolutely convergent. (This is called the \textit{Cauchy product} of the two series).
+	
+	\begin{sol}
+		Set $w_n \coloneqq \sum_{k=1}^{n}u_kv_{n-k+1}$, and
+		\begin{align*}
+			U_N &=\sum_{n=1}^{N}u_n, \\
+			V_N &=\sum_{n=1}^{N} v_n, \\
+			W_N &=\sum_{n=1}^{N} w_n.
+		\end{align*}
+		By rearrangement, we can write
+		\begin{align*}
+			W_N &=\sum_{n=1}^{N}w_n \\
+			&=\sum_{n=1}^{N}\sum_{k=1}^{n} u_kv_{n-k+1} \\
+			&=\sum_{k=1}^{N}\sum_{n=1}^{N-k+1}u_kv_n \\
+			&=\sum_{k=1}^{N}u_k\sum_{n=1}^{N-k+1}v_n \\
+			&=\sum_{k=1}^{N}u_kV_{N-k+1} \\
+			&=\sum_{n=1}^{N}u_{N-n+1}V_n.
+		\end{align*}
+		Adding $U_NV$ to both sides gives $$W_N=U_NV+\sum_{n=1}^{N}u_{N-n+1}\left(V_n-V\right).$$
+		
+		Suppose, without loss of generality, that $\sum_{n=1}^{\infty}u_n$ converges absolutely. Choose $\eps>0$. Then there exists $M_1$ such that for all $N \ge M_1$, $$\abs{V_N-V}< \dfrac{\eps}{3\sum_{n=1}^{\infty}\abs{v_n}}.$$ At the same time, since the series $u_n$ converges, its terms tend to zero, so there exists $M_2$ such that for all $N \ge M_2$, $$\abs{u_N}<\dfrac{\eps}{3M_1\max_{0 \le i<M_1}\abs{V_i-V}}$$. Finally, since $U_N \rightarrow U$, there exists $M_3$ such that for all $N \ge M_3$, $$\abs{U_N-U}<\dfrac{\eps}{3\abs{V}}.$$ Using these estimates, we have that for all $N \ge \max\{M_1+M_2,M_3\}$,
+		\begin{align*}
+			\abs{W_N-UV} &=\left\abs{\left(U_N-U\right)V+\sum_{n=1}^{N}u_{N-n+1}(V_n-V)\right} \\
+			&\le \abs{U_N-U}V+\sum_{n=1}^{M_1-1}\abs{u_{N-n+1}}\abs{V_n-V}+\sum_{n=M_1}^{N}\abs{u_{N-n+1}}\abs{V_n-V} \\
+			&>\dfrac{\eps}{3}+\dfrac{\eps}{3}+\dfrac{\eps}{3} \\
+			&=\eps,
+		\end{align*}
+		and $W_N \rightarrow UV$, as desired.
+	\end{sol}
+\end{exercise}
+
+\section{Power Series}
+A \emph{power series} is of the form $$a_0+a_1z+a_2z^2+\cdots+a_nz^n+\cdots,$$ where the coefficients $a_n$ and the variable $z$ are complex.
+
+\begin{example}
+	The \emph{geometric series} $$1+z+z^2+\cdots+z^n+\cdots$$ has the partial sums $$1+z+z^2+\cdots+z^{n-1}=\dfrac{1-z^n}{1-z}$$ and converges to $\frac{1}{1-z}$ for $\abs{z}<1$. It diverges otherwise.
+\end{example}
+
+As it turns out, the behavior of convergence for the geometric series is typical; every power series converges inside a circle and diverges outside the same circle, except that it may happen that the series converges only for $z=0$, or that it converges for all values of $z$.
+
+More precisely, we shall prove the following theorem due to Abel:
+\begin{theorem}[Abel]
+	For every power series there exists a number $R$, $0 \le R \le \infty$, called the \emph{radius of convergence}, with the following properties:
+	\begin{enumerate}
+		\item[(i)] The series converges absolutely for every $z$ with $\abs{z}<R$. If $0 \le \rho<R$ the convergence is uniform for $\abs{z} \le \rho$.
+		\item[(ii)] If $\abs{z}>R$ the terms of the series are unbounded, and the series is consequently divergent.
+		\item[(iii)] In $\abs{z}<R$ the sum of the series is an analytic function. The derivative can be obtained by termwise differentiation, and the derived series has the same radius of convergence.
+	\end{enumerate}
+\end{theorem}
+The circle $\abs{z}=R$ is called the \textit{radius of convergence}; nothing is claimed about the convergence on the circle.
+
+\begin{proof}
+	We shall show that the assertions of the theorem are true if $R$ is chosen according to the formula $$\dfrac{1}{R}=\limsup_{n \rightarrow \infty} \sqrt[n]{\abs{a_n}}.$$ This is known as \emph{Hadamard's formula} for the radius of convergence.
+	
+	If $\abs{z}<R$, we can find $\rho$ so that $\abs{z}<\rho<R$. Then $1/\rho>1/R$, and by the definition of limit superior there exists an $N$ such that $\abs{a_n}^{1/n}<1/\rho \then \abs{a_n}<1/\rho^n$ for all $n \ge N$. It follows that $\abs{a_nz^n}<\left(\frac{\abs{z}}{\rho}\right)^n$ for large $n$, so that the power series $\sum_{n=0}^{\infty}a_nz^n$ has a convergent geometric series as a majorant, and is consequently convergent. To prove the uniform convergence for $\abs{z} \le \rho<R$ we choose a $\rho'$ such that $\rho<\rho'<R$ and find $\abs{a_nz^n} \le \left(\frac{\rho}{\rho}\right)^n$ for $n \ge N$. Since the majorant is convergent and has constant terms we conclude by Weierstrass's $M$-test that the power series is uniformly convergent.
+	
+	Next, if $\abs{z}>R$, we choose $\rho$ so that $R<\rho<\abs{z}$. Since $1/\rho<1/R$ there are arbitrarily large $n$ such that $\abs{a_n}^{1/n}>1/\rho \then \abs{a_n}>1/\rho^n$. Thus $\abs{a_nz^n}>\left(\frac{\abs{z}}{\rho}\right)^n$ for infinitely many $n$, and the terms are unbounded.
+	
+	The derived series $\sum_{n=1}^{\infty}na_nz^{n-1}$ has the same radius of convergence because $\sqrt[n]{n} \rightarrow 1$. To see why, set $\sqrt[n]{n}=1+\delta_n$. Then $\delta_n>0$, and by use of the Binomial Theorem $$n=(1+\delta_n)^n>1+\dfrac{1}{2}n(n-1)\delta_n^2.$$ This gives $\delta_n^2<2/n$, and hence $\delta_n \rightarrow 0$ by the Squeeze Theorem.
+	
+	By a similar argument to the one used to prove the result of Exercise 4.4, we can show that $\limsup_{n \rightarrow \infty} \sqrt[n]{na_n}=
+	\lim_{n \rightarrow \infty} \sqrt[n]{n} \cdot \limsup_{n \rightarrow \infty}\sqrt[n]{a_n}=\limsup_{n \rightarrow \infty}\sqrt[n]{a_n}$, so the radius of convergence is the same.
+	
+	Now, For $\abs{z}<R$ we shall write $$f(z)=\sum_{n=0}^{\infty}a_nz^n=s_n(z)+R_n(z),$$ where $$s_n(z)=a_0+a_1z+\cdots+a_{n-1}z^{n-1}, \quad R_n(z)=\sum_{k=n}^{\infty}a_kz^k,$$ and also $$f_1(z)=\sum_{n=1}^{\infty}na_nz^{n-1}=\lim_{n \rightarrow \infty}s_n(z).$$ We have to show that $f'(z)=f_1(z)$.
+	
+	Consider the identity $$\dfrac{f(z)-f(z_0)}{z-z_0}-f_1(z_0)=\left(\dfrac{s_n(z)-s_n(z_0)}{z-z_0}-s_n'(z_0)\right)+\left(s_n'(z_0)-f_1(z_0)\right)+\left(\dfrac{R_n(z)-R_n(z_0)}{z-z_0}\right),$$ where we assume that $z \neq z_0$ and $\abs{z},\abs{z_0}<\rho<R$. By factoring out $z-z_0$, the last term can be rewritten as $$\sum_{k=n}^{\infty}a_k\left(z^{k-1}+z^{k-2}z_0+\cdots+zz_0^{k-2}+z_0^{k-1}\right),$$ and we conclude that $$\left\abs{\dfrac{R_n(z)-R_n(z_0)}{z-z_0}\right} \le \sum_{k=n}^{\infty}k\abs{a_k}\rho^{k-1}.$$ Since right-hand side is the remainder term in a convergent series (seen by generating functions, for example), we can find $N_0$ such that for all $n \ge N$, we have $$\left\abs{\dfrac{R_n(z)-R_n(z_0)}{z-z_0}\right}<\dfrac{\eps}{3}.$$ There is also an $N_1$ such that $\abs{s_n'(z_0)-f_1(z_0)}<\eps/3$ for $n \ge N_1$ by the definition of $f_1(z_0)$. Choose a fixed $n \ge \max\{N_0,N_1\}$. By the definition of derivative we can find $\delta>0$ such that $0<\abs{z-z_0}<\delta$ implies $$\left\abs{\dfrac{s_n(z)-s_n(z_0)}{z-z_0}-s_n'(z_0)\right}<\dfrac{\eps}{3}.$$ Using these estimates, it follows that $$\left\abs{\dfrac{f(z)-f(z_0)}{z-z_0}-f_1(z_0)\right}<\eps$$ when $0<\abs{z-z_0}<\delta$. We have proved that $f'(z_0)$ exists and is equal to $f_1(z_0)$. Hence, $f(z)$ is analytic in the radius of convergence.
+\end{proof}
+
+By repeating this reasoning, we can conclude that a power series with positive radius of convergence has derivatives of all orders given by term-by-term differentiation, and we recover the familiar Taylor-Maclaurin expansion $$f(z)=f(0)+f'(0)z+\dfrac{f''(0)}{2!}z^2+\cdots+\dfrac{f^{(n)}(0)}{n!}z^n+\cdots.$$ We do now that this expansion is uniquely determined, if it exists, but the main part is still missing: namely, that every analyitc function has a Taylor series expansion.
+
+\begin{exercise}
+	Expand $\dfrac{2z+3}{z+1}$ in powers of $z-1$. What is the radius of convergence?
+	
+	\begin{sol}
+		Let $f(z)=(2z+3)/(z+1)$. First, we claim that, for all $n \ge 1$, $$f^{(n)}(z)=\dfrac{(-1)^n \cdot n!}{(z+1)^{n+1}}.$$ The proof is by induction on $n$. For the base case, we have
+		\begin{align*}
+			f'(z) &=\dfrac{(z+1)(2)-(2z+3)(1)}{(z+1)^2} \\
+			&=\dfrac{(2z+2)-(2z+3)}{(z+1)^2} \\
+			&=-\dfrac{1}{(z+1)^2}.
+		\end{align*}
+		Now, assume that the identity holds for some $n \ge 1$. Then,
+		\begin{align*}
+			f^{(n+1)}(z) &=\left(f^{(n)}\right)'(z) \\
+			&=\dfrac{-(-1)^{n} \cdot n! \cdot (n+1)(z+1)^n}{(z+1)^{2n+2}} \\
+			&=\dfrac{(-1)^{n+1} \cdot (n+1)!}{(z+1)^{n+2}},
+		\end{align*}
+		completing the induction and proving the claim.
+		
+		Hence, we have $$f^{(n)}(1)=\dfrac{(-1)^n \cdot n!}{2^{n+1}}$$ for all $n \ge 1$, so the $n$th Taylor coefficent, for $n \ge 1$, is $$\dfrac{f^{(n)}(1)}{n!}=\dfrac{(-1)^n}{2^{n+1}}=\dfrac{1}{2} \cdot \left(-\dfrac{1}{2}\right)^n.$$ We get that $$\dfrac{2z+3}{z+1}=\dfrac{1}{2}\left[5-\dfrac{1}{2}(z-1)+\dfrac{1}{4}(z-1)^2-\dfrac{1}{8}(z-1)^3+\cdots+\left(-\dfrac{1}{2}\right)^{n}(z-1)^n+\cdots\right].$$ Therefore, the radius of convergence is $$R=2 \cdot \dfrac{1}{2}=\boxed{1},$$ and the series converges for all $0<\abs{z}<2$.
+	\end{sol}
+\end{exercise}
+
+\section{Abel's Limit Theorem}
+There is a second theorem of Abel's which refers to the case where a power series converges at a point of the circle of convergence. We lose no generality by assuming that $R=1$ and that the convergence takes place at $z=1$.
+
+\begin{theorem}[Abel]
+	If $\sum_{n=0}^{\infty}a_n$ converges, then $f(z)=\sum_{n=0}^{\infty}a_nz^n$ tends to $f(1)$ as $z$ approaches $1$ in such a way that $\abs{1-z}/(1-\abs{z})$ remains bounded.
+\end{theorem}
+
+\begin{proof}
+	We may assume that $\sum_{n=1}^{\infty}a_n=0$, for this can be attained by adding a constant to $a_1$. We write $s_n=a_0+a_1z+\cdots+a_n$ and make use of the identity (summation by parts):
+	\begin{align*}
+		s_n(z) &=a_0+a_1z+\cdots+a_nz^n \\
+		&=s_0+(s_1-s_0)z+\cdots+(s_n-s_{n-1})z^n \\
+		&=s_0(1-z)+s_1(z-z^2)+\cdots+s_{n-1}(z^{n-1}-z^n)+s_nz^n \\
+		&=(1-z)(s_0+s_1z+\cdots+s_{n-1}z^{n-1})+s_nz^n.
+	\end{align*}
+	But $s_nz^n \rightarrow 0$, so we obtain the representation $$f(z)=(1-z)\sum_{n=0}^{\infty}s_nz^n.$$ We are assuming that $\abs{1-z} \le K(1-\abs{z})$, say, and that $s_n \rightarrow 0$. Choose $m$ large enough such that $\abs{s_n}<\eps$ for $n \ge m$. The remainder of the series $\sum_{n=m}^{\infty}s_nz^n$, from $n=m$ onward, is then dominated by the geometric series $\eps\sum_{n=m}^{\infty}\abs{z}^n=\eps\abs{z}^m/(1-\abs{z})<\eps/(1-\abs{z})$. It follows that $$\abs{f(z)} \le \abs{1-z} \cdot \left\abs{\sum_{n=0}^{m-1}s_nz^n\right}+K\eps.$$ The first term on the right can be made arbitrarily small by choosing $z$ sufficiently close to $1$, and we conclude that $f(z) \rightarrow 0=\sum_{n=0}^{\infty}a_n$ when $z \rightarrow 1$ subject to the stated restriction.
+\end{proof}
+
+\begin{remark}
+	Geometrically, the condition on $z$ means that $z$ stays in an angle less than $180^{\circ}$ with vertex $1$, symmetrically to the part $(-\infty,1)$ of the real axis (meaning that $z$ approaches $1$ in a non-tangential way). It is customary to say that the approach takes place in a \emph{Stolz angle}.
+\end{remark}
+
+
+
+   

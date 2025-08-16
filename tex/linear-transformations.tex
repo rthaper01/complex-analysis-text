@@ -1,0 +1,593 @@
+\chapter{Linear Transformations}
+\label{chap:linear-transformations}
+
+Of all analytic functions the first-order rational functions, known as linear or \emph{Möbius transformations} have the simplest mapping properties, for they define mappings of the extended plane onto itself which are at the same time conformal and topological. These linear transformations have also very remarkable geometric properties, and for that reason their importance goes far beyond serving as simple examples of conformal mappings.
+
+\section{The Linear Group}
+Recall that a \emph{linear fractional transformation} $$w=f(z)=\dfrac{az+b}{cz+d}$$ with $ad-bc \neq 0$ has an inverse $$z=S^{-1}(w)=\dfrac{dw-b}{-cw+a}.$$ The special values $S(\infty)=a/c$ and $S(-d/c)=\infty$ can be introduced either by convention or as limits for $z \rightarrow \infty$ and $z \rightarrow -d/c$. With the latter interpretation it becomes obvious that $S$ is a diffeomorphism of the extended complex plane onto itself, the topology being defined by distances on the Riemann sphere.
+
+For linear transformations we shall usually replace the notation $S(z)$ with $Sz$. The representation above is said to be normalized if $ad-bc=1$. It is clear that every linear transformation has two normalized representations, obtained from each other by changing the signs of the coefficients.
+
+A convenient way to express a linear transformation is by use of homogeneous coordinates. If we write $z=z_1/z_2$, $w=w_1/w_2$ we find that $w=Sz$ if
+\begin{align*}
+	w_1 &=az_1+bz_2, \\
+	w_2 &=cz_1+dz_2,
+\end{align*}
+or, in matrix notation, $$\begin{pmatrix}
+	w_1 \\
+	w_2
+\end{pmatrix}=\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}\begin{pmatrix}
+z_1 \\
+z_2
+\end{pmatrix}.$$ The main advantage of this notation is that it leads to a simple determination of a composite transformation $w=S_1S_2z$, which is the matrix product.
+
+We can verify that the set of linear transformations form a group with respect to multiplication, and we can identify this group with the one-dimensional projective group $\text{PL}_1(\CC)$ over the complex numbers, or -- using normalized representations -- the special linear group $\text{SL}_2(\CC)$, except this is a $2$-to-$1$ mapping as opposite matrices correspond to the same linear transformation.
+
+We shall make no further use of the matrix notation, except for pointing out the simplest transformations and their matrices:
+\begin{example}
+	$ $
+	\begin{enumerate}
+		\item The matrix $$\begin{pmatrix}
+			1 & \alpha \\
+			0 & 1
+		\end{pmatrix}$$ represents the linear transformation $w=z+\alpha$ and is called a \emph{parallel translation}.
+		\item The matrix $$\begin{pmatrix}
+			k & 0 \\
+			0 & 1
+		\end{pmatrix}$$ represents the linear transformation $w=kz$ and is a \emph{rotation} if $\abs{k}=1$ and a \emph{homothety} if $k$ is real and $k>0$. For arbitrary complex numbers $k$ the transformation is a homothety composed with a rotation.
+		\item The matrix $$\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+		\end{pmatrix}$$ represents $w=1/z$ and is called an \emph{inversion}.
+	\end{enumerate}
+\end{example}
+
+If $c \neq 0$ we can write 
+\begin{align*}
+\dfrac{az+b}{cz+d} &=\dfrac{az+b}{c\left(z+d/c\right)} \\
+&=\dfrac{acz+bc}{c^2(z+d/c)} \\
+&=\dfrac{acz+bc-ad+ad}{c^2(z+d/c)} \\
+&=\dfrac{bc-ad}{c^2(z+d/c)}+\dfrac{a(cz+d)}{c(cz+d)} \\
+&=\dfrac{bc-ad}{c^2(z+d/c)}+\dfrac{a}{c},
+\end{align*}
+and this decomposition shows that the most general linear transformation is composed by a translationm an inversion, a rotation, and a homothety followed by another translation. If $c=0$, the inversion falls out and the last translation is not needed.
+
+\begin{exercise}
+	Prove that the reflection $z \mapsto \overline{z}$ is not a linear transformation.
+	
+	\begin{sol}
+		Suppose that $S(z)=\overline{z}$ is a linear transformation. Then, in particular, since $S(i)=-i$, we must have $$\dfrac{ai+b}{ci+d}=-i \then ai+b=c-di \then (b-c)+(a+d)i=0.$$ This implies that $a=-d$ and $b=c$, so $S(z)=(az+b)/(bz-a)$. But now, plugging in $z=1$ gives $$S(1)=\dfrac{a+b}{b-a}=1 \then a+b=b-a \then a=0,$$ so $S(z)=1/z$ and $S$ is an inversion. However, this is clearly not conjugation, since it does not hold for any real number $z \neq 1$.
+	\end{sol}
+\end{exercise}
+
+\section{The Cross Ratio}
+Given three distinct points $z_2,z_3,z_4$ in the extended plane, there exists a linear transformation $S$ which carries them into $1,0,\infty$ in his order. If none of the points is $\infty$, $S$ will be given by $$Sz=\dfrac{z-z_3}{z-z_4} \colon \dfrac{z_2-z_3}{z_2-z_4}=\dfrac{(z-z_3)(z_2-z_4)}{(z-z_4)(z_2-z_3)}.$$ If $z_2$, $z_3$, or $z_4$ is $\infty$, then $S$ reduces to $$\dfrac{z-z_3}{z-z_4}, \quad \dfrac{z_2-z_4}{z-z_4}, \quad \dfrac{z-z_3}{z_2-z_3},$$ respectively.
+
+If $T$ were another linear transformation with the same property, then $ST^{-1}$ would leave $1$, $0$, and $\infty$ invariant. In other words, letting $ST^{-1}=(az+b)/(cz+d)$, we would have
+\begin{align*}
+	\dfrac{a+b}{c+d} &=1, \\
+	\dfrac{b}{d} &=0, \\
+	\dfrac{\infty}{c \cdot \infty+d} &=\infty.
+\end{align*}
+We may deduce from these equalities that $ST^{-1}$ must be the identity transformation, so $S=T$ and $S$ is uniquely determined.
+
+\begin{definition}
+	The \emph{cross ratio} $(z_1,z_2,z_3,z_4)$ is the image of $z_1$ under the linear transformation which carries $z_2,z_3,z_4$ into $1,0,\infty$. In other words, $$(z_1,z_2,z_3,z_4)=\dfrac{z_1-z_3}{z_1-z_4} \colon \dfrac{z_2-z_3}{z_3-z_4}.$$
+\end{definition}
+
+This definition is only meaningful if $z_2,z_3,z_4$ are distinct.
+
+\begin{theorem}
+	\label{thm:cross-ratio-preserved}
+	If $z_1,z_2,z_3,z_4$ are distinct points in the extended complex plane and $T$ is any linear transformation, then $(Tz_1,Tz_2,Tz_3,Tz_4)=(z_1,z_2,z_3,z_4)$.
+\end{theorem}
+
+\begin{proof}
+	Let $Sz=(z,z_2,z_3,z_4)$. Then $ST^{-1}$ carries $Tz_2,Tz_3,Tz_4$ into $1,0,\infty$, so by definition, we have $$(Tz_1,Tz_2,Tz_3,Tz_4)=ST^{-1}(Tz_1)=Sz_1=(z_1,z_2,z_3,z_4),$$ as desired.
+\end{proof}
+
+With the help of the property given in Theorem \ref{thm:cross-ratio-preserved}, we can immediately write down the linear transformation which carries three given points $z_1,z_2,z_3$ to prescribed positions $w_1,w_2,w_3$. The correspondence must be given by $$(w,w_1,w_2,w_3)=(z,z_1,z_2,z_3).$$ In general, it is -- of course -- necessary to solve this equation with respect to $w$.
+
+\begin{theorem}
+	\label{thm:cross-ratio-real}
+	The cross ratio $(z_1,z_2,z_3,z_4)$ is real if and only if the four points lie on a circle or on a straight line.
+\end{theorem}
+\begin{proof}
+	We have
+	\begin{align}
+		\label{eq:cross-ratio-arguments}
+	\arg (z_1,z_2,z_3,z_4)=\left[\arg (z_1-z_3)-\arg(z_1-z_4)\right]-\left[\arg (z_2-z_3)-\arg (z_2-z_4)\right].
+	\end{align}
+	If the four points all lie on a line, then each of the arguments on the right-hand side is $0$ or $\pi$, and the entire right-hand side is a multiple of $\pi$. SImilarly, if the four points lie on a circle, then recall that undirected inscribed angles that subtend the same arc on a circle are equal, as shown in Figure \ref{fig:inscribed-angles} below.
+	
+	\begin{figure}[h]
+		\label{fig:inscribed-angles}
+		\caption{Inscribed Angles in a Circle}
+		\centering
+		\begin{asy}
+		unitsize(3cm);
+		draw(unitcircle);
+		
+		pair zthree = (sqrt(2)/2,sqrt(2)/2);
+		pair zfour = (sqrt(2)/2, -sqrt(2)/2);
+		pair zone = (-sqrt(3)/2, 1/2);
+		pair ztwo = (-sqrt(2)/2,-sqrt(2)/2);
+		
+		dot(zone, linewidth(5pt));
+		dot(ztwo, linewidth(5pt));
+		dot(zthree, linewidth(5pt));
+		dot(zfour, linewidth(5pt));
+		
+		draw(zone -- zthree, p=blue);
+		draw(zone -- zfour, p=blue);
+		draw(ztwo -- zthree, p=green);
+		draw(ztwo -- zfour, p=green);
+		
+		\end{asy}
+	\end{figure}
+	Since $\left[\arg (z_1-z_3)-\arg(z_1-z_4)\right]$ measures one inscribed angle while  \\ $\left[\arg (z_2-z-3)-\arg (z_2-z_4)\right]$ measures the other, we again have that the right-hand side of \ref{eq:cross-ratio-arguments} is equal to either $0$ or $\pm \pi$. Hence, the argument of the cross ratio is an integer multiple of $\pi$ in any case, so the cross ratio has no imaginary part.
+	
+	For the reverse direction, we will show that the \textit{image of the real axis under any linear transformation is either a circle or a straight line}. Why is this enough? Because -- assuming this fact -- $Sz=(z,z_2,z_3,z_4)$ is bijective, being a linear transformation, so if $Sz \in \RR$, then $z \in S^{-1}(\RR)$, meaning that $z$ lies either on a circle or straight line.
+	
+	Let $T$ be any linear transformation. The values of $w=T^{-1}z$ for real $z$ satisfy the equation $Tw=\overline{Tw}$. Explicitly, this condition is of the form $$\dfrac{aw+b}{cw+d}=\dfrac{\overline{a}\overline{w}+\overline{b}}{\overline{c}\overline{w}+\overline{d}}.$$ By cross multiplication we obtain $$\left(a\overline{c}-c\overline{a}\right)\abs{w}^2+\left(a\overline{d}-c\overline{b}\right)w+(b\overline{c}-d\overline{a})\overline{w}+b\overline{d}-d\overline{b}=0.$$ If $a\overline{c}-c\overline{a}=0$, then this is the equation of a straight line, for under this condition the coefficient $a\overline{d}-c\overline{b}$ cannot also vanish. If it did, then we would have
+	\begin{align*}
+		a\overline{c} &=\overline{a}c, \\
+		a\overline{d} &=\overline{b}c, \\
+		\then \dfrac{c}{d} &=\dfrac{a}{b} \\
+		\then ad-bc &=0,
+	\end{align*}
+	which is impossible.
+	
+	On the other hand, if $a\overline{c}-c\overline{a} \neq 0$, then we can divide by this coefficient and complete the square -- using the fact that $a\overline{c}-c\overline{a}$ is purely imaginary -- to obtain 
+	\begin{align*}
+		\abs{w}^2+\dfrac{a\overline{d}-c\overline{b}}{a\overline{c}-c\overline{a}}w+\dfrac{b\overline{c}-d\overline{a}}{a\overline{c}-c\overline{a}}\overline{w}+\dfrac{b\overline{d}-d\overline{b}}{a\overline{c}-c\overline{a}} &=0 \\
+		\then \left\abs{w+\dfrac{\overline{a}d-\overline{c}b}{\overline{a}c-\overline{c}a}\right}^2+\dfrac{b\overline{d}-d\overline{b}}{a\overline{c}-c\overline{a}} -\dfrac{\left(\overline{a}d-\overline{c}b\right)\left(a\overline{d}-c\overline{b}\right)}{\left(\overline{a}c-\overline{c}a\right)\left(a\overline{c}-c\overline{a}\right)} &=0 \\
+		\then \left\abs{w+\dfrac{\overline{a}d-\overline{c}b}{\overline{a}c-\overline{c}a}\right}^2+\dfrac{(b\overline{d}-d\overline{b})(\overline{a}c-\overline{c}a)-\left(\overline{a}d-\overline{c}b\right)\left(a\overline{d}-c\overline{b}\right)}{\left(\overline{a}c-\overline{c}a\right)\left(a\overline{c}-c\overline{a}\right)} &=0 \\
+		\then \left\abs{w+\dfrac{\overline{a}d-\overline{c}b}{\overline{a}c-\overline{c}a}\right}^2-\left(\dfrac{ad-bc}{\overline{a}c-\overline{c}a}\right)\left(\dfrac{\overline{ad}-\overline{bc}}{a\overline{c}-c\overline{a}}\right) &=0 \\ 
+		\then \left\abs{w+\dfrac{\overline{a}d-\overline{c}b}{\overline{a}c-\overline{c}a}\right}^2-\left\abs{\dfrac{ad-bc}{\overline{a}c-\overline{c}a}\right}^2 &=0 \\
+		\then \left\abs{w+\dfrac{\overline{a}d-\overline{c}b}{\overline{a}c-\overline{c}a}\right} &=\left\abs{\dfrac{ad-bc}{\overline{a}c-\overline{c}a}\right}.
+	\end{align*}
+	This is, of course, the equation of a circle.
+\end{proof}
+
+Theorem \ref{thm:cross-ratio-real} makes it clear that we should not, in the theory of linear transformations, distinguish between circles and straight lines. A further justification was found in the fact that both correspond to circles on the Riemann sphere. Accordingly, we shall agree to use the word circle in this wider sense.
+
+In this sense, the following is an immediate corollary of Theorems \ref{thm:cross-ratio-preserved} and \ref{thm:cross-ratio-real}:
+\begin{corollary}
+	A linear transformation carries circles onto circles.
+\end{corollary}
+
+\begin{exercise}
+	Find the linear transformation which carries $0, i, -i$ into $1,-1,0$.
+	
+	\begin{sol}
+		Let $T$ be the desired linear transformation. We have
+		\begin{align*}
+			\left(Tz, 1, -1, 0\right) &=\left(z, 0, i, -i\right) \\
+			\then \dfrac{Tz+1}{Tz} \cdot \dfrac{1}{2} &=\dfrac{z-i}{z+i} \cdot \dfrac{i}{-i} \\
+			\then 
+			\dfrac{Tz+1}{2Tz} &=\dfrac{i-z}{z+i} \\
+			\then (Tz+1)(z+i) &=(2Tz)(i-z) \\
+			\then (z+i)Tz+z+i &=(2i-2z)Tz \\
+			\then z+i &=(i-3z)Tz \\
+			\then Tz &=\boxed{\dfrac{z+i}{-3z+i}}.
+		\end{align*}
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}[Ptolemy's Theorem]
+	If the consecutive vertices $z_1,z_2,z_3,z_4$ of a quadrilateral lie on a circle, prove that $$\abs{z_1-z_3} \cdot \abs{z_2-z_4}=\abs{z_1-z_2} \cdot \abs{z_3-z_4}+\abs{z_2-z_3} \cdot \abs{z_1-z_4},$$ and interpret the result geometrically.
+	
+	\begin{sol}
+		Because the opposite angles of a cyclic quadrilateral add to $\pi$, the cross ratio $(z_1,z_3,z_2,z_4)$ has argument $\pi$ and is negative. Hence, $$\dfrac{(z_1-z_2)(z_3-z_4)}{(z_1-z_4)(z_2-z_3)}=-(z_1,z_3,z_2,z_4) \in \RR_{>0},$$ so we have that
+		\begin{align*}
+			\abs{z_1-z_2} \cdot \abs{z_3-z_4}+\abs{z_2-z_3} \cdot \abs{z_1-z_4} &=\left(\left\abs{\dfrac{(z_1-z_2)(z_3-z_4)}{(z_1-z_4)(z_2-z_3)}\right}+1\right)\cdot \abs{(z_2-z_3)(z_1-z_4)} \\
+			&=\left(\abs{-(z_1,z_3,z_2,z_4)}+1\right) \cdot \abs{(z_2-z_3)(z_1-z_4)} \\
+			&=\left\abs{-(z_1,z_3,z_2,z_4)+1\right} \cdot \abs{(z_2-z_3)(z_1-z_4)} \\
+			&=\abs{(z_1-z_2)(z_3-z_4)+(z_2-z_3)(z_1-z_4)} \\
+			&=\abs{z_1z_2+z_3z_4-z_1z_4-z_2z_3} \\
+			&=\abs{z_1-z_3} \cdot \abs{z_2-z_4},
+		\end{align*}
+		as desired.
+		
+		Geometrically speaking, this means that if $ABCD$ is a cyclic quadrliateral, the following identity holds: $$(AC)(BD)=(AB)(CD)+(AD)(BC),$$ or that the product of the diagonals is the sum of the products of opposite edges.
+	\end{sol}
+\end{exercise}
+
+\section{Symmetry}
+The points $z$ and $\overline{z}$ are symmetric with respect to the real axis. A linear transformation with real coefficients carries the real axis into itself and $z,\overline{z}$ into points which are again symmetric. More generally, if a linear transformation $T$ carries the real axis into a circle $C$, then we shall say that the points $w=Tz$ and $w^*=T\overline{z}$ are \textit{symmetric with respect to $C$}. This is a relation between $w$, $w^*$, and $C$ that does not depend on $T$, for if $S$ is another transformation which carries the real axis into $C$, then $S^{-1}T$ is a real transformation, and so $S^{-1}w=S^{-1}Tz$ and $S^{-1}w^*=S^{-1}T\overline{z}$ are also conjugate. Symmetry can thus be defined in the following terms:
+\begin{definition}
+	The points $z$ and $z^*$ are said to be \emph{symmetric with respect to the circle $C$} through $z_1$, $z_2$, and $z_3$ if and only if $(z^*,z_1,z_2,z_3)=\overline{(z,z_1,z_2,z_3)}$.
+\end{definition}
+
+The points on $C$, and only those, are symmetric to themselves. The mapping which carries $z$ into $z^*$ is a one-to-one correspondence and is caled \emph{reflection} with respect to $C$. Two reflections will evidently resultin a linear transformation.
+
+\begin{example}
+	$ $
+	\begin{enumerate}
+		\item Suppose that $C$ is a straight line. Then $z_1,z_2,z_3$ are collinear and we may simply choose $z_3=\infty$, and the condition for symmetry becomes $$\dfrac{z^*-z_2}{z_1-z_2}=\dfrac{\overline{z}-\overline{z_2}}{\overline{z_1}-\overline{z_2}}.$$ Taking absolute values we obtain $\abs{z^*-z_2}=\abs{z-z_2}$. Here $z_2$ can be any finite point on $C$, and we conclude that $z$ and $z^*$ are equidistant from all points on $C$. We further have $$\Img \dfrac{z^*-z_2}{z_1-z_3}=-\Img \dfrac{z-z_2}{z_1-z_2},$$ as the imaginary part of the conjugate is the negation. Hence, $z$ and $z^*$ are in different half planes determined by $C$ (unless, of course, they coincide and lie on $C$). We leave it to the reader to prove that $C$ is the perpendicular bisector of the segment between $z$ and $z^*$, or one may take it as an elementary fact from geometry.
+		
+		\item Consider next the case of a finite circle $C$ of center $a$ and radius $R$. By repeatedly exploiting the invariance of the cross ratio under linear transformations, we get
+		\begin{align*}
+			(z^*,z_1,z_2,z_3) &=\overline{(z,z_1,z_2,z_3)} \\
+			&=\overline{(z-a,z_1-a,z_2-a,z_3-a)} \\
+			&=\left(\overline{z}-\overline{a},\dfrac{R^2}{z_1-a},\dfrac{R^2}{z_2-a},\dfrac{R^2}{z_3-a}\right) \\
+			&=\left(\dfrac{R^2}{\overline{z}-\overline{a}},z_1-a,z_2-a,z_3-a\right) \\
+			&=\left(\dfrac{R^2}{\overline{z}-\overline{a}}+a,z_1,z_2,z_3\right),
+		\end{align*}
+		where in the third, fifth, and sixth steps we have used the invariance of the cross ratio under translation and inversion.
+		
+		As the cross ratio is a bijection, we deduce that $z^*=R^2/(\overline{z}-\overline{a})+a$, or that $z$ and $z^*$ satisfy the relation $$(z^*-a)(\overline{z}-\overline{a})=R^2.$$ There is a simple geometric construction for the symmetric point of $z$, shown below in Figure \ref{fig:circle-reflection}.
+	\end{enumerate}
+\end{example}
+
+\begin{figure}[h]
+	\label{fig:circle-reflection}
+	\caption{Reflection in a circle}
+	\centering
+	\begin{asy}
+		// Reflection in a Circle: Drawing with Asymptote
+		// Given: Circle C with center a and radius r, and a point z* outside C.
+		// Draw the two tangents from z* to C, draw the chord between points of tangency,
+		// and mark the intersection between chord and segment from a to z* (the reflection).
+		
+		import geometry;
+		
+		size(300);
+		
+		// Define the circle and the external point
+		pair a = (0,0);           // Center of the circle
+		real r = 2.0;             // Radius
+		pair zstar = (4,2.5);     // External point
+		
+		// Compute the points of tangency
+		// First, find the points where tangents from zstar touch the circle
+		// Let the distance from a to zstar be d
+		real d = abs(zstar - a);
+		
+		// If d < r, no tangents are possible (should not happen here)
+		if(d < r) {
+		// Not possible, do nothing
+		}
+		else {
+		// Angle between a->zstar and the tangent line
+		real theta = acos(r/d);
+		
+		// Unit vector from a to zstar
+		pair v = (zstar - a)/d;
+		
+		// Rotate v by +theta and -theta to get directions to the points of tangency
+		pair v1 = rotate(degrees(theta))*v;
+		pair v2 = rotate(-degrees(theta))*v;
+		
+		// Scale by r to get points on the circle
+		pair t1 = a + r*v1;
+		pair t2 = a + r*v2;
+		
+		// Draw the circle
+		draw(circle(a,r), linewidth(0.8));
+		dot(a,blue+2bp);
+		label("$a$",a,SW,blue);
+		
+		// Draw the external point
+		dot(zstar,red+2bp);
+		label("$z^*$",zstar,NE,red);
+		
+		// Draw the two tangents
+		draw(zstar--t1, dashed+deepgreen);
+		draw(zstar--t2, dashed+deepgreen);
+		
+		// Mark points of tangency
+		dot(t1,deepgreen+2bp);
+		dot(t2,deepgreen+2bp);
+		label("$T_1$",t1,dir(t1-a),deepgreen);
+		label("$T_2$",t2,dir(t2-a),deepgreen);
+		
+		// Draw the chord between the points of tangency
+		draw(t1--t2, purple+linewidth(1));
+		
+		// Draw the segment from center a to zstar
+		draw(a--zstar, gray+linewidth(0.7));
+		
+		// Find intersection of chord and segment a-zstar
+		// Parametrize chord: t1 + s*(t2-t1), s in [0,1]
+		// Parametrize a-zstar: a + t*(zstar-a), t in [0,1]
+		// Solve for intersection
+		real S = ((t1-a).x*(zstar-a).y - (t1-a).y*(zstar-a).x - (t1-t2).x*(zstar-a).y + (t1-t2).y*(zstar-a).x) /
+		((t2-t1).x*(zstar-a).y - (t2-t1).y*(zstar-a).x);
+		real T = ((t1-a).x*(t2-t1).y - (t1-a).y*(t2-t1).x) /
+		((zstar-a).x*(t2-t1).y - (zstar-a).y*(t2-t1).x);
+		
+		pair z = a + T*(zstar-a);
+		
+		// Mark the reflection point
+		dot(z,orange+3bp);
+		label("$z$",z,E,orange);
+		
+		// Optional: add a legend or explanation
+		label("$C$",a+(-r,1.2r),blue);
+		}
+	\end{asy}
+\end{figure}
+
+\begin{theorem}[Symmetry Principle]
+	If a linear transformation carries a circle $C_1$ into a circle $C_2$, then it transforms any pair of symmetric points with respect to $C_1$ into a pair of symmetric points with respect to $C_2$.
+\end{theorem}
+
+Briefly, linear transformations preserve symmetry. If $C_1$ or $C_2$ is the real axis, the principle follows from the definition of symmetry. In the general case, it follows by the use of an intermediate transformation which carries $C_1$ into the real axis.
+
+The principle of symmetry is put to practical use in the problem of finding the linear transformations which carry a circle $C$ into a circle $C'$. We can always determine the transformation by requiring that three points $z_1,z_2,z_3$ on $C$ go over into three points $w_1,w_2,w_3$ on $C'$; the transformation is then $(w,w_1,w_2,w_3)=(z,z_1,z_2,z_3)$. But the transformation is also determined if we prescribe that a point $z_1$ on $C$ shall correspond to a point $w_1$ on $C'$ and that a point $z_2$ \textit{not} on $C$ shall be carried into a point \textit{not} on $C'$. We know then that $z_2^*$ (the symmetric point of $z_2$ with respect to $C$) must correspond to $w_2^*$ (the symmetric point of $w_2$ with respect to $C'$). Hence the transformation will be obtained from the relation $(w,w_1,w_2,w_2^*)=(z,z_1,z_2,z_2^*)$.
+
+\begin{exercise}
+	Find the linear transformation that maps the circle $\abs{z}=1$ onto the circle $\abs{z-1}=1$, the point $1$ to $0$, and the point $0$ to $1/2$.
+
+	\begin{sol}
+		The symmetric point of $0$ with respect to the circle $\abs{z}=1$ is $\infty$, while the symmetric point of $1/2$ with respect to the circle $\abs{z-1}=1$ is given by $$(w^*-1)\left(\dfrac{1}{2}-1\right)=1 \then w^*=-1.$$ Hence, the desired linear transformation is
+		\begin{align*}
+			\left(w, 0, \dfrac{1}{2},-1\right) &=(z, 1, 0, \infty) \\
+			\then \dfrac{w-\frac{1}{2}}{w+1} \cdot \dfrac{1}{-\frac{1}{2}} &=\dfrac{z}{z-\infty} \cdot (1-\infty) \\
+			\then \dfrac{1-2w}{w+1} &=z \\
+			\then w(z+2) &=-z+1 \\
+			\then w=\boxed{\dfrac{-z+1}{z+2}}.
+		\end{align*}
+	\end{sol}
+\end{exercise}
+\begin{exercise}
+	A linear transformation carries a pair of concentric circles into another pair of concentric circles. Prove that the ratios of the radii must be the same.
+	
+	\begin{sol}
+		Let $T$ be the linear transformation, and without loss of generality (by pre- and/or post-composing with appropriate translations and inversions), we may assume that both pairs of concentric circles are centered at $0$ and one of the radii in each pair is $1$. Let $r$ be the radius of the other circle in the pair of pre-images, and let $s$ be the radius of the other circle in the pair of images.
+		
+		Since the reflection of $0$ within any of the circles is $\infty$, we must have $T(0)\overline{T(\infty)}=1=s^2$. Since $s \neq 1$, the only way this is possible is if $T(0)=0$ and $T(\infty)=\infty$, or vice versa. In the first case, $T(z)=az$ for some $a \in \CC$, so it is simply a rotation (as it maps a circle of radius $1$ to itself) and $r=s$. In the second case, $T(z)=a/z$, again with $\abs{a}=1$, and $s=1/r$. In either case, the ratio of the radii is preserved. \qedsymbol 
+	\end{sol}
+\end{exercise}
+
+\section{Oriented Circles}
+Because the linear transformation $S(z)$ is analytic and $$S'(z)=\dfrac{ad-bc}{(cz+d)^2} \neq 0,$$ the mapping $w=S(z)$ is conformal for $z \neq -d/c$ and $\infty$. It follows that a pair of intersecting circles are mapped on circles that include the same angle. In addition, the sense of an angle is preserved. From an intuitive perspective, this means that right and left are preserved, but a more precise formulation is desirable.
+
+The reader well-acquainted with differential topology will probably recognize that the fact that $S'(z) \neq 0$ means that the differential of $S$ is a linear isomorphism, meaning that it is \emph{orientation-preserving} (in fact, all analytic functions with nonzero derivative are orientation-preserving because their Jacobian determinant is the absolute value of the derivative). For the purposes of these notes, we will not delve into the general topological definition of orientation but confine ourselves to the specific case we need for complex analysis.
+
+An orientation of a circle $C$ will be determined by an ordered triple of points $z_1,z_2,z_3$ on $C$. With respect to this orientation a point $z$ not on $C$ is said to lie to the \emph{right} of $C$ if $\Img (z,z_1,z_2,z_3)>0$ and to the \emph{left} of $C$ if $\Img (z,z_1,z_2,z_3)<0$.
+
+it is essential to show that there are only two different orientations. Since the cross ratio is invariant, it is sufficient to consider the case where $C$ is the real axis. Then $$(z,z_1,z_2,z_3)=\dfrac{az+b}{cz+d}$$ can be written with real coefficients, and a simple calculation gives $$\Img (z, z_1,z_2,z_3)=\dfrac{ad-bc}{\abs{cz+d}^2}\Img z.$$ We recognize that the distinction between right and left is the same as the distinct between the upper and lower half plane. Which is which depends on the sign of the determinant $ad-bc$.
+
+A linear transformation $S$ carries the oriented circle $C$ into a circle which we orient through the triple $Sz_1,Sz_2,Sz_3$. From the invariance of the cross ratio it follows that the left and right of $C$ will be mapped on the left and right of the image circle.
+
+If two circles are tangent to each other, their orientations can be compared. Indeed, we can use a linear transformation which throws their common points to $\infty$. The circles become parallel straight lines, and we know how to compare the directions of parallel lines.
+
+When the finite plane is considered as part of the extended plane, the point at infinity is distinguished. We can therefore define an absolute positive orientation of all finite circles by the requirement that $\infty$ should lie to the right of the oriented circles. The points to the left are said to form the \emph{inside} of the circle and the points to the right form its \emph{outside}.
+
+\begin{exercise}
+	If $z_1,z_2,z_3,z_4$ are points on a circle, show that $z_1,z_3,z_4$ and $z_2,z_3,z_4$ determine the same orientation if and only if $(z_1,z_2,z_3,z_4)>0$.
+	\begin{sol}
+		We first prove the following general lemma:
+		\begin{lemma}
+			Let $z,w \in \CC$, and suppose $\Img z>0$, $\Img w>0$, and $\Img (z/w)=0$. Then $\Real (z/w)>0$.
+		\end{lemma}
+		\begin{proof}
+			We have $0<\arg z<\pi$, $0<\arg w<\pi$, and $\arg z-\arg w=0$ or $\pm \pi$. But the latter case is impossible since $\abs{\arg z-\arg w}<\pi$. Hence, we must have $\arg z-\arg w=0$, and $\Real (z/w)>0$.
+		\end{proof}
+		
+		Now, suppose $z_1,z_3,z_4$ and $z_2,z_3,z_4$ determine the same orientation. Let $z$ be a point on the right with respect to both orientations. Then $\Img (z,z_1, z_3,z_4)>0$ and $\Img (z,z_2,z_3,z_4)>0$. Since $(z_1,z_2,z_3,z_4)=(z,z_2,z_3,z_4)/(z,z_1,z_3,z_4)$, the conditions of the lemma apply to give that $(z_1,z_2,z_3,z_4)>0$.
+		
+		On the other hand, suppose $(z_1,z_2,z_3,z_4)>0$, so that $\arg (z_1,z_2,z_3,z_4)=0$. Let $z$ be a point to the right of the orientation induced by $z_1,z_3,z_4$. Then
+		\begin{align*}
+			\arg (z,z_2,z_3,z_4) &=\arg (z, z_1,z_3,z_4)+\arg(z_1,z_2,z_3,z_4) \\
+			&=\arg (z,z_1,z_3,z_4),
+		\end{align*}
+		and $z$ must also lie to the right of $z_2,z_3,z_4$. Hence, $z_2,z_3,z_4$ determine the same orientation as $z_1,z_3,z_4$.
+	\end{sol}
+\end{exercise}
+
+\section{Families of Circles}
+A great deal can be done toward the visualization of linear transformations by the introduction of certain families of circles which may be though of as coordinate lines in a circular coordinate system.
+
+Consider a linear transformation of the form $$w=k \cdot \dfrac{z-a}{z-b}.$$ Here $z=a$ correspond to $w=0$ and $z=b$ to $w=\infty$. It follows that the straight lines through the origin of the $w$-plane are images of the circles through $a$ and $b$. On the other hand, the concentric circles about the origin, $\abs{w}=\rho$, correspond to circles with the equation $$\left\abs{\dfrac{z-a}{z-b}\right}=\rho/k.$$ These are the \textit{circles of Apollonius} with limit points $a$ and $b$; they are the loci of points whose distances from $a$ and $b$ have a constant ratio.
+
+Denote by $C_1$ the circles through $a$ and $b$ and by $C_2$ the circles of Apollonius with these limit points. The configurtation formed by all the circles $C_1$ and $C_2$ will be referred to as the \emph{circular net} or the \emph{Steiner circles} determined by $a$ and $b$. It has many interesting properties of which we shall list a few:
+\begin{enumerate}
+	\item There is exactly one $C_1$ and one $C_2$ through each point in te plane with the exception of the limit points.
+	\item Every $C_1$ meets every $C_2$ under right angles.
+	\item Reflection in a $C_1$ transforms every $C_2$ into itself and every $C_1$ into another $C_1$. Reflection in a $C_2$ transforms every $C_1$ into itself and every $C_2$ into another $C_2$.
+	\item The limit points are symmetric with respect to each $C_2$, but not with respect to any other circle.
+\end{enumerate}
+
+These properties are trivial when the limit points are $0$ and $\infty$, i.e., when the $C_1$ are lines through the origin and the $C_2$ concentric circles. SInce the proeprties are invariant under linear transformations, they must continue to hold in the general case.
+
+\begin{figure}[h]
+	\caption{Steiner circles}
+	\centering
+	\begin{asy}
+		import graph;
+		import geometry;
+		size(14cm);
+		usepackage("amsmath");
+		
+		// Rotation angle in degrees
+		real theta = 20;
+		transform T = rotate(theta);
+		
+		// Define base points a and b before rotation
+		pair a0 = (0, 0);
+		pair b0 = (6, 0);
+		pair a = T * a0;
+		pair b = T * b0;
+		
+		dot(a, red+2);
+		dot(b, red+2);
+		label("$a$", a, SW);
+		label("$b$", b, SE);
+		
+		// Degenerate case 1: Line through a and b
+		draw(a--b, dashed+gray);
+		
+		// Midpoint and perpendicular direction
+		pair mid = (a + b)/2;
+		pair abVec = b - a;
+		pair perpDir = rotate(90)*unit(abVec);
+		
+		// Degenerate case 2: Perpendicular bisector (no label)
+		draw(mid - 10*perpDir -- mid + 10*perpDir, dashed+gray);
+		
+		// Step 1: Circles through a and b (label as C₁)
+		int numThroughCircles = 3;
+		real step = 3.5;
+		for (int i = -numThroughCircles; i <= numThroughCircles; ++i) {
+		if (i == 0) continue;
+		pair center = mid + i * step * perpDir;
+		draw(circle(center, abs(center - a)), blue+opacity(0.6));
+		}
+		
+		// Step 2: Apollonius circles (label as C₂)
+		real[] rs = {0.5, 1, 2};
+		for (real r : rs) {
+		real denom = 1 - r^2;
+		if (abs(denom) < 1e-6) continue; // skip r=1
+		
+		real xc = (a0.x - r^2 * b0.x) / denom;
+		real yc = (a0.y - r^2 * b0.y) / denom;
+		pair center0 = (xc, yc);
+		pair center = T * center0;
+		real rad = (r * abs(b0 - a0)) / abs(denom);
+		
+		draw(circle(center, rad), heavygreen+opacity(0.6));
+		}
+		
+		// Compact Labels
+		label("$C_1$", T * (10, 6), blue);
+		label("$C_2$", T * (10, -6), heavygreen);
+	\end{asy}
+\end{figure}
+
+If a transformation $w=Tz$ carries $a,b$ into $a',b'$ it can be written in the form
+\begin{equation}
+	\label{eq:linear-steiner}
+	\dfrac{w-a'}{w-b'}=k \cdot \dfrac{z-a}{z-b}.
+\end{equation} 
+It is clear that $T$ transforms the circles $C_1$ and $C_2$ into circles $C_1'$ and $C_2'$ with the limit points $a',b'$.
+
+The situation is particularly simple if $a'=a, b'=b$. Then $a,b$ are said to be \emph{fixed points} of $T$, and it is convenient to represent $z$ and $Tz$ in the same plane. Under these circumstances the whole circular net will be mapped upon itself. The value of $k$ serves to identify the image circles $C_1'$ and $C_2'$. Indeed, with appropriate orientations $C_1$ forms the angle $\arg k$ with is image $C_1'$, and the quotient of the constant ratios $\abs{z-a}\abs{z-b}$ on $C_2'$ and $C_2'$ is $\abs{k}$.
+
+The special cases in which all $C_1$ or all $C_2$ are mapped upon themselves are particularly important. We have $C_1'=C_1$ for all $C_1$ if $k>0$ (if $k<0$ the circles are still the same, but the orientation is reversed). The transformation is then said to be \emph{hyperbolic}. When $k$ increases the points $Tz$, $z \neq a,b$ will folow along the circles $C_1$ toward $b$. The consideration of this flow provides a very clear picture of a hyperbolic transformation. The form of a hyperbolic transformation also tell us that in matrix form, where the transformation is considered as an element of $\text{PGL}_2(\CC)$, it is similar (in the sense of matrices) to a homothety, as $k$ is the real dilation factor.
+
+The case $C_2'=C_2$ occurs when $\abs{k}=1$. Transformations with this property are called \emph{elliptic}. When $\arg k$ varies, the points $Tz$ move along the circles $C_2$. The corresponding flow circulates about $a$ and $b$ in different directions. We also find that such a transformation is similar to a rotation with factor $k$ in the matrix sense, as it preserves angles and distances from the fixed points.
+The general linear transformation with two fixed points is the product of a hyperbolic and an elliptic transformation with the same fixed points.
+
+The fixed points of a linear transformation are found by solving the equation
+\begin{equation}
+	\label{eq:fixed-points}
+	z=\dfrac{\alpha z+\beta}{\gamma z+\delta}.
+\end{equation} 
+
+This can be written as $\gamma z^2+(\delta-\alpha)z-\beta=0$.
+In general this is a quadratic equation with two roots. If $c=0$, one of the fixed points is $\infty$. If $\gamma \neq 0$, the two fixed points coincide if and only if $(\alpha-\delta)^2=4\beta \gamma$. In this case, the transformation is said to be \emph{parabolic}. A parabolic transformation is the limit of a sequence of hyperbolic or elliptic transformations as the two fixed points approach each other.
+
+If the equation \ref{eq:fixed-points} is found to have two distinct roots $a$ and $b$, the transformation can be written in the form $$\dfrac{w-a}{w-b}=k \cdot \dfrac{z-a}{z-b}.$$ We can then use the Steiner circles determined by $a$ and $b$ to visualize the transformation. It is important to note, however, that the method is by no means restricted to this case. We can write any linear transformation in the form \ref{eq:linear-steiner} with arbitrary $a$ and $b$ and use the two circular nets to great advantage.
+
+For the discussion of parabolic transformations, it is desirable to introduce still another type of circular net. Consider the transformation $$w=\dfrac{\omega}{z-a}+\varsigma$$ for some constant $\beta$. This transformation has the effect of moving the point $a$ to infinity, and it can be shown that the corresponding circular net is related to the original net by a certain limiting process.
+
+It is evident that straight lines in the $w$-plane correspond to circles through $a$ in the $z$-plane. Moreover, parallel lines correspond to mutually tangent circles. In particular, if $w=u+iv$ the lines $u=\text{constant}$ and $v=\text{constant}$ correspond to two families of mutually tangent circles which intersect at right angles (Figure \ref{fig:degenerate-steiner}). This configuration can be considered as a degenerate set of Steiner circles. It is determined by the point $a$ and the tangent to one of the families of circles. We shall denote the images of the lines $v=\text{constant}$ by $C_1$, the circles of the other family by $C_2$. Clearly, the line $v=\Img \varsigma$ corresponds to the circles $C_1$; its direction is given by $\arg \omega$.
+
+\begin{figure}[h]
+	\label{fig:degenerate-steiner}
+	\caption{Degenerate Steiner circles}
+	\centering
+	\begin{asy}[width=10cm]
+		import geometry;
+		size(300);
+
+		//--- parameters of the parabolic map w = omega/(z - a) + beta ---
+		pair a    = (0,0);    // the point sent to infinity
+		real omega = 1;       // scale
+		pair beta = (0,0);    // translation in w-plane
+
+		//--- choose which u = const and v = const lines to sample ---
+		real[] us = {-2, -1, -0.5, 0.5, 1, 2};
+		real[] vs = {-2, -1, -0.5, 0.5, 1, 2};
+
+		// pre-images of u = U  (blue family)
+		for(real U : us) {
+		real shift = U - beta.x;
+		// circle: |Re(omega/(z-a))| = shift  --> center at a+(omega/(2·shift),0), radius=|omega/(2·shift)|
+		pair C = a + (omega/(2*shift), 0);
+		real R = abs(omega/(2*shift));
+		draw(circle(C, R), blue+opacity(0.6));
+		}
+
+		// pre-images of v = V  (red family)
+		for(real V : vs) {
+		real shift = V - beta.y;
+		// circle: |Im(omega/(z-a))| = V  --> center at a+(0,omega/(2·shift)), radius=|omega/(2·shift)|
+		pair C = a + (0, omega/(2*shift));
+		real R = abs(omega/(2*shift));
+		draw(circle(C, R), red+opacity(0.6));
+		}
+
+		// mark the point a
+		dot(a, black+4bp);
+		label("$a$", a, SW);
+	\end{asy}
+\end{figure}
+
+Any transformation which carries $a$ into $a'$ can be written in the form $$\dfrac{\omega'}{w-a'}=\dfrac{\omega}{z-a}+\varsigma.$$ It is clear that the circles $C_1$ and $C_2$ are carried into the circles $C_1'$ and $C_2'$ determined by $a'$ and $\omega'$. We suppose now that $a=a'$ is the only fixed point. Then $\omega=\omega'$ and we can write
+\begin{equation}
+	\label{eq:parabolic-steiner}
+	\dfrac{\omega}{w-a}=\dfrac{\omega}{z-a}+\varsigma.
+\end{equation}
+By this transformation the configuration consisting of the circles $C_1$ and $C_2$ is mapped upon itself. In \ref{eq:parabolic-steiner} a multiplicative factor is arbitrary, and we can hence supposse that $\varsigma$ is real. Then every $C_1$ is mapped upon itself and the parabolic transformation can be considered as a flow along the circles $C_2$.
+
+A linear transformation that is neither hyperbolic, elliptic, nor parabolic is called \emph{loxodromic}.
+
+\begin{exercise}
+	Suppose that the coefficients of the transformation $$S=\dfrac{az+b}{cz+d}$$ are normalized by $ad-bc=1$. 
+	
+	\begin{enumerate}
+	\item[(a)] Prove that the transformation is elliptic if and only if $-2<a+d<2$.
+	\item[(b)] Prove that the transformation is parabolic if and only if $a+d= \pm 2$.
+	\item[(c)] Prove that the transformation is hyperbolic if and only if $a+d>2$ or $a+d<-2$.
+	\end{enumerate}
+
+	\begin{sol}
+		Note that $a+d=\tr S$, where we abuse notation and let $S$ also refer to its matrix representation as an element of $\text{PSL}_2(\CC)$.
+
+		\begin{enumerate}
+		\item[(a)] ($\Rightarrow$) If $S$ is elliptic, then we may write $$\dfrac{Sz-\alpha}{Sz-\beta}=k \cdot \dfrac{z-\alpha}{z-\beta}$$ for some $\alpha,\beta \in \CC$ and with $\abs{k}=1$. Rearranging this into standard form gives $$Sz=\dfrac{(a-bk)z+ab(1-k)}{(1-k)z+ak-b}.$$ Therefore,
+		\begin{align*}
+			\det S &= (\alpha-\beta k)(\alpha k-\beta) + \alpha\beta(1-k)^2 \\
+			&= \alpha^2 k - \alpha\beta - \alpha\beta k^2 + \beta^2 k + \alpha\beta - 2\alpha\beta k + \alpha\beta k^2 \\
+			&= (\alpha^2 - 2\alpha\beta + \beta^2)k \\
+			&= (\alpha-\beta)^2 k.
+		\end{align*}
+		If this is assumed to be equal to $1$, then $\alpha-\beta=1/\sqrt{k}$, so
+		\begin{align*}
+			\tr S &= (\alpha-\beta k) + (\alpha k-\beta) \\
+			&= (\alpha-\beta)(1+k) \\
+			&= \dfrac{1+k}{\sqrt{k}}.
+		\end{align*}
+			Since $\abs{k}=1$, we may let $k=e^{i \theta}$, and then the above becomes $$\tr S=e^{i \theta/2}+e^{-i \theta/2}=2\cos(\theta/2).$$ Now, because $k \neq 1$ (otherwise, $S$ would simply be the identity), it must be that $\theta/2 \neq 0, \pi$, so that $-2<\tr S<2$.
+
+			($\Leftarrow$) Conversely, suppose $-2<\tr S<2$. Then the matrix $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ has eigenvalues that sum to $2$ and multiply to $1$. Let these eigenvalues be $\lambda_1,\lambda_2$; then $\lambda_2=1/\lambda_1$. Since $\tr S$ is real, we have that $$\lambda_1+\dfrac{1}{\lambda_1}=\overline{\lambda_1}+\dfrac{1}{\overline{\lambda_1}}.$$ This can be rewritten as $$\abs{\lambda_1-1}(\lambda_1-\overline{\lambda_1})=0.$$ Since $\lambda_1 \notin \RR$, we must have $\abs{\lambda_1}=1$, so that $\lambda_1=e^{i \theta}$ and $\lambda_2=e^{-i \theta}$ for some $\theta$. As we observed above, any complex-valued matrix with complex numbers on the unit circle as eigenvalues is similar to a rotation matrix, and hence is elliptic.
+
+		\item[(b)] As described in the text, $S$ is parabolic if and only if $(a-d)^2=4bc$. If we further assume that $ad-bc=1$, then $S$ is parabolic if and only if
+		\begin{align*}
+			0 &=(a-d)^2+4bc \\
+			&=(a-d)^2+4(ad-1) \\
+			&=a^2-2ad+d^2+4ad-4 \\
+			&=a^2+2ad+d^2-4 \\
+			&=(a+d)^2-4.
+		\end{align*}
+		Hence, $S$ is parabolic if and only if $a+d=\pm 2$, as desired. If $a+d=2$, then the eigenvalues of $S$ are both equal to $1$, and if $a+d=-2$, then the eigenvalues are both equal to $-1$.
+
+		\item[(c)] In one direction, if $S$ is hyperbolic with, without loss of generality, dilation factor $k>0$, then $k$ is real, and $(k-1)^2>0$. Adding $4k$ to both sides gives $$4k<(k-1)^2+4k=(k+1)^2,$$ and dividing by $k$ and taking the square root yields $$\tr S=\dfrac{k+1}{\sqrt{k}}>2$$ or $$\tr S<-2.$$
+		
+		Conversely, suppose $S \in \text{PSL}_2(\CC)$ and $\tr S>2$ (the case of $\tr S<2$ is the same). Let $\lambda_1,\lambda_2$ be the eigenvalues of $S$; then, again, $$\abs{\lambda_1-1}(\lambda_1-\overline{\lambda_1})=0.$$ Since $\abs{\lambda_1}=1$ produces an elliptic transformation, we must have that $\lambda_1$ is real and not equal to $\pm 1$. Then $S$ has two distinct eigenvalues $\lambda_1,1/\lambda_1$ and is diagonalizable as a homothetic matrix $$\begin{pmatrix} \lambda_1 & 0 \\
+		0 & 1/\lambda_1 \end{pmatrix} \sim \begin{pmatrix}
+		\lambda_1^2 & 0 \\
+		0 & 1
+		\end{pmatrix}$$ with the appropriate change of basis to distinct eigenvectors. We conclude that $S$ is hyperbolic. \qedsymbol
+	\end{enumerate}	
+	\end{sol}
+\end{exercise}

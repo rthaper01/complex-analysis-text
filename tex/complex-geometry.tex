@@ -1,0 +1,324 @@
+\chapter{The Geometry of Complex Numbers}
+\label{chap:complex-geometry}
+
+With respect to a given rectangular coordinate system in the plane, like Cartesian coordinates, the complex number $a+bi$ can be represented as the point $(a,b)$. The first coordinate, which is the $x$-axis, is the \textit{real axis}, while the second coordinate -- the $y$-axis -- is the \textit{imaginary axis}.
+
+Ahlfors prefers to derive all analytical arguments from the axioms of real numbers, rather than from geometry, but I believe that the geometric representation of complex numbers is an asset that should be exploited as much as possible. Indeed, a few examples in this chapter should convince the reader of the power of interpreting complex numbers as points in the plane. In many cases, geometry can reduce the work of solving a complex number problem by half or more.
+
+\section{Geometric Addition and Multiplication}
+\label{sec:geometric-addition-and-multiplication}
+
+By appreciating the structure of $\CC$ as a vector space over $\RR$, we can consider a complex point a vector extending from the origin $(0,0)$. Then addition and subtraction of two complex numbers is easily represented by addition and subtraction of vectors in the plane, as shown below (recall that vectors added head-to-tail):
+
+\begin{figure}[h]
+	\caption{Complex vector addtion and subtraction}
+	\centering
+	\begin{asy}
+	    settings.outformat="pdf";
+	    unitsize(2cm);
+	    Label La = Label("$w$", position=MidPoint);
+	    Label Lb = Label("$z$", position=MidPoint);
+	    Label Laminusb = Label("$w-z$", position=Relative(0.25), filltype=Fill(white));
+	    Label Laplusb = Label("$w+z$", position=Relative(0.75));
+	    draw((0,0)--(2,1), arrow=Arrow(), L=La);
+	    draw((0,0) -- (3,0), arrow=Arrow(), L=Laminusb);
+	    draw((3,0) -- (2,1), arrow=Arrow(), L=Lb);
+	    draw((1,-1) -- (0,0), arrow=Arrow(), L=Lb);
+	    draw((1,-1) -- (3,0), arrow=Arrow(), L=La);
+	    draw((1,-1) -- (2,1), arrow=Arrow, L=Laplusb);
+	\end{asy}
+\end{figure}
+
+An additional benefit of the vector representation is that the length of the vector represented by $z$ is simply $\abs{z}$; hence, the distance between $w$ and $z$ is $\abs{w-z}$. With this, the triangle inequality's name is justified: $\abs{w+z} \le \abs{w}+\abs{z}$ is the geometric fact we know and love. Similarly, we can establish the \textit{parallelogram law} $\abs{w+z}^2+\abs{w-z}^2=2(\abs{w}^2+\abs{z}^2)$ (the sum of the squares of the diagonal lengths of a parallelogram is equal to the sum of hte squares of the side lengths).
+
+In order to derive a geometric interpretation of the product of two complex numbers, we introduce polar coordinates, writing $$a+bi=r(\cos \theta+i \sin \theta),$$ where $r$ is the radial distance from the origin and $\theta$ is the angle that the vector representing $a+bi$ makes with the positive $x$-axis; it is frequently called the \emph{argument} of the complex number $z=a+bi$ and is denoted by $\arg z$ and is restricted to the range $[0,2\pi)$.
+
+Given two complex numbers $w=r(\cos \alpha+i\sin \alpha)$ and $z=s(\cos \beta+i\sin \beta)$, their algebraic product is
+\begin{align*}
+	wz &=rs\left[\cos \alpha \cos\beta-\sin \alpha\sin\beta+(\sin \alpha\cos \beta+\sin \beta\cos \alpha)i\right] \\
+	&=rs\left(\cos(\alpha+\beta)+\sin(\alpha+\beta)i\right),
+\end{align*}
+where we have used the well-known trigonometric sum identities. By the way, this establishes the following result:
+\begin{proposition}
+	\label{prop:argument-addition}
+	Given two complex numbers $w$ and $z$, we have that $$\arg(wz)=\arg w+\arg z.$$
+\end{proposition}
+
+With this geometric result, drawing the product of two complex numbers in the plane is easy: in fact, we see -- as expected -- that the triangle formed by the vertices $0$, $1$, and $w$ is similar to the triangle formed by the vertices $0$, $z$, $wz$.
+
+Division of complex numbers amounts to nearly the same thing: we have $$\arg\left(\dfrac{z}{w}\right)=\arg z-\arg w,$$ and the similar triangles are now $\{0,1,w\}$ and $\{0,z/w,z\}$.
+
+\begin{figure}[h]
+	\caption{Complex vector multiplication}
+	\centering
+	\begin{asy}
+		settings.outformat="pdf";
+		unitsize(3cm);
+		
+		Label Lw = Label("$w$", position=EndPoint);
+		Label Lz = Label("$z$", position=EndPoint);
+		Label Lwz = Label("$wz$", position=EndPoint);
+		
+		draw((0,0) -- (1,0), L=Label("$1$", position=EndPoint));
+		draw((0,0) -- (sqrt(3)/2, 1/2), p=blue, L=Lw);
+		draw((0,0) -- (1, sqrt(3)),p=blue, L=Lz);
+		draw((0,0) -- (0,2),p=red, L=Lwz);
+	\end{asy}
+\end{figure}
+
+\begin{exercise}
+	Prove that the points $z_1,z_2,z_3$ are the vertices of an equilateral triangle if and only if $z_1^2+z_2^2+z_3^2=z_1z_2+z_2z_3+z_1z_3$.
+	
+	\begin{sol}
+		If the points do form an equilateral triangle, then it is true that $z_3$ is the image of $z_1$ under a rotation of $\pi/3$ radians about $z_2$. So set $$w=\cos(\pi/3)+i\sin(\pi/3)=\dfrac{1}{2}+\dfrac{\sqrt{3}}{2}i,$$ and we have $$\dfrac{z_3-z_2}{z_1-z_2}=w.$$ Note that $\arg(w^6)=6\arg(w)=2\pi$, so $w^6=1$. Since this is the smallest power of $w$ that equals $1$, $w$ is a primitive sixth root of unity and satisfies $w^2-w+1=0$ (we could have arrived at this conclusion simply by applying Euler's formula $w=e^{\pi i/3}$, though that will be formally proved in the next few sections).
+		
+		Therefore,
+		\begin{align*}
+			\left(\dfrac{z_3-z_2}{z_1-z_2}\right)^2-\dfrac{z_3-z_2}{z_1-z_2}+1 &=0 \\
+			\then (z_3-z_2)^2-(z_3-z_2)(z_1-z_2)+(z_1-z_2)^2 &=0 \\
+			\then z_3^2-2z_2z_3+z_2^2-z_1z_3+z_2z_3+z_1z_2-z_2^2+z_1^2-2z_1z_2+z_2^2 &=0 \\
+			\then z_1^2+z_2^2+z_3^2-z_1z_2-z_2z_3-z_1z_3 &=0 \\
+			\then z_1^2+z_2^2+z_3^2 &=z_1z_2+z_2z_3+z_1z_3.
+		\end{align*}
+		
+		The other direction is handled in the same way, as we can rearrange the relation $z_1^2+z_2^2+z_3^2=z_1z_2+z_2z_3+z_1z_3$ into the form above. First of all, either $z_1=z_2=z_3$ or no two of them are the same point, because if -- for example -- $z_1=z_3$, then plugging this in would transform the relation into $$z_1^2+z_3^2=2z_1z_3 \Rightarrow (z_1-z_3)^2=0,$$ so we would, in fact, have $z_1=z_2=z_3$.
+		
+		Thus, we can safely divide by $z_1-z_2$ and get that $(z_3-z_2)/(z_1-z_2)$ is a primitive sixth root of unity, meaning that it is simply the complex number corresponding to rotation by $\pi/3$ radians. \qedsymbol
+	\end{sol}
+\end{exercise}
+
+\section{De Moivre's Formula and Roots of Unity}
+\label{sec:de-moivre}
+If the reader completed the previous exercise, then he or she would have already deduced the results we are about to state formally here. If $z=r(\cos \theta+i\sin \theta)$, then our work in the previous section immediately yields that $$z^n=r^n(\cos n\theta+i\sin n\theta)$$ for \textit{any} $n \in \ZZ$, as the case where $n$ is negative is easily verified by complex division.
+
+For $r=1$, we obtain the special case
+\begin{proposition}[De Moivre's Formula]
+	\label{prop:de-moivre}
+	Let $\theta \in [0,2\pi)$. Then $$(\cos \theta+i \sin \theta)^n=\cos n\theta+i \sin n \theta.$$
+\end{proposition}
+
+This identity allows us to find $n$th roots of complex numbers, for if $a=r(\cos \theta+i \sin \theta)$ and $z \in \CC$ with $z^n=a$, one easy candidate for $z$ is the number $$z=r^{1/n}\left(\cos\left(\theta/n\right)+i\sin(\theta/n)\right).$$ But shifting the argument by any multiple of $2\pi$ does not change the complex number, so we find that each of the numbers $$r^{1/n}\left(\cos\left(\dfrac{\theta+2\pi k}{n}\right)+i\sin\left(\dfrac{\theta+2\pi k}{n}\right)\right), \quad k=0,1,\dots,n-1$$ are also $n$th roots of $a$. Since $\CC$ is algebraically closed, the Fundamental Theorem of Algebra gives that the equation $z^n-a$ must have exactly $n$ complex roots, the ones enumerated above.
+
+The equation $z^n=1$ is particularly important, and results in the $n$ \textit{$n$th roots of unity}. It is easy to check that they form a cyclic multiplicative group generated by the \textit{primitive} $n$th root of unity $$\zeta_n=\cos\left(\dfrac{2\pi}{n}\right)+i\sin\left(\dfrac{2\pi}{n}\right).$$ It is also quite clear that the solutions to the equation $z^n=a$ for any $a \in \CC$ are then $$\{\zeta_n^k\sqrt[n]{a} \colon k=0,1,\dots,n-1\},$$ where $\sqrt[n]{a}$ is any $n$th root of $a$.
+
+Geometrically speaking, the $n$th roots of unity are the vertices of a regular $n$-gon centered at the origin.
+
+\begin{exercise}
+	Let $\omega$ be a primitive $n$th root of unity, and let $h$ be an integer such that $n$ does not divide $h$. What are the values of $$1+\omega^h+\omega^{2h}+\cdots+\omega^{(n-1)h}$$ and $$1-\omega^h+\omega^{2h}-\cdots+(-1)^{n-1}\omega^{(n-1)h}?$$
+	
+	\begin{sol}
+		For the first expression, multiply both sides by $\omega^h-1$ to get
+		\begin{align*}
+			(1-\omega^h)(1+\omega^h+\omega^{2h}+\cdots+\omega^{(n-1)h}) &=1-\omega^{nh} \\
+			&=1-(\omega^n)^h \\
+			&=1-1 \\
+			&=0.
+		\end{align*}
+		Since $\omega^h \neq 1$ (as $n \nmid h$), we must have $$1+\omega^h+\omega^{2h}+\cdots+\omega^{(n-1)h}=\boxed{0}.$$
+		
+		On the other hand, multiplying the second expression by $1+\omega^h$ gives
+		\begin{align*}
+			(1+\omega^h)(1-\omega^h+\omega^{2h}-\cdots+(-1)^{n-1}\omega^{(n-1)h}) &=1+(-1)^{n-1}\omega^{nh} \\
+			&=1+(-1)^{n-1},
+		\end{align*}
+		so $$1-\omega^h+\omega^{2h}-\cdots+(-1)^{n-1}\omega^{(n-1)h} =\begin{cases}
+			\dfrac{2}{1+\omega^h}, & n \text{ is odd}, \\
+			0, & n \text{ is even}.
+		\end{cases}.$$
+	\end{sol}
+\end{exercise}
+
+\section{Analytic Geometry}
+\label{sec:analytic-geometry}
+In classical analytic geometry, the geometry of a locus is expressed as a relation between $x$ and $y$. In many geometry problems, such as those involving rectangles, squares, circles, angless that are multiples of $30^\circ$, the work is greatly simplified by translating to Cartesian coordinates. Complex coordinates can offer an even faster solution, since the equations are reduced to one variable and written in terms of $z$ and $\overline{z}$.
+
+For instance, the equation of a circle of radius $r$ centered about the complex point $a$ is $\abs{z-a}=r$. This can be expanded as
+\begin{align*}
+	(z-a)(\overline{z}-\overline{a}) &=r^2 \\
+	\then z\overline{z}-a\overline{z}-\overline{a}z+a\overline{a} &=r^2.
+\end{align*}
+
+A straight line in the complex plane can be given by the parametric form $$z=a+bt,$$ where $a,b \in \CC$, $b \neq 0$, and $t$ is the parameter running through all values in $\RR$. Two equations $z=a+bt$ and $z=a'+b't$ represent the same line if and only if $a'-a$ and $b'$ are real multiples of $b$. The lines are parallel whenever $b'$ is a real multiple of $b$, and they are equally directed if $b'$ is a positive multiple of $b$. The direction of a directed line can be identified with $\arg b$. The angle between $z=a+bt$ and $z=a'+b't$ is $\arg b'/b$, and in that sense, it is a directed angle. Hence, the lines are orthogonal (perpendicular) to each other if $b'/b$ is purely imaginary.
+
+Note that, since $t$ is real, we can also write $\overline{z}=\overline{a}+\overline{b}t$, so that $$\overline{b}z-b\overline{z}-a\overline{b}+b\overline{a}=0.$$ This is the standard form of the equation of a line.
+
+Problems of finding intersections between lines and circles, parallel or perpendicular lines, tangents, etc. usually become exceedingly simple when expressed in complex form. Mathematical competitions tend to feature such problems as brainteasers in ingenuity.
+
+An inequality $\abs{z-a}<r$ describes the inside of a circle. Similarly, a directed line $z=a+bt$ determines a right half plane consisting of all points $z$ with $\Imag(z-a)/b<0$ and a left half plane with $\Imag(z-a)/b>0$.
+
+\begin{exercise}
+	Prove analytically that the midpoints of parallel chords to a circle lie on a diameter perpendicular to the chords.
+	
+	\begin{sol}
+		Without loss of generality, let the circle have unit radius, and thus parametrize it by $\abs{z}=1$ in the complex plane. Let $a$ and $b$ be points on this circle; the chord between them is in the direction of $b-a$. Let $c$ be another point on the circle; we wish to find a point $d$ on the circle such that the chord between $c$ and $d$ is parallel to the chord between $a$ and $b$. Such a chord is represented by the parametric equation $c+t(b-a)$, so we want to solve for $d$ such that $d=c+t(b-a)$ for some real $t$, and $\abs{d}=1$. We then have
+		\begin{align*}
+			\left(c+t(b-a)\right) \cdot \left(\overline{c}+t(\overline{b}-\overline{a})\right) &=1.
+		\end{align*}
+		Making use of the fact that $\overline{z}=1/z$ for any point $z$ on the unit circle, we get
+		\begin{align*}
+			\left(c+t(b-a)\right)\cdot \left(\dfrac{1}{c}+t\left(\dfrac{1}{b}-\dfrac{1}{a}\right)\right) &=1 \\
+			\then 1+ct\left(\dfrac{a-b}{ab}\right)+\dfrac{t}{c}\left(b-a\right)-t^2\left(\dfrac{(b-a)^2}{ab}\right) &=1 \\
+			\then t(b-a)\left(-\dfrac{c}{ab}+\dfrac{1}{c}\right)-t^2\left(\dfrac{(b-a)^2}{ab}\right) &=0 \\
+			\then t(b-a)\left[\left(\dfrac{ab-c^2}{abc}\right)-t\left(\dfrac{b-a}{ab}\right)\right] &=0 \\
+			\then t &=\dfrac{ab-c^2}{abc} \cdot \dfrac{ab}{b-a} \\
+			&=\dfrac{ab-c^2}{c(b-a)}.
+		\end{align*}
+		
+		As a sanity check, we confirm that $t$ is real by taking its conjugate:
+		\begin{align*}
+			\overline{t} &=\dfrac{\overline{ab}-\overline{c}^2}{\overline{c}(\overline{b}-\overline{a})} \\
+			&=\dfrac{\frac{1}{ab}-\frac{1}{c^2}}{\frac{1}{c}\left(\frac{1}{b}-\frac{1}{a}\right)} \\
+			&=\dfrac{c^2-ab}{abc^2} \cdot \dfrac{a-b}{abc} \\
+			&=\dfrac{c^2-ab}{c(a-b)} \\
+			&=\dfrac{ab-c^2}{c(b-a)} \\
+			&=t.
+		\end{align*}
+		Since $\overline{t}=t$, $t$ is real.
+		
+		Now,
+		\begin{align*}
+			d &=c+t(b-a) \\
+			&=c+\dfrac{ab-c^2}{c(b-a)} \cdot (b-a) \\
+			&=c+\dfrac{ab-c^2}{c} \\
+			&=c+\dfrac{ab}{c}-c \\
+			&=\dfrac{ab}{c}.
+		\end{align*}
+		We are in a position to determine the direction of the line formed by joining the midpoints of the two chords $ab$ and $cd$: it is
+		\begin{align*}
+			\dfrac{\frac{ab}{c}+c}{2}-\dfrac{a+b}{2} &=\dfrac{ab+c^2-ac-bc}{2c}.
+		\end{align*}
+		Since the direction of the chord formed by $a$ and $b$ is simply $b-a$, as mentioned above, it suffices to show by the discussion in the text that the quotient $$\dfrac{ab+c^2-ac-bc}{2c(b-a)}$$ is purely imaginary. Denote it by $w$ and take its conjugate:
+		\begin{align*}
+			\overline{w} &=\dfrac{\overline{ab}+\overline{c}^2-\overline{ac}-\overline{bc}}{2\overline{c}\left(\overline{b}-\overline{a}\right)} \\
+			&=\dfrac{\frac{1}{ab}+\frac{1}{c^2}-\frac{1}{ac}-\frac{1}{bc}}{\frac{2}{c}\left(\frac{1}{b}-\frac{1}{a}\right)} \\
+			&=\dfrac{c^2+ab-bc-ac}{abc^2} \cdot \dfrac{c}{2} \cdot \dfrac{ab}{a-b} \\
+			&=\dfrac{ab+c^2-ac-bc}{2c(a-b)} \\
+			&=-w.
+		\end{align*}
+		Hence, $w+\overline{w}=0$, so $\Real w=0$, and $w$ is purely imaginary.
+		
+		This is also true of the angle between the chord $cd$ and the line segment joining the midpoints of $ab$ and $cd$, since $cd \parallel ab$. We conclude that these two lines are perpendicular.
+		
+		To show that the center of the circle lies on the line joining the midpoints of $ab$ and $cd$ without resorting to the geometric fact that a radius perpendicular to the chord bisects that chord, we simply find the explicit parametrization of the line. Its direction is, of course, $\frac{ab+c^2-ac-bc}{2c}$, and since $\frac{a+b}{2}$ is a point on it, we can take its equation to be $$z=\dfrac{a+b}{2}+t \cdot \dfrac{ab+c^2-ac-bc}{2c}.$$ To prove that $z=0$ lies on this line, we compute the quotient:
+		\begin{align*}
+			t &=-\dfrac{a+b}{2} \cdot \dfrac{2c}{ab+c^2-ac-bc} \\
+			&=-\dfrac{c(a+b)}{(ab+c^2-ac-bc)}.
+		\end{align*}
+		Its conjugate is
+		\begin{align*}
+			\overline{t} &=-\dfrac{\frac{1}{c}\left(\frac{1}{a}+\frac{1}{b}\right)}{\frac{c^2+ab-bc-ac}{abc^2}} \\
+			&=-\dfrac{a+b}{abc} \cdot \dfrac{abc^2}{c^2+ab-bc-ac} \\
+			&=-\dfrac{c(a+b)}{ab+c^2-ac-bc} \\
+			&=t,
+		\end{align*}
+		so $t$ is, indeed, real, and $0$ lies on the line.
+	\end{sol}
+\end{exercise}
+
+\section{The Spherical Representation}
+\label{sec:riemann-sphere}
+For many purposes it is useful to extend the system $\CC$ of complex numbers by introduction of a ``point at infinity," denoted by $\infty$. The extended number system is endowed with the rules $a+\infty=\infty+a=\infty$ for all finite $a$, and $b \cdot \infty=\infty \cdot b=\infty$ for all $b \neq 0$, including $b=\infty$. It is impossible, however, to define $\infty+\infty$ and $0 \cdot \infty$ without violating the laws of arithmetic. By special convention we shall nonetheless write $a/0=\infty$ for $a \neq 0$ and $b/\infty=0$ for $b \neq \infty$.
+
+In the plane there is no room for a point corresponding to $\infty$, but we can of course introduce one, mandating that every straight line pass through this point, but that no half plane contains it.
+
+Since it is desirable to introduce a geometric model of the \textit{extended complex plane}, we shall consider the unit sphere $S^2=\{(x_1,x_2,x_3) \colon x_1^2+x_2^2+x_3^2=1\}$. The reader well-acquainted with basic topology will recall that $S-\{(0,0,1)\}$ is diffeomorphic to $\RR^2 \cong \CC$ via the \textit{stereographic projection}.
+
+\begin{definition}[Stereographic Projection]
+	Given a point $(x_1,x_2,x_3) \in S^2-\{(0,0,1)\}$, the unit sphere minus the north pole $N$, its \emph{stereographic projection} is the point $$\left(\dfrac{x_1}{1-x_3},\dfrac{x_2}{1-x_3}\right).$$ This is precisely the intersection of the line passing through the north pole and $(x_1,x_2,x_3)$ with the flat $(x_1,x_2)$-plane, as shown below.
+	
+	\begin{figure}[h]
+		\caption{Stereographic projection (from the north pole)}
+		\centering
+		\begin{asy}
+		unitsize(3cm);
+		draw(unitcircle);
+		draw(ellipse((0,0), 1, 0.25), dashed);
+		draw((sqrt(3)/2,1/2)--(2,1/2)--(1,-1/2)--(-2,-1/2)--(-1,1/2) -- (-sqrt(3)/2, 1/2));
+		draw((-1/4, -1/4) -- (1/4,1/4));
+		pair northpole = (0,1);
+		pair pointone = (-0.75,0.4);
+		pair projectionone = (-1.5,-0.2);
+		pair pointtwo = (0.4,0.125);
+		pair projectiontwo = (0.6, -5/16);
+		pair origin = (0,0);
+		
+		label("$N$", northpole, align=N);
+		label("$Z$", pointone, align=NW, filltype=Fill(white));
+		label("$z$", projectionone, align=W);
+		label("$z$", pointtwo, align=E);
+		label("$Z$", projectiontwo, align=W);
+		label("$O$", origin, align=E);
+		dot(northpole, linewidth(5pt));
+		dot(pointone, linewidth(5pt));
+		dot(projectionone, linewidth(5pt));
+		dot(pointtwo, linewidth(5pt));
+		dot(projectiontwo, linewidth(5pt));
+		draw(northpole -- pointone -- projectionone, linewidth(1.5pt));
+		draw(northpole -- origin, linewidth(1.5pt));
+		draw(northpole -- pointtwo, linewidth(1.5pt));
+		draw(pointtwo -- projectiontwo, dashed);
+		draw(projectiontwo -- (1.2, -13/8), linewidth(1.5pt));
+		\end{asy}
+	\end{figure}
+	
+	Associating the $(x_1,x_2)$-plane with $\CC$, we set $$z=\dfrac{x_1+ix_2}{1-x_3}$$ as the complex stereographic projection of $(x_1,x_2,x_3)$.
+	
+	Given such a complex number $z$, its \textit{inverse stereographic projection} is the point $$\left(\dfrac{z+\overline{z}}{\abs{z}^2+1},\dfrac{z-\overline{z}}{i(\abs{z}^2+1)},\dfrac{\abs{z}^2-1}{\abs{z}^2+1}\right).$$ Thus, stereographic projection is shown to be a diffeomorphism of $S^2$ onto $\CC$.
+\end{definition}
+
+The sphere, projected stereographically onto the complex plane rather than $\RR^2$, is referred to as the \textit{Riemann sphere} in differential geometry.
+
+It is geometrically evident that the stereographic projection transforms every straight line in the complex plane into a circle on $S$ which passes through the north pole, and the converse is also true. More generally, the following holds:
+\begin{proposition}
+	Any circle on the sphere $S^2$ corresponds to a circle or straight line in the complex plane.
+\end{proposition}
+\begin{proof}
+	Observe that any circle on the sphere lies in a plane corresponding to the equation $ax_1+bx_2+cx_3=d$, where upon dividing by $\sqrt{a^2+b^2+c^2}$, we can assume that $a^2+b^2+c^2=1$ and $0 \le d<1$. In terms of $z$ and $\overline{z}$, the stereographic projection, this equation takes the form $$a(z+\overline{z})-bi(z-\overline{z})+c(\abs{z}^2-1)=d(\abs{z}^2+1),$$ or $$(d-c)(\abs{z}^2)-2a\Real z-2b\Imag z+c+d=0.$$ Letting $x=\Real z$ and $y=\Imag z$, we get that $$(d-c)(x^2+y^2)-2ax-2by+c+d=0.$$ For $c \neq d$ this is the equation of a circle, and for $c=d$, it represents a straight line. Conversely, any equation of a circle or line can be written in this form, so the correspondence is one-to-one.
+\end{proof}
+
+As a final computation to conclude this section, we determine the distance $d(z,z')$ between the (inverse) stereographic projections of $z$ and $z'$; let these points be  $(x_1,x_2,x_3)$ and $(x_1',x_2',x_3)$, respectively. First of all, the distance between $(x_1,x_2,x_3)$ and $(x_1',x_2',x_3)$ is
+\begin{align*}
+	(x_1-x_1')^2+(x_2-x_2')^2+(x_3-x_3')^2 &=2-2(x_1x_1'+x_2x_2'+x_3x_3').
+\end{align*}
+From the formula for inverse stereographic projection, we obtain
+\begin{align*}
+	x_1x_1'+x_2x_2'+x_3x_3' &=\dfrac{(z+\overline{z})(z'+\overline{z'})-(z-\overline{z})(z'-\overline{z'})+(\abs{z}^2-1)(\abs{z'}^2-1)}{(1+\abs{z}^2)(1+\abs{z'}^2)} \\
+	&=\dfrac{2zz'+2z\overline{z'}+2z'\overline{z}+1+\abs{z}^2\abs{z'}^2-\abs{z}^2-\abs{z'}^2}{(1+\abs{z}^2)(1+\abs{z'}^2)} \\
+	&=\dfrac{(1+\abs{z}^2)(1+\abs{z'}^2)+2zz'+2z\overline{z'}+2z'\overline{z}-2\abs{z}^2-2\abs{z'}^2}{(1+\abs{z}^2)(1+\abs{z'}^2)} \\
+	&=\dfrac{(1+\abs{z}^2)(1+\abs{z'}^2)-2\abs{z-z'}^2}{(1+\abs{z}^2)(1+\abs{z'}^2)}.
+\end{align*}
+Therefore, the distance between $(x_1,x_2,x_3)$ and $(x_1',x_2',x_3')$, in terms of $z$, is $$d(z,z')=\dfrac{2\abs{z-z'}}{\sqrt{(1+\abs{z}^2)(1+\abs{z'}^2)}}.$$ For $z'=\infty$ we have that $(x_1',x_2',x_3')=(0,0,1)$, and the corresponding formula is $$d(z,\infty)=\dfrac{2}{\sqrt{1+\abs{z}^2}}.$$
+
+\begin{exercise}
+	Show that $z$ and $z'$ correspond to diametrically opposite points on the Riemann sphere if and only if $z\overline{z'}=-1$.
+	
+	\begin{sol}
+		Suppose that the inverse stereographic projections of $z$ and $z'$ onto the Riemann sphere are antipodes. Then
+		\begin{align}
+			\dfrac{z+\overline{z}}{\abs{z}^2+1} &=-\dfrac{z'+\overline{z'}}{\abs{z'}^2+1}, \\
+			\dfrac{z-\overline{z}}{i(\abs{z}^2+1)} &=-\dfrac{z'-\overline{z'}}{i(\abs{z'}^2+1)}, \\
+			\dfrac{\abs{z}^2-1}{\abs{z}^2+1} &=-\dfrac{\abs{z'}^2-1}{\abs{z'}^2+1}.
+		\end{align}
+		Dividing (2.1) by (2.2) gives 
+		\begin{align*}
+			\dfrac{z+\overline{z}}{z-\overline{z}} &=\dfrac{z'+\overline{z'}}{z'-\overline{z'}} \\
+			\then zz'-z\overline{z'}+z'\overline{z}-\overline{zz'} &=zz'+z\overline{z'}-z'\overline{z}-\overline{zz'} \\
+			\then z\overline{z'} &=z'\overline{z}.
+		\end{align*}
+		From (2.3), we have
+		\begin{align*}
+			\abs{zz'}^2+\abs{z}^2-\abs{z'}^2-1 &=-\abs{zz'}^2+\abs{z}^2-\abs{z'}^2+1 \\
+			\abs{zz'}^2 &=1.
+		\end{align*}
+		Since $\abs{zz'}^2=zz'\overline{z}\overline{z'}=z\overline{z'}z'\overline{z}=\abs{z\overline{z'}}^2$, we find that $z\overline{z'}=\pm 1$. In either case, (2.1) then simplifies to
+		\begin{align*}
+			z+\overline{z} &=-\abs{z}^2(z'+\overline{z'}) \\
+			\then z+\overline{z} &=-z\overline{z}(z'+\overline{z'}) \\
+			\then z+\overline{z} &=-z(z'\overline{z})-\overline{z}(z\overline{z'}),
+		\end{align*}
+		so it must be that $$z\overline{z'}=z'\overline{z}=-1.$$
+		
+		The converse is easy to check: if $z\overline{z'}=1$, then by taking conjugates we get $z'\overline{z}=1$, and we can use these equalities to substitute for $z'$ and $\overline{z'}$ in the formulae for inverse stereographic projections to get that they are antipodes.
+	\end{sol}
+\end{exercise}
+

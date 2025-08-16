@@ -1,0 +1,301 @@
+\chapter{Analytic Functions}
+\label{chap:analytic-functions}
+When upgrading from real numbers to complex numbers, we have to consider four different kinds of functions: real functions of a real variable, real functions of a complex variable, complex functions of a real variable, and complex functions of a complex variable. As a practical matter we shall always denote complex numbers by $z$ and $w$; thus, to indicate a complex function of a complex variable, we will write $w=f(z)$. The notation $y=f(x)$ will be used in a neutral manner wih the understanding that $x$ and $y$ can be real or complex. When we want to indicate that a variable is definitely restricted to real values, we will usually denote it by $t$.
+
+It is not necessary that a function be defined on \textit{all} values of its independent variable, but we will make the informal agreement that it is certainly defined on an open set.
+
+\section{Limits and Continuity}
+Here, we restate the definitions the reader is used to from real analysis:
+\begin{definition}[Limit]
+	The function $f$ is said to have the limit $b$ as $x$ tends to $a$, and we write $$\lim_{x \rightarrow a}f(x)=b, \text{ or } f(x) \rightarrow b \text{ as } x \rightarrow a,$$ if and only if for every $\eps>0$ there exists a number $\delta>0$ such that $\abs{f(x)-b}<\eps$ whenever $\abs{x-a}<\delta$.
+\end{definition}
+This definition makes use of the absolute value, but that quantity is defined for complex numbers as well as reals, so we needn't worry.
+
+Note that infinite limits also exist, but in the complex case, an infinite limit can only be $+\infty$.
+
+The following properties of limits are easily verified:
+\begin{proposition}
+	Let $f,g$ be functions. Then, if all limits exist, we have
+	\begin{enumerate}
+		\item[(1)] $\lim_{x \rightarrow a}\left[f(x)+g(x)\right]=\lim_{x \rightarrow a}f(x)+\lim_{x \rightarrow a}g(x)$,
+		\item[(2)] $\lim_{x \rightarrow a}\left[f(x)g(x)\right]=\lim_{x \rightarrow a}f(x) \cdot \lim_{x \rightarrow a}g(x)$,
+		\item[(3)] $\lim_{x \rightarrow a}\left[f(x)/g(x)\right]=\lim_{x \rightarrow a}f(x)/\lim_{x \rightarrow a}g(x)$,
+		\item[(4)] $\lim_{x \rightarrow a}\abs{f(x)}=\abs{\lim_{x \rightarrow a}f(x)}$,
+		\item[(5)] $\lim_{x \rightarrow a} \Real f(x)=\Real \lim_{x \rightarrow a} f(x)$,
+		\item[(6)] $\lim_{x \rightarrow a} \Imag f(x)=\Imag \lim_{x \rightarrow a} f(x)$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{definition}
+	The function $f$ is said to be \emph{continuous} at $a$ if and only if $\lim_{x \rightarrow a}f(x)=f(a)$. A \emph{continuous function}, without further qualification, is one which is continuous at all points where it is defined.
+\end{definition}
+
+As the reader should have guessed, sums, products, quotients, and compositions of continuous functions are all continuous.
+
+\begin{definition}
+	The \emph{derivative} of a function $f$ at $a$ is defined as $$f'(a)=\lim_{x \rightarrow a}\dfrac{f(x)-f(a)}{x-a}.$$
+\end{definition}
+
+The usual rules for sums, products, and quotients concerning derivatives apply. The derivative of a composite function is determined by the Chain Rule.
+\begin{proposition}
+	Let $f$ and $g$ be functions, and suppose $g(a)$ is in the domain of $f$. Then
+	\begin{enumerate}
+		\item[(1)] $(fg)'=fg'+f'g$,
+		\item[(2)] $(f/g)'=\dfrac{gf'-fg'}{g^2}$,
+		\item[(3)] $(f \circ g)'(a)=f'(g(a)) \cdot g'(a)$.
+	\end{enumerate}
+\end{proposition}
+
+However, there is a fundamental difference between the cases of a real and a complex variable. To illustrate this point, let $f(z)$ be a \textit{real} function of a \textit{complex} variable whose derivative exists at $z=a$. Then $f'(a)$ is on side real, for it is the limit of the quotients $$\dfrac{f(a+h)-f(a)}{h}$$ as $h$ tends to $0$ through real values. On the other side, it is also the limit of the quotients $$\dfrac{f(a+ih)-f(a)}{ih}$$ and as such purely imaginary. Therefore, $f'(a)$ must be $0$. We conclude that a real function of a complex variable either has the derivative zero, or else the derivative does not exist.
+
+The case of a complex function of a real variable can be reduced to the real case. If we write $z(t)=x(t)+iy(t)$, we find that $$z'(t)=x'(t)+iy'(t),$$ and the existence of $z'(t)$ is equivalent to the simultaneous existence of $x'(t)$ and $y'(t)$.
+
+The most interesting case, then, is that of a complex function of a complex variable. The existence of its derivative has far-reaching consequences for the structural properties of the function. The investigation of these consequences is the central theme in complex function theory.
+
+\section{Analytic Functions}
+\begin{definition}
+	A complex function of a complex variable is called \textit{analytic} if it possesses a derivative everywhere it is defined. The term \textit{holomorphic} is also used.
+\end{definition}
+The sum and the product of two analytic functions is also analytic. So is the quotient, provided that the denominator does not vanish anywhere; however, in the general case, we simply exclude the roots of the denominator.
+
+The definition of the complex derivative can be rewritten in the form $$f'(z)=\lim_{h \rightarrow 0} \dfrac{f(z+h)-f(z)}{h}.$$ As a first consequence, if $f$ is analytic, then it is certainly continuous. Indeed, from $f(z+h)-f(z)=h \cdot (f(z+h)-f(z))/h$ we obtain $$\lim_{h \rightarrow 0}(f(z+h)-f(z))=0 \cdot f'(z)=0.$$ More interesting is when we write $f(z)=u(z)+iv(z)$; then both $u$ and $v$ are continuous as real functions of a complex variable.
+
+The limit of the difference quotient must be the same regardless of the way in which $h$ approaches $0$. If we choose real values for $h$, then the imaginary part $y$ is kept constant, and the derivative becomes a partial derivative with respect to $x$. We thus have $$f'(z)=\dfrac{\partial f}{\partial x}=\dfrac{\partial u}{\partial x}+i \dfrac{\partial v}{\partial x}.$$ Similarly, if we substitute purely imaginary values for $h$, like $ik$ for $k \in \RR$, then we get
+\begin{align*}
+	f'(z) &=\lim_{k \rightarrow 0} \dfrac{f(z+ik)-f(z)}{ik} \\
+	&=\dfrac{1}{i} \cdot \dfrac{\partial f}{\partial y} \\
+	&=-i \cdot \dfrac{\partial f}{\partial y} \\
+	&=-i \dfrac{\partial u}{\partial y}+\dfrac{\partial v}{\partial y}.
+\end{align*}
+It follows that $f(z)$ must satisfy the partial differential equation $$\dfrac{\partial f}{\partial x}=-i\dfrac{\partial f}{\partial y}.$$ Resolving this equation into its real and imaginary parts yields
+\begin{proposition}
+	If $f(z)=u(z)+iv(z)$ for real-valued functions $u$ and $v$, and $f$ is analytic, then we must have 
+	\begin{align}
+	\dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y}, \quad \dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}.
+	\end{align}
+	These are the \textit{Cauchy-Riemann} differential equations.
+\end{proposition}
+
+We remark that the existence of the four partial derivatives above is implied by the existence of $f'(z)$. The simples expression for the derivative $f'(z)$ is $$f'(z)=\dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}.$$ For the quantity $\abs{f'(z)}^2$ we have
+\begin{align*}
+	\abs{f'(z)}^2 &=\left(\dfrac{\partial u}{\partial x}\right)^2+\left(\dfrac{\partial x}{\partial x}\right)^2 \\
+	&=\left(\dfrac{\partial u}{\partial x}\right)^2+\left(\dfrac{\partial v}{\partial x}\right)^2 \\
+	&=\dfrac{\partial u}{\partial x}\dfrac{\partial v}{\partial y}-\dfrac{\partial u}{\partial y}\dfrac{\partial v}{\partial x}.
+\end{align*}
+Because the Jacobian matrix that $f'(z)$ represents is $$Df_z=\begin{pmatrix}
+	\frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\
+	\frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}
+\end{pmatrix},$$ we have that $\abs{f'(z)}^2=\det (Df_z)$.
+
+We shall prove later that the derivative of an analytic function is itself analytic. By this fact, $u$ and $v$ will have continuous partial derivatives of all orders, and in particular, the mixed derivatives will be equal. Using this information, we have
+\begin{align*}
+	\Delta u &=\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2}=0, \\
+	\Delta v &=\dfrac{\partial^2 v}{\partial x^2}+\dfrac{\partial^2 v}{\partial y^2}=0.
+\end{align*}
+A function which satisfies \textit{Laplace's equation} $\Delta u=0$ is said to be \textit{harmonic}. The real and imaginary part of an analytic function are thus harmonic. If two harmonic functions $u$ and $v$ satisfy the Cauchy-Riemann differential equations, then $v$ is said to be the \emph{conjugate harmonic function} of $v$. Under the same circumstances, $u$ is evidently the conjugate harmonic function of $-v$.
+
+Let us now prove that the function $u+iv$ determined by a pair of conjugate harmonic functions is always analytic, under the explicit assumption that $u$ and $v$ has continuous partial derivatives of the first order. It is proved in calculus, under exactly these regularity conditions, that
+\begin{align*}
+	u(x+h,y+k)-u(x,y) &=\dfrac{\partial u}{\partial x}h+\dfrac{\partial u}{\partial y}k+\eps_1, \\
+	v(x+h,y+k)-v(x,y) &=\dfrac{\partial v}{\partial x}h+\dfrac{\partial v}{\partial y}k+\eps_2,
+\end{align*}
+where $\eps_1,\eps_2=o(h+ik)$; that is, $\eps_1/(h+ik) \rightarrow 0$ and $\eps_2/(h+ik) \rightarrow 0$ as $h+ik \rightarrow 0$. With the notation $f(z)=u(x,y)+iv(x,y)$ we obtain by virtue of the Cauchy-Riemann differential equations that $$f(z+h+ik)-f(z)=\left(\dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}\right)(h+ik)+\eps_1+i\eps_2,$$ and hence $$\lim_{h+ik \rightarrow 0} \dfrac{f(z+h+ik)-f(z)}{h+ik}=\dfrac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}.$$ We conclude that $f(z)$ is analytic.
+
+Combining this with the other direction shown above -- that the components of an analytic function satisfy the Cauchy-Riemann differential equations -- we deduce
+\begin{proposition}
+	\label{prop:analytic-conjugate-harmonic}
+	Let $u$ and $v$ be real-valued functions of a complex variable. Then $u+iv$ is an analytic function if and only if $u$ and $v$ are harmonic functions which satisfy the Cauchy-Riemann differential equations.
+\end{proposition}
+Let us see an example of how to calculate a conjugate harmonic function.
+\begin{example}
+	The function $u=x^2-y^2$ is harmonic, as $$\Delta u=\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2}=2-2=0.$$ Since $$\dfrac{\partial u}{\partial x}=2x, \quad \dfrac{\partial u}{\partial y}=-2y,$$ the conjugate function $v$ must satisfy
+	\begin{align}
+		\dfrac{\partial v}{\partial x} &=2y, \\
+		\dfrac{\partial v}{\partial y} &=2x.
+	\end{align}
+	From (3.2) we get $$v=2xy+\varphi(y),$$ where $\varphi$ is a function of $y$ alone. Substituting this general form into (3.3) gives $$\varphi'(y)=0,$$ so $\varphi(y)=c$ for some constant $c$. Hence, we have $$v=2xy+c.$$ Observe that $x^2-y^2+2ixy=z^2$, so the analytic function with the real part $x^2-y^2$ is $z^2+ic$.
+\end{example}
+
+There is an interesting formal procedure which throws considerable light on the nature of analytic functions. Consider a complex function $f(x,y)$ of two variables. Introducting the complex variable $z=x+iy$ and its conjugate $\overline{z}=x-iy$, we can obviously write $$x=\dfrac{1}{2}\left(z+\overline{z}\right), \quad -\dfrac{1}{2}i(z-\overline{z}).$$ With this change of variables we can consider $f(x,y)$ as a function of $z$ and $\overline{z}$ which we will treat as independent variables (forgetting that they are, in fact, conjugate to each other). If the rules of calculus were applicable, we could use the Chain Rule for partial derivatives to obtain
+\begin{align*}
+	\dfrac{\partial f}{\partial z} &=\dfrac{\partial f}{\partial x} \cdot \dfrac{\partial x}{\partial z}+\dfrac{\partial f}{\partial y} \cdot \dfrac{\partial y}{\partial z} =\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}-i\dfrac{\partial f}{\partial y}\right), \\
+	\dfrac{\partial f}{\partial \overline{z}} &=\dfrac{\partial f}{\partial x} \cdot \dfrac{\partial x}{\partial \overline{z}}+\dfrac{\partial f}{\partial y} \cdot \dfrac{\partial y}{\partial \overline{z}} =\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}+i\dfrac{\partial f}{\partial y}\right).
+\end{align*}
+
+These expressions have no convenient definition as limits, but we can nonetheless introduce them as formal derivatives with respect to $z$ and $\overline{z}$. From the relation $$\dfrac{\partial f}{\partial x}=-i\dfrac{\partial f}{\partial y},$$ we get that $\frac{\partial f}{\partial \overline{z}}=0$, so that an analytic function is a function of $z$ alone.
+
+This formal reasoning supports the point of view that analytic functions are true functions of a complex variable as opposed to functions which are more adequately described as complex functions of two real variables.
+
+\begin{exercise}
+	Verify that $e^x \sin y$ and $e^x \cos y$ are conjugate harmonic functions.
+	
+	\begin{sol}
+		Let $u(x,y)=e^x \cos y$ and $v(x,y)=e^x \sin y$. First of all, we confirm that these functions are harmonic. We have
+		\begin{align*}
+			\Delta u &=\dfrac{\partial^2 v}{\partial x^2}+\dfrac{\partial^2 v}{\partial y^2}= e^x \cos y-e^x \sin y=0, \\
+			\Delta v &=\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 u}{\partial y^2}=e^x \sin y-e^x \sin y=0.
+		\end{align*}
+		Now, there are two ways to see that $u$ and $v$ are conjugate. We can compute the Cauchy-Riemann differential equations, or we can simply notice that
+		\begin{align*}
+			u+iv &=e^x \cos y+ie^x \sin y \\
+			&=e^x\left(\cos y+i \sin y\right) \\
+			&=e^{x+iy} \\
+			&=e^z,
+		\end{align*}
+		which is clearly analytic on all of $\CC$. Therefore, $u$ and $v$ are the real and imaginary parts, respectively, of an analytic function so by Proposition \ref{prop:analytic-conjugate-harmonic}, we conclude that they are conjugate.
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	If $g$ and $f$ are analytic functions, show that $g \circ f$ is also analytic.
+	
+	\begin{sol}
+		The function $g \circ f$ can be considered as the multivariate $$g(f(x,y))=(u_g(u_f(x,y),v_f(x,y)),v_g(u_f(x,y),v_f(x,y))).$$ We will show that $u_g$ and $v_g$ satisfy the Cauchy-Riemann differential equations. Indeed, by the Chain Rule, and using the fact that both $g$ and $f$ also satisfy the Cauchy-Riemann differential equations, we have
+		\begin{align*}
+			\dfrac{\partial u_g}{\partial x} &=\dfrac{\partial u_g}{\partial u_f} \cdot \dfrac{\partial u_f}{\partial x}+\dfrac{\partial u_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial x} \\
+			&=\dfrac{\partial v_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial y}+\left(-\dfrac{\partial v_g}{\partial u_f} \cdot -\dfrac{\partial u_f}{\partial y}\right) \\
+			&=\dfrac{\partial v_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial y}+\dfrac{\partial v_g}{\partial u_f} \cdot \dfrac{\partial u_f}{\partial y} \\
+			&=\dfrac{\partial v_g}{\partial y}.
+		\end{align*}
+		Similarly,
+		\begin{align*}
+			\dfrac{\partial u_g}{\partial y} &=\dfrac{\partial u_g}{\partial u_f} \cdot \dfrac{\partial u_f}{\partial y}+\dfrac{\partial u_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial y} \\
+			&=-\dfrac{\partial v_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial x}-\dfrac{\partial v_g}{\partial u_f} \cdot \dfrac{\partial u_f}{\partial x} \\
+			&=-\left(\dfrac{\partial v_g}{\partial v_f} \cdot \dfrac{\partial v_f}{\partial x}+\dfrac{\partial v_g}{\partial u_f} \cdot \dfrac{\partial u_f}{\partial x}\right) \\
+			&=-\dfrac{\partial v_g}{\partial x},
+		\end{align*}
+		so $g \circ f$ is analytic.
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	Show that a harmonic function satisfies the formal differential equation $$\dfrac{\partial^2 u}{\partial z \partial \overline{z}}=0.$$
+	
+	\begin{sol}
+		Using the formal derivation of the text, we have
+		\begin{align*}
+			\dfrac{\partial^2 u}{\partial z\partial \overline{z}} &=\dfrac{1}{2}\left[\dfrac{1}{2}\left(\dfrac{\partial^2 u}{\partial x^2}+i\dfrac{\partial^2 u}{\partial x \partial y}\right)-\dfrac{1}{2}i\left(\dfrac{\partial^2 u}{\partial x \partial y}+i\dfrac{\partial^2 u}{\partial y^2}\right)\right] \\
+			&=\dfrac{1}{4}\left(\dfrac{\partial^2 u}{\partial x^2}+\dfrac{\partial^2 f}{\partial y^2}\right) \\
+			&=0,
+		\end{align*}
+		where the last step follows from the equality of mixed partial derivatives and the hypothesis that $u$ is harmonic.
+	\end{sol}
+\end{exercise}
+
+\section{Polynomials}
+Every polynomial $$P(z)=a_0+a_1z+\cdots+a_nz^n$$ is an analytic function. Its derivative is, as expected, $$P'(z)=a_1+2a_2z+\cdots+na_nz^{n-1}.$$ By the Fundamental Theorem of Algebra (which shall be proved explicitly in the text, though I have hinted at Milnor's topological proof), we can factor $P$ as $$P(z)=a_n(z-\alpha_1) \cdots (z-\alpha_n),$$ where the $n$ roots $\alpha_1,\dots,\alpha_n$ are not necessarily distinct. If a root $\alpha$ appears with multiplicity $h$, then we can write $P(z)=(z-\alpha)^hQ(z)$ for some other polynomial $Q$ of degree $n-h$. This shows that $P^{(k)}(a)=0$ for all $0 \le k \le h-1$; that is, the multiplicity of the root equals the order of the first non-vanishing derivative of the polynomial. A \textit{simple} root $\alpha$ is one with multiplicity $1$, and it satisfies $P(\alpha)=0$ but $P'(\alpha) \neq 0$. If a polynomial is \textit{separable}, meaning that each of its roots occurs with multiplicity $1$, then it does not share any nontrivial common factor with its derivative.
+
+As an application of this discussion we shall prove Lucas's theorem, a fundamental result in elementary complex analysis:
+\begin{theorem}[Lucas]
+	\label{thm:lucas}
+	If all zeroes of a polynomial $P(z)$ lie in a half plane, then all zeroes of the derivative $P'(z)$ also lie in the same half plane.
+\end{theorem}
+\begin{proof}
+	Note that, by the product rule for differentiation, we have that $$P'(z)=P(z)\left(\dfrac{1}{z-\alpha_1}+\cdots+\dfrac{1}{z-\alpha_n}\right),$$ so 
+	\begin{align}
+	\dfrac{P'(z)}{P(z)} &=\dfrac{1}{z-\alpha_1}+\cdots+\dfrac{1}{z-\alpha_n}.
+	\end{align}
+	Recall Section \ref{sec:analytic-geometry}: suppose that the half plane $H$ is defined as the part of the plane where $\Imag (z-a)/b<0$ for some complex numbers $a$ and $b$. If $\alpha_k$ is in $H$ and $z$ is not, then $$\Imag \dfrac{z-\alpha_k}{b}=\Imag \dfrac{z-a}{b}-\Imag \dfrac{\alpha_k-a}{b}>0.$$ But the imaginary parts of reciprocal numbers have opposite sign, so -- under the same assumption -- $$\Imag \dfrac{b}{z-\alpha_k}<0.$$ If this is true for all $k$, we conclude from (3.4) that $$\Imag \dfrac{bP'(z)}{P(z)}=\sum_{k=1}^{n} \Imag \dfrac{b}{z-\alpha_k}<0,$$ and consequently, $P'(z) \neq 0$. Thus, any $z \notin H$ cannot be a root of $P'(z)$, so all the roots of $P'(z)$ lie in $H$, as desired.
+\end{proof}
+
+In its sharpest formulation, Theorem \ref{thm:lucas} tells us that the smallest convex polygon that contains all the zeroes of $P$ also contains the zeroes of $P'$.
+
+\section{Rational Functions}
+We turn to the case of a rational function $$R(z)=\dfrac{P(z)}{Q(z)},$$ the quotient of two polynomials. We assume, and this is essential, that $P$ and $Q$ have no common factors and hence no common zeroes. Furthermore, $R(z)$ will be given the value $\infty$ at the zeroes of $Q(z)$, so it must be considered as a function with values in the extended plane, and as such it is continuous.
+
+\begin{definition}
+	If $R(z)=P(z)/Q(z)$ is a rational complex function, then the zeroes of the denominator $Q(z)$ are called the \emph{poles} of $R$. The \emph{order} of a pole is its order (multiplicity) as a root of $Q$.
+\end{definition}
+
+The derivative $$R'(z)=\dfrac{P'(z)Q(z)-Q'(z)P(z)}{Q(z)^2}$$ exists only when $Q(z) \neq 0$. However, as a rational function defined by the right-hand side of above, $R'(z)$ has the same poles as $R(z)$. What are their orders? Well, suppose $Q(z)=(z-\alpha)^hQ_h(z)$. Then $Q(z)^2=(z-\alpha)^{2h}Q_h(z)^2$ and $$Q'(z)=h(z-\alpha)^{h-1}Q_h(z)+(z-\alpha)^hQ_h'(z)=(z-\alpha)^{h-1}(hQ_h(z)+Q_h(z)),$$ so
+\begin{align*}
+	R'(z) &=\dfrac{P'(z)Q(z)-Q'(z)P(z)}{Q(z)^2} \\
+	&=\dfrac{(z-\alpha)^hP'(z)Q_h(z)-(z-\alpha)^{h-1}(hQ_h(z)+Q_h'(z))P(z)}{(z-\alpha)^{2h}Q_h(z)^2} \\
+	&=\dfrac{(z-\alpha)^{h-1}\left[(z-\alpha)P'(z)Q_h(z)-(hQ_h(z)+Q_h'(z))P(z)\right]}{(z-\alpha)^{2h}Q_h(z)^2} \\
+	&=\dfrac{(z-\alpha)P'(z)Q_h(z)-(hQ_h(z)+Q_h'(z))P(z)}{(z-\alpha)^{h+1}Q_h(z)^2}.
+\end{align*}
+
+Therefore,
+\begin{proposition}
+	The order of any pole of the derivative of a rational function $R$ is one greater than the order of that same pole of $R$ itself.
+\end{proposition}
+
+If we let $z$ range over the extended plane, then we define $R(\infty)$ as $R_1(0)$, where $R_1(z)=R(1/z)$. If $R_1(0)=0$ or $\infty$, the order of the zero or pole at $\infty$ is defined as the order of the zero or pole of $R_1(z)$ at the origin.
+
+With the notation $$R(z)=\dfrac{a_0+a_1z+\cdots+a_nz^n}{b_0+b_1z+\cdots+b_nz^n},$$ we obtain $$R_1(z)=z^{m-n}\dfrac{a_0z^n+a_1z^{n-1}+\cdots+a_n}{b_0z^m+b_1z^{m-1}+\cdots+b_m}.$$ This shows that if $m>n$, then $R(z)$ has a zero of order $m-n$ at $\infty$; and if $m<n$, then $R(z)$ has a pole of order $n-m$ at $\infty$. If $m=n$, then $$R(\infty)=a_n/b_m \neq 0,\infty.$$
+
+Due to this analysis, we may deduce that the both the number of zeroes and poles are equal to $\max(m,n)$. This common number is denoted the \emph{order} of $R$.
+
+If $a$ is any constant, the function $R(z)-a$ has the same poles as $R(z)$, and consequently the same order. The zeroes of $R(z)-a$ are the roots of the equation $R(z)=a$, and if the roots are counted as many times as the order of the zero indicates, we can state the following result:
+\begin{proposition}
+	A rational function $R$ of order $p$ has $p$ zeroes and $p$ poles, and every equation $R(z)=a$ has exactly $p$ solutions, counted with multiplicity.
+\end{proposition}
+Now let's see some specific examples of rational functions.
+\begin{example}
+	\begin{enumerate}
+	\item A rational function of order $1$ is a linear fraction $$S(z)=\dfrac{\alpha z+\beta}{\gamma z+\delta},$$ with $\alpha \delta-\beta \gamma \neq 0$ to ensure that it is invertible. Then the equation $$w=S(z)$$ has exactly one root, and indeed, we find that $$z=S^{-1}(w)=\dfrac{\delta w-\beta}{-\gamma w+\alpha}.$$
+	\item The linear transformation $z+a$ is called a \emph{parallel transformation}.
+	\item The function $1/z$ is called an \emph{inversion}.
+	\end{enumerate}
+\end{example}
+
+Every rational function has a representation by \textit{partial fractions}; the reader is probably used to this from the corresponding integration technique from single-variable calculus. But in complex analysis the procedure carries even more weight.
+
+Let $R(z)=P(z)/Q(z)$; carry out the division of $P(z)$ by $Q(z)$ so that $P(z)=Q(z)F_1(z)+F_2(z)$, where $F_1$ is a polynomial (possibly of degree $0$), and $\deg F_2<\deg Q$. Add to $F_2(z)$ the appropriate number of terms from the product $Q(z)G(z)$ so that $\deg F_2=\deg Q$; then, we may write $$R(z)=G(z)+H(z),$$ where $G$ is a polynomial without constant term, and $H$ is finite at $\infty$ (because the degrees of its numerator and denominator are equal). The degree of $G$ is the order of the pole at $\infty$, and the polynomial $G(z)$ is called the \textit{singular part} of $R(z)$ at $\infty$.
+
+Let the distinct poles of $R$ be denoted by $\beta_1,\beta_2,\dots,\beta_q$. The function $R\left(\beta_j+\dfrac{1}{\zeta}\right)$ is a rational function of $\zeta$ with a pole at $\zeta=\infty$. By use of the decomposition above, we can write $$R\left(\beta_j+\dfrac{1}{\zeta}\right)=G_j(\zeta)+H_j(\zeta),$$ or which a change of variable, $$R(z)=G_j\left(\dfrac{1}{z-\beta_j}\right)+H_j\left(\dfrac{1}{z-\beta_j}\right).$$ Here, $G_j$ is a polynomial in $\dfrac{1}{z-\beta_j}$ without constant term, called the singular part of $R(z)$ at $\beta_j$. The function $H_j\left(\dfrac{1}{z-\beta_j}\right)$ is finite for $z=\beta_j$.
+
+Consider now the expression
+\begin{align}
+	R(z)-G(z)-\sum_{j=1}^{q}G_j\left(\dfrac{1}{z-\beta_j}\right).
+\end{align}
+This is a rational function which cannot have any other poles than $\beta_1,\beta_2,\dots,\beta_q$, and $\infty$. At $z=\beta_j$, we find that the two terms which become infinite have a difference $H_j\left(\dfrac{1}{z-\beta_j}\right)$ with a finite limit, and the same is true at $\infty$. Therefore (3.5) has neither any finite poles nor a pole at $\infty$. But a rational function without any poles must reduce to a constant, and if this constant is absorbed in $G(z)$ we obtain
+\begin{align}
+	R(z) &=G(z)+\sum_{j=1}^{q} G_j\left(\dfrac{1}{z-\beta_j}\right).
+\end{align}
+Let us make a minor application of (3.6) to the computation of the partial fraction decomposition of a rational function of order $2$.
+\begin{example}
+	A rational function of order $2$ has either one double or two simple poles. In the first case, we can throw the pole to $\infty$ by a preliminary linear transformation of $z$. The function will then have the form $$w=az^2+bz+c=a\left(z+\dfrac{b}{2a}\right)^2+c-\dfrac{b^2}{4a},$$ and by further linear transformations, it can be reduced to the normal form $w=z^2$. 
+	
+	In the case of two simple poles, we may choose the poles at $z=0$ and $z=\infty$. The representation will then have the form $$w=Az+B+\dfrac{C}{z}.$$ If we replace $z$ by $z'=z\sqrt{A/C}$ the coefficients of $z'$ and $1/z'$ become equal, and by a further linear change of $w$ we can reduce to the form $$w=\dfrac{1}{2}\left(z+\dfrac{1}{z}\right),$$ which we choose as the normal form for a rational function of order $2$ with distinct poles.
+\end{example}
+
+\begin{exercise}
+	Determine the partial fraction decomposition of $$\dfrac{z^4}{z^3-1}.$$
+	
+	\begin{sol}
+		Let $\omega=e^{2\pi i/3}$ be a primitive cube root of unity. Then the poles of $R(z)=z^4/(z^3-1)$ are $1,\omega,\omega^2$. Write $$\dfrac{z^4}{z^3-1}=\dfrac{A}{z-1}+\dfrac{B}{z-\omega}+\dfrac{C}{z-\omega^2}.$$ Multiplying both sides by $z^3-1$ gives $$z^4=A(z-\omega)(z-\omega^2)+B(z-1)(z-\omega^2)+C(z-1)(z-\omega).$$ This identity must hold for \textit{all} values of $z$, so we may plug in the poles of $R$ to get
+		\begin{align}
+			1 &=A(1-\omega)(1-\omega^2), \\
+			\omega &=B(\omega-1)(\omega-\omega^2), \\
+			\omega^2 &=C(\omega^2-1)(\omega^2-\omega),
+		\end{align}
+		where we made the simplifications $\omega^4=\omega$ and $\omega^8=\omega^2$. From (3.10) we get $A=1/3$, from (3.11) we get $B=-1/(\omega-1)^2$. But observe that $$(\omega-1)^2=\omega^2-2\omega+1=-3\omega,$$ so $B=1/3\omega$. And finally, (3.12) yields
+		\begin{align*}
+			C &=\dfrac{\omega}{(\omega^2-1)(\omega-1)} \\
+			&=\dfrac{\omega}{\omega^3-\omega^2-\omega+1} \\
+			&=\dfrac{\omega}{2+1} \\
+			&=\dfrac{\omega}{3}.
+		\end{align*}
+		Hence, we have
+		\begin{align*}
+			\dfrac{z^4}{z^3-1} &=\dfrac{1}{3(z-1)}+\dfrac{1}{3\omega(z-\omega)}+\dfrac{\omega}{3(z-\omega^2)}.
+		\end{align*}
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	If $Q$ is a polynomial with distinct roots $\alpha_1,\dots,\alpha_n$, and if $P$ is a polynomial of degree less than $n$, show that $$\dfrac{P(z)}{Q(z)}=\sum_{k=1}^{n}\dfrac{P(\alpha_k)}{Q'(\alpha_k)(z-\alpha_k)}.$$ Use this to prove that there exists a unique polynomial $P$ of degree less than $n$ such that $P$ takes on the value $c_k$ at $\alpha_k$ for each $k=1,\dots,n$ (Lagrange's interpolation polynomial).
+	
+	\begin{sol}
+		Note that $Q(z)/(z-\alpha_k)=(z-\alpha_1) \cdots (z-\alpha_{k-1})(z-\alpha_{k+1}) \cdots (z-\alpha_n)$ is a polynomial of degree $n-1$, so that $$P(z)-\sum_{k=1}^{n}\dfrac{P(\alpha_k)Q(z)}{Q'(\alpha_k)(z-\alpha_k)}=P(z)-\sum_{k=1}^{n}\dfrac{P(\alpha_k)}{Q'(\alpha_k)} \cdot (z-\alpha_1) \cdots (z-\alpha_{k-1})(z-\alpha_{k+1}) \cdots (z-\alpha_n)$$ is a polynomial of degree less than $n$. Denote it by $F(z)$. Then for each $j=1,\dots,$, we have
+		\begin{align*}
+			F(\alpha_j) &=P(\alpha_j)-\sum_{k=1}^{n}\dfrac{P(\alpha_k)}{Q'(\alpha_k)} \cdot (\alpha_j-\alpha_1) \cdots (\alpha_j-\alpha_{k-1})(\alpha_j-\alpha_{k+1}) \cdots (\alpha_j-\alpha_n) \\
+			&=P(\alpha_j)-\dfrac{P(\alpha_j)}{Q'(\alpha_j)} \cdot Q'(\alpha_j) \\
+			&=P(\alpha_j)-P(\alpha_j) \\
+			&=0,
+		\end{align*}
+		so $\alpha_1,\dots,\alpha_n$ are all roots of $F$. But this means that $F$ cannot have finite degree, as then it would have at most $n-1$ roots. Therefore, $F=0$, and we have the desired formula $$\dfrac{P(z)}{Q(z)}=\sum_{k=1}^{n}\dfrac{P(\alpha_k)}{Q'(\alpha_k)(z-\alpha_k)}.$$ This means that if we are given constants $c_1,\dots,c_k$, then $$P(z)=\sum_{k=1}^{n}\dfrac{c_kQ(z)}{Q'(\alpha_k)(z-\alpha_k)}$$ is the unique polynomial such that $P(\alpha_k)=c_k$ for each $k=1,\dots,n$.
+	\end{sol}
+\end{exercise}
+

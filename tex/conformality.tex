@@ -1,0 +1,136 @@
+\chapter{Conformality}
+
+\label{chap:conformality}
+
+We now return to our original setting where all functions and variables are restricted to real or complex numbers. Having established the foundations of topology, we remark that for the rest of this series of notes, we will only really need the simple notions of connectedness and compactness. But it always helps to have a firm grasp of topological arguments, as the techniques used in them are easily transferable to all other areas of mathematics.
+
+This whole chapter is mainly descriptive. It centers on the geometric consequences of the existence of the derivative.
+
+\section{Arcs and Closed Curves}
+The equation of an \emph{arc} $\gamma$ in the plane is most conveniently given in parametric form $x=x(t)$, $y=y(t)$, where $t$ runs through an interval $\alpha \le t \le \beta$ and $x(t),y(t)$ are continuous functions. We can also use the complex notation $z=z(t)=x(t)+iy(t)$ which has several advantages.
+
+Considered as a point set an arc is thus the mapping of a closed finite interval under a continuous mapping. As such it is compact and connected. However, an arc is not merely a set of points, but very essentially also a succession of points, ordered by increasing values of the parameter. If a nondecreasing function $t=\varphi(\tau)$ maps an interval $\alpha' \le \tau \le \beta'$ onto $\alpha \le t \le \beta$, then $z=z(\varphi(\tau))$ defines the same succession of points at $z=z(t)$. We say that the first equation arises from the second by a \emph{change of parameter}. The change is \emph{reversible} if and only if $\varphi(\tau)$ is strictly increasing. For instance, the equation $z=t^2+it^4$, $0 \le t \le 1$, arises by a reversible change of parameter from the equation $z=t+it^2$, $0 \le t \le 1$, as the map $\varphi(t)=t^2$ is strictly increasing in $0 \le t \le 1$. The interval $(\alpha',\beta')$ can always be transformed into $(\alpha,\beta)$ linearly, via the map $t=\frac{\beta-\alpha}{\beta'-\alpha'}(t-\alpha')+\alpha$.
+
+Logically, the simplest course is to consider two arcs as different as soon as they are given by different equations, regardless of whether one equation may arise from the other by a change of parameter. In following this course, as we will, it is important to show that certain properties of arcs are invariant under a change of parameter. For instance, the \emph{intitial} and \emph{terminal points} of an arc remain the same after a change of parameter.
+
+If the derivative $z'(t)=x'(t)+iy'(t)$ exists and is $\neq 0$, the arc $\gamma$ has a \emph{tangent} whose direction is determined by $\arg z'(t)$. We shall say that the arc is \emph{differentiable} if $z'(t)$ exists, and \emph{continuously differentiable} if $z'(t)$ is further continuous. If $z'(t) \neq 0$ the arc is said to be \emph{regular}. An arc is \emph{piecewise differentiable} or \emph{piecewise regular} if the same conditions hold except for a finite number of values $t$; at these points $z(t)$ shall still be continuous with left and right derivatives which are equal to the left and right limits of $z'(t)$ and, in the case of a piecewise regular arc, $\neq 0$.
+
+The differentiable or regular character of an arc is invariant under the change of parameter $t=\varphi(\tau)$ provided that $\varphi'(t)$ is continuous and, for regularity, $\neq 0$ (this follows from the Chain Rule). When this is the case, we speak of a differentiable or regular change of parameter.
+
+An arc is \emph{simple}, or a \emph{Jordan arc}, if $z(t_1)=z(t_2)$ only for $t_1=t_2$. An arc is a \emph{closed curve} if the end points coincide: $z(\alpha)=z(\beta)$. For closed curves a \emph{shift} of the parmeter is defined as follows: if the original equation is $z=z(t)$, $\alpha \le t \le \beta$, we choose a point $t_0$ from the interval $(\alpha,\beta)$ and define a new closed curve by $$\tilde{z}(t)=\begin{cases}
+	z(t), & t_0 \le t \le \beta, \\
+	z(t-\beta+\alpha), & \beta \le t \le t_0+\beta-\alpha.
+\end{cases}.$$ The purpose of the shift is to get rid of the distinguished position of the initial point. The correct definitions of a differentiable or regular closed curve and of a \emph{simple closed curve} (or \emph{Jordan curve}) are obvious.
+
+The \emph{opposite arc} of $z=z(t)$, $\alpha \le t \le \beta$, is the arc $z=z(-t)$, $-\beta \le t \le -\alpha$. Opposite arcs are sometimes denoted by $\gamma$ and $-\gamma$, sometimes by $\gamma$ and $\gamma^{-1}$, depending on the connection. A constant function $z(t)=c$ defines a \emph{point curve}.
+
+A circle $C$, originally defined as a locus $\abs{z-a}=r$, can be considered as a closed curve with the equation $z=a+re^{it}$, $0 \le t \le 2\pi$. We will use this standard parametrization whenever a finite circle is introduced. This convention saves us from writing down the equation each time it is needed; also, and this is its most important purpose, it serves as a definite rule to distinguish between $C$ and $-C$.
+
+\section{Analytic Functions in Regions}
+When we consider the derivative $$f'(z)=\lim_{h \rightarrow 0}\dfrac{f(z+h)-f(z)}{h}$$ of a complex-valued function, defined on a set $A$ in the complex plane, it is of course understood that $z \in A$ and that the limit is with respect to values $h$ such that $z+h \in A$. The existence of the derivative will therefore will have different meaning depening on whether $z$ is an interior or boundary point. The only simple way to avoid this is to insist that all analytic functions be defined on open sets. We shall find that further advantages ensue if every analytic function is defined in a region.
+
+\begin{definition}
+	A complex-valued function $f(z)$ is said to be analytic in the region $\Omega$ if it is defined and has a derivative of each point of $\Omega$.
+\end{definition}
+
+When we say that $f$ is analytic on a set or at a point, it is implied that it is analytic in a neighborhood of that set or point.
+
+\begin{example}
+	Let $\Omega=\CC \backslash \{z \le 0, z \in \RR\}$. Then $\Omega$ is open and connected, and we define $f(z)=\sqrt{z}$ on $\Omega$. It has two values, only one of which has a positive real part. Choose that one to make $f$ well-defined. We will show that $f$ is continuous.
+	
+	Choose any two points $z_1,z_2 \in \Omega$ and denote the corresponding values of $w=\sqrt{z}$ as $w_1=u_1+iv_1$, $w_2=u_2+iv_2$, with $u_1,u_2>0$. Then $$\abs{z_1-z_2}=\abs{w_1^2-w_2^2}=\abs{w_1-w_2} \cdot \abs{w_1+w_2}.$$ Since $\abs{w_1+w_2} \ge u_1+u_2>u_1$, we get that $$\abs{w_1-w_2}<\dfrac{\abs{z_1-z_2}}{u_1},$$ and it follows that $w=\sqrt{z}$ is continuous at $z_1$.
+	
+	Once the continuity is established, the analyticity follows by using the quotient rule to get that $$f'(z)=\dfrac{1}{2\sqrt{2}}.$$
+\end{example}
+
+\begin{example}
+	Let us delineate a single-valued branch of the function $f(z)=\log z$. Recall that two different values of $\log z$ differ by a multiple of $2\pi i$, so we will define the \emph{principal branch} of the logarithm by the condition $-\pi<\Imag \log z<\pi$. Again, we must prove continuity.
+	
+	Denote the principal branch by $w=u+iv=\log z$. For a given point $w_1=u_1+iv_1$, $\abs{v_1}<\pi$, and a given $z>0$, consider the set $A$ in the $w$-plane given by the inequalities
+	\begin{align*}
+		\abs{w-w_1} \ge \eps, \\
+		\abs{v} \le \pi, \\
+		\abs{u-u_1} \le \log 2.
+	\end{align*}
+	This set is closed and bounded, and for sufficiently small $\eps$ it is not empty. The continuous function $\abs{e^w-e^{w_1}}$ has consequently a minimum $\rho$ on $A$ by the Extreme Value Theorem. This minimum is positive, for $A$ does not contain any point $w_1+n \cdot 2\pi i$. Choose $\eps=\min\{\rho, \frac{1}{2}e^{u_1}\}$, and assume that $$\abs{z_1-z_2}=\abs{e^{w_1}-e^{w_2}}<\delta.$$ Then $w_2$ cannot lie in $A$, for this would make $\abs{e^{w_1}-e^{w_2}} \ge \rho \ge \delta$. Neither is it possible that $u_2<u_1-\log 2$ or $u_2<u_1+\log 2$; in the former case, we would obtain $$\abs{e^{w_1}-e^{w_2}} \ge \abs{e^{w_1}}-\abs{e^{w_2}}=e^{u_1}-e^{u_2}>\dfrac{1}{2}e^{u_1} \ge \delta,$$ and in the latter case, $$\abs{e^{w_1}-e^{w_2}} \ge e^{u_2}-e^{u_1}>e^{u_1}>\delta.$$ Hence, $w_2$ must lie in the disk $\abs{w-w_1}<\eps$, and we have proved that $w$ is a continuous function of $z$. From the continuity we conclude that the derivative exists and equals $1/z$.
+\end{example}
+
+\begin{example}
+	The infinitely many values of $\arccos z$ are the same as the values of $i \log(z+\sqrt{z^2-1})$. In this case we restrict $z$ to the complement $\Omega'$ of the half-lines $x \le 0, y=0$ and $x \ge 1, y=0$. Since $1-z^2$ is never real and $\le 0$ in $\Omega'$, we can define $\sqrt{1-z^2}$ as in the first example and then set $\sqrt{z^2-1}=i\sqrt{1-z^2}$. Moreover, $z+\sqrt{z^2-1}$ can never be negative or zero in $\Omega'$; indeed, since $z+\sqrt{z^2-1}$ and $z-\sqrt{z^2-1}$ are reciprocals, $z+\sqrt{z^2-1}<0$ would imply $z-\sqrt{z^2-1}<0$ and hence, $2z<0$. We can thus define an analytic branch of $\log(z+\sqrt{z^2-1})$ whose imaginary part lies between $-\pi$ and $\pi$. In this way we obtain a single-valued analytic function $$\arccos z=i\log(z+\sqrt{z^2-1})$$ in $\Omega'$ whose derivative is $$(\arccos z)'=\dfrac{i}{z+\sqrt{z^2-1}}\left(1+\dfrac{z}{\sqrt{z^2-1}}\right)=\dfrac{i}{\sqrt{z^2-1}}=\dfrac{1}{\sqrt{1-z^2}},$$ where $\sqrt{1-z^2}$ has a positive real part. This is, of course, what we already know for real functions, and it holds with the appropriate constraint of region of domain for the complex counterpart.
+\end{example}
+
+There is nothing unique about the way in which the region and the single-valued branches have been chosen in these examples. Therefore, each time we consider a function such as $\log z$ the choice of the branch has to be specified. It is a fundamental fact that \textit{it is impossible to define a single-valued and analytic branch of $\log z$ in certain regions}. This will be proved in the integration part of these notes.
+
+Recall that the real and imaginary parts of an analytic function satisfies the Cauchy-Riemann differential equations. From real analysis one recalls that a function is constant if its derivative is zero in a connected domain. We can prove an analog of this for analytic functions.
+
+\begin{theorem}
+	An analytic function in a region $\Omega$ whose derivative vanishes identically must reduce to a constant. The same is true if either the real part, the imaginary part, the modulus, or the argument is constant.
+\end{theorem}
+
+\begin{proof}
+	Let $f(z)=u(z)+iv(z)$. The vanishing of the derivative implies that $\partial u/\partial x$, $\partial u/\partial y$, $\partial v/\partial x$, and $\partial v/\partial y$ are all zero. It follows that $u$ and $v$ are constant on any line segment in $\Omega$ which is parallel to one of the coordinate axes. Since any two points in $\Omega$ can be joined by can be joined by a polygon whose sides are parallel to the coordinate axes, we conclude that $u+iv$ is constant.
+	
+	If $u$ or $v$ is contant, then by the Cauchy-Riemann differential equations, $$f'(z)=\dfrac{\partial u}{\partial x}-i\dfrac{\partial u}{\partial y}=\dfrac{\partial v}{\partial y}+i\dfrac{\partial v}{\partial y}=0,$$ and hence by the first part, $f$ itself must be constant.
+	
+	If $u^2+v^2$ is constant, we obtain, by differentiation, $$u \dfrac{\partial u}{\partial x}+v \dfrac{\partial v}{\partial x}=0,$$ and $$u \dfrac{\partial u}{\partial y}+\dfrac{\partial v}{\partial y}=0.$$ Applying the Cauchy-Riemann differential equations to the second equation gives $$-u \dfrac{\partial v}{\partial x}+v\dfrac{\partial u}{\partial x}=0.$$ This results in two linear equations in $\partial u/\partial x$ and $\partial v/\partial x$ that are a result of the matrix product $$\begin{pmatrix}
+		u & v \\
+		v &-u
+	\end{pmatrix}\begin{pmatrix}
+	\frac{\partial u}{\partial x} \\
+	\frac{\partial v}{\partial x}
+	\end{pmatrix}=0.$$ Hence, $\partial u/\partial x=\partial v/\partial x=0$ unless the determinant $u^2+v^2=0$. But if $u^2+v^2=0$ at a single point it is constantly zero and $f(z)$ vanishes identically. Hence $f$ in any case is a constant.
+	
+	Finally, if $\arg f(z)$ is constant, we can set $u=kv$ with constant $k$ (unless $v$ is identically zero). But $u-kv=\Real \left[(1+ik)(u+iv)\right]$, and we conclude again that $f$ must reduce to a constant.
+\end{proof}
+
+\begin{exercise}
+	Suppose that $f(z)$ is analytic and satisfies the condition $\abs{f(z)^2-1}<1$ in a region $\Omega$. Show that either $\Real f(z)>0$ or $\Real f(z)<0$ throughout $\Omega$.
+	
+	\begin{sol}
+		First of all, $\Real f$ is a continuous function. Now, suppose for the sake of contradiction that there exis points $w,z \in \Omega$ such that $\Re w<0$ and $\Re z>0$. Since $w$ and $z$ can be joined by a polygon (whose sides are parallel to the coordinate axes), they can be joined by an arc $\gamma \colon [0,1] \rightarrow \Omega$, so by the Intermediate Value Theorem applied to $(\Real f) \circ \gamma$, we get that $\Real f=0$ for some point $z' \in \Omega$.
+		
+		Write $f(z')=u(z')+iv(z')$ with $u(z')=0$, so that
+		\begin{align*}
+			1 &>\abs{f(z')^2-1} \\
+			&=\abs{-v(z')^2-1} \\
+			&=v(z')^2+1,
+		\end{align*}
+		as $v(z')^2+1$ is always positive. This gives $v(z')^2<0$, which is absurd. Hence, there can be no point in $\Omega$ at which $\Real f=0$, proving the statement.
+	\end{sol}
+\end{exercise}
+
+\section{Conformal Mapping}
+Suppose that an arc $\gamma$ with the equation $z=z(t)$, $\alpha \le t \le \beta$, is contained in a region $\Omega$, and let $f(z)$ be defined and continuous in $\Omega$. Then the equation $w=w(t)=f(z(t))$ defines an arc $\gamma'$ in the $w$-plane which may be called the \emph{image} of $\gamma$.
+
+Consider the case of an $f(z)$ which is analytic in $\Omega$. If $z'(t)$ exiss, we find that $w'(t)$ also exists, and by the Chain Rule, $$w'(t)=f'(z(t)) \cdot z'(t).$$ We will investigate the meaning of this equation at a point $z_0=z(t_0)$ with $z'(t_0) \neq 0$ and $f'(z_0) \neq 0$.
+
+The first conclusion is that $w'(t_0) \neq 0$. Hence, $\gamma'$ has a tangent at $w_0=f(z_0)$, and its direction is determined by $$\arg w'(t_0)=\arg f'(z_0)+\arg z'(t_0).$$ This relation asserts that the angle between the directed arguments to $\gamma$ at $z_0$ and to $\gamma'$ at $w_0$ is equal to $\arg f'(z_0)$. It is hence independent of the curve $\gamma$. For this reason curves through $z_0$ which are tangent to each other are mapped onto curves with a common tangent at at $w_0$. Moreover, two curves which form an angle at $z_0$ are mapped upon curves forming the same angle, in sense as well as size.
+
+\begin{definition}
+	A mapping is said to be \emph{conformal} if it locally preserves angles.
+\end{definition}
+
+We see that if $w=f(z)$ is analytic, then it is conformal at all all points where $f'(z) \neq 0$.
+
+A related property of the mapping is derived by considerations of the modulus $\abs{f'(z_0)}$. We have $$\lim_{z \rightarrow z_0} \dfrac{\abs{f(z)-f(z_0)}}{\abs{z-z_0}}=\abs{f'(z_0)},$$ and this means that any small line segment with one endpoint at $z_0$ is, in the limit, contracted or expanded in the ratio $\abs{f'(z_0)}$. In other words, the linear change of scale at $z_0$, affected by the transformation $w=f(z)$, is independent of the direction. In general this change of scale will vary from point to point.
+
+Conversely, it is clear that both kinds of conformality together imply the existence of $f'(z_0)$. It is less obvious that each kind will separately imply the same result, at least under additional regularity assumptions.
+
+To be more precise, let us assume that the partial derivatives $\partial f/\partial x$ and $\partial f/\partial y$ are continuous. Under this condition the derivative of $w(t)=f(z(t))$ can be expressed in the form $$w'(t_0)=\dfrac{\partial f}{\partial x}x'(t_0)+\dfrac{\partial f}{\partial y}y'(t_0),$$ where the partial derivatives are taken at $z_0=z(t_0)$. Substituting
+\begin{align*}
+	x'(t_0) &=\dfrac{1}{2}\left(z'(t_0)+\overline{z'(t_0)}\right), \\
+	y'(t_0) &=-\dfrac{1}{2}i\left(z'(t_0)-\overline{z'(t_0)}\right)
+\end{align*}
+gives $$w'(t_0)=\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}-i\dfrac{\partial f}{\partial y}\right)z'(t_0)+\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}+i\dfrac{\partial f}{\partial y}\right)\overline{z'(t_0)}.$$ If angles are preserved, $\arg [w'(t_0)/z'(t_0)]$ must be independent of $\arg z'(t_0)$. Thus, the expression
+\begin{align}
+\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}-i\dfrac{\partial f}{\partial y}\right)+\dfrac{1}{2}\left(\dfrac{\partial f}{\partial x}+i\dfrac{\partial f}{\partial y}\right) \cdot \dfrac{\overline{z'(t_0)}}{z'(t_0)}
+\end{align}
+must have a constant argument. But as $\arg z'(t_0)$ is allowed to vary, since $\abs{\overline{z'(t_0)}/z'(t_0)}=1$ and $\arg \left[\overline{z'(t_0)}/z'(t_0)\right]=2 \arg z'(t_0)$, the above expression represents a point on the circle with center $\frac{1}{2}\left[(\partial f/\partial x)+i(\partial f/\partial y)\right]$ and radius $\frac{1}{2}\left[(\partial f/\partial x)+i(\partial f/\partial y)\right]$. The argument cannot be constant on this circle unless its radius vanishes, so we must have $$\dfrac{\partial f}{\partial x}=-i\dfrac{\partial f}{\partial y},$$ which is the complex form of the Cauchy-Riemann differential equations.
+
+Quite similarly, the condition that the change of scale shall be the same in all directions implies that (7.1) has a constant modulus. On a circle the modulus is constant if and only if the radius vanishes or if the center lies at the origin. In the first case we obtain the Cauchy-Riemann differential equation above, and in the second case, $$\dfrac{\partial f}{\partial x}=i \dfrac{\partial f}{\partial y}.$$ This implies that $\overline{f(z)}$ is analytic. A mapping by the conjugate of an analytic function with a nonvanishing derivative is said to be \emph{indirectly conformal}. It evidently preserves the size but reverses the sense of angles.
+
+If the mapping of $\Omega$ by $w=f(z)$ is a ($C^1$) diffeomorphism, then the inverse function $z=f^{-1}(w)$ is also analytic. This follows easily if $f'(z) \neq 0$, for then the derivative of the inverse function must be equal to $1/f'(z)$ at the point $z=f^{-1}(w)$. We shall prove later that $f'(z)$ can never vanish in this case.
+
+In fact, the knowledge that $f'(z_0) \neq 0$ is sufficient to conclude that the mapping is a diffeomorphism in a sufficiently small neighborhood of $z_0$. This follows from the Inverse Function Theorem from advanced calculus, for if we let $df_{z_0}$ be the Jacobian matrix of $f$ at $z_0$ as a function from $\RR^2$ to $\RR^2$, we have that $\det df_{z_0}=\abs{f'(z_0)}^2 \neq 0$, and so $df_{z_0}$ is an isomorphism. The reader may be familiar with the proof of this important theorem by the contraction mapping principle, but later, we shall present a simpler proof.
+
+Locality is important, for even if $f'(z_0) \neq 0$ throughout the region $\Omega$, we cannot assert that $f$ is globally a diffeomorphism over $\Omega$.

@@ -1,0 +1,125 @@
+\chapter{The Exponential and Trigonometric Functions}
+\label{chap:exp-trig}
+The reader probably recalls the familiar Taylor series expansions for the exponential and trigonometric functions. With complex numbers, these representations become even more powerful, and easier to prove.
+
+Here, we undertake the formal development of the constants $e$ and $\pi$; complex analysis provides an easy way of defining them and appreciating their intimate relationship to each other.
+
+\section{The Exponential}
+\begin{definition}
+	The \emph{exponential function} is defined as the solution to the differential equation $$f'(z)=f(z)$$ with initial value $f(0)=1$. 
+\end{definition}
+	
+We solve it by setting
+\begin{align*}
+	f(z) &=a_0+a_1z+\cdots+a_nz^n+\cdots, \\
+	f'(z) &=a_1+2a_2z+\cdots+na_nz^{n-1}+\cdots.
+\end{align*}
+Setting these power series into the differential equation yields $a_{n-1}=na_n$, and the initial condition gives $a_0=1$. It follows by induction that $a_n=1/n!$. We denote this function by $e^z$ (the exponential form will be justified below), so that $$e^z=\sum_{n=0}^{\infty}\dfrac{z^n}{n!}.$$ We also note that this series converges on the whole complex plane, as $\sqrt[n]{n}^{1/n} \rightarrow \infty$. To see why the terms of the series are unbounded, observe that $$n!=n \cdot (n-1) \cdots n/2 \cdots 1 \ge \left(\dfrac{n}{2}\right)^{n/2},$$ so $$n!^{1/n}=\sqrt{\dfrac{n}{2}}.$$ Since the right-hand side clearly grows without bound, so does the left.
+
+It is a consequence of the differential equation that $e^z$ satisfies the identity $$e^{a+b}=e^a \cdot e^b,$$ for $$D(e^z \cdot e^{c-z})=e^z \cdot e^{c-z}+e^z \cdot (-e^{c-z})=0.$$ Hence, $e^z \cdot e^{c-z}$ is constant. The value of the constant is found by setting $z=0$, giving $e^z \cdot e^{c-z}=e^c$, resulting in the additive identity for the exponential.
+
+As a word of caution, we were able to use the fact that a zero derivative implies a constant function because $f$ is analytic on the whole plane. Since $\CC$ is connected, so is $f(\CC)$, and a zero derivative on a connected space implies that the function is constant on that space.
+
+Note that $e^z \cdot e^{-z}=1$, so $e^z$ is never zero. For real $x$ the series expansion shows that $e^x>1$ for $x>0$, and since $e^x$ and $e^{-x}$ are reciprocals, $0<e^x<1$ for $x<0$. The fact that the series has real coefficients shows that $e^{\overline{z}}$ is the conjugate of $e^z$. Hence, $\abs{e^{iy}}^2=e^{iy} \cdot e^{-iy}=1$, and $\abs{e^{x+iy}}=e^x$.
+
+\section{The Trigonometric Functions}
+The trigonometric functions are defined by $$\cos z=\dfrac{e^{iz}+e^{-iz}}{2}, \quad \sin z=\dfrac{e^{iz}-e^{-iz}}{2i}.$$ Substituting the power series representation of $e^z$ yields
+\begin{align*}
+	\cos z &=\sum_{n=0}^{\infty} \dfrac{(-1)^n \cdot z^{2n}}{(2n)!}, \\
+	\sin z &=\sum_{n=0}^{\infty} \dfrac{(-1)^n \cdot z^{2n+1}}{(2n+1)!}.
+\end{align*}
+For real $z$ they reduce to the familiar Taylor developments of $\cos x$ and $\sin x$, with the significant difference that we have now redefined these functions without use of geometry.
+
+Now, Euler's formula becomes apparent: $$e^{iz}=\cos z+i \sin z,$$ as well as the identity $$\cos^2 z+\sin^2 z=1.$$ It follows likewise that $$(\cos z)'=-\sin z, \quad (\sin z)'=\cos z.$$ The trigonometric addition identities
+\begin{align*}
+	\cos(a+b) &=\cos a \cos b-\sin a \sin b, \\
+	\sin(a+b) &=\sin a \cos b+\sin b \cos a
+\end{align*}
+ are direct consequences of the addition identity for the exponential function.
+ 
+ The other trigonometric functions are of tangential importance, though we remark that, for instance, $$\tan z=-i \dfrac{e^{iz}-e^{-iz}}{e^{iz}+e^{-iz}}.$$
+ 
+ \begin{exercise}
+ 	Find the values of $\sin i$ and $\cos i$.
+ 	
+ 	\begin{sol}
+ 		We have
+ 		\begin{align*}
+ 			\cos i &=\dfrac{e^{i^2}+e^{-i^2}}{2} \\
+ 			&=\dfrac{e^{-1}+e}{2} \\
+ 			&=\dfrac{e^2+1}{2e}
+ 		\end{align*}
+ 		and
+ 		\begin{align*}
+ 			\sin i &=\dfrac{e^{i^2}-e^{-i^2}}{2i} \\
+ 			&=\dfrac{e^{-1}-e}{2i} \\
+ 			&=\dfrac{1-e^2}{2ie} \\
+ 			&=\left(\dfrac{e^2-1}{2e}\right)i.
+ 		\end{align*}
+ 	\end{sol}
+ \end{exercise}
+ 
+ \section{The Periodicity}
+ We say that $f(z)$ has the \emph{period} $c$ if $f(z+c)=f(z)$ for all $z$. Thus a period of $e^z$ satisfies $e^{z+c}=e^z$, or $e^c=1$. It follows that $c=i\omega$ with real $\omega$; we prefer to say that $\omega$ is a period of $e^{iz}$. We shall show that there are periods, and that they are all integral multiples of a positive period $\omega_0$.
+ 
+ Of the many ways to prove the existence of a period we choose the following: from $(\sin y)'=\cos y \le 1$ and $\sin 0=0$ we obtain $\sin y<y$ for $y>0$, as by the Mean Value Theorem, there exists $a>0$ such that $\sin y=\cos a \cdot y$ for any fixed $y>0$. Next, from $(\cos y)'=-\sin y>-y$ and $\cos 0=1$ we get that $\cos y>1-\frac{y^2}{2}$ by integrating both sides. This in turn leads to $\sin y>y-\frac{y^3}{6}$ and finally to $\cos y<1-\frac{y^2}{2}+\frac{y^4}{24}$ (note that we could also have arrived at this via the Taylor series expansion). This inequality shows that $\cos(\sqrt{3})<0$, and therefore by the Intermediate Value Theorem there is a $y_0 \in [0,\sqrt{3}]$ such that $\cos y_0=0$. Because $$\cos^2 y_0+\sin^2 y_0=1,$$ we have $\sin y_0=\pm 1$; that is $e^{iy_0}=\pm i$, and hence $e^{4iy_0}=1$. We have thus shown that $4y_0$ is a period.
+ 
+ Actually, it is the smallest positive period. To see this, take $0<y<y_0$. Then $\sin y>y\left(1-\frac{y^2}{6}\right)>\frac{y}{2}>0$, which shows that $\cos y$ is strictly decreasing. Because $\sin y$ is positive and $\cos^2 y+\sin^2 y=1$, it follows that $\sin y$ is strictly increasing, and hence $\sin y<\sin y_0=1$. The double inequality $0<\sin y<1$ guarantees that $e^{iy}$ is neither $\pm 1$ nor $\pm i$. Therefore, $e^{4iy} \neq 1$, and $4y_0$ is indeed the smallest positive period. We denote it by $\omega_0$.
+ 
+ Consider now an arbitrary period $\omega$. There exists an integer $n$ such that $n\omega_0 \le \omega<(n+1)\omega_0$. If $\omega$ were not equal to $n\omega_0$, then $\omega-n\omega_0$ would be another positive period smaller than $\omega_0$. Therefore, $\omega$ must be an integral multiple of $\omega_0$.
+ 
+ \begin{definition}
+ 	The smallest positive period of $e^{iz}$ is denoted by $2\pi$.
+ \end{definition}
+ 
+ In the course of the proof we have shown that $e^{\pi i/2}=i$, $e^{\pi i}=-1$, and $e^{2\pi i}=1$. These are famous equations that demonstrate the intimate relationship between the numbers $e$ and $\pi$. In fact, the second equation is commonly written as $$\boxed{e^{\pi i}+1=0}$$ to include all of the ``big" constants $e,\pi,i,0,1$ in one formula. It is widely considered to be the most magical equation in all of mathematics.
+ 
+ When $y$ increases from $0$ to $2\pi$, the point $w-e^{iy}$ describes the unit circle $\abs{\omega}=1$ in the positive sense, namely from $1$ over $i$ to $-1$ and back over $-i$ to $1$ (a counterclockwise rotation). For every $w$ with $\abs{w}=1$ there is one and only one $y$ from the half-open interval $0 \le y<2\pi$ such that $w=e^{iy}$ (such a parametrization is a diffeomorphism and can be used to construct the covering map of the unit circle).
+ 
+ From an algebraic point of view the mapping $y \mapsto e^{iy}$ is a homomorphism from the additive group of real numbers to the multiplicative group of complex numbers with absolute value $1$. The kernel of the homomorphism is the subgroup formed by all integral multiples of $2\pi$, so we get by the First Isomorphism Theorem that $$\RR \quotient 2\pi \ZZ \cong \{w \in \CC \colon \abs{w}=1\}.$$
+ 
+ \section{The Logarithm}
+\begin{definition}
+	Given $w \in \CC$, a complex number $z$ such that $e^z=w$ is called the (natural) \emph{logarithm} of $w$.
+\end{definition}
+First of all, the number $0$ has no logarithm. For $w \neq 0$, the equation $e^{x+iy}=w$ is equivalent to $$e^x=\abs{w}, \quad e^{iy}=w/\abs{w}.$$ The first equation has a unique solution $x=\log \abs{w}$, the \emph{real logarithm} of the positive number $\abs{w}$. The right-hand member of the second equation is a complex number of absolute value $1$. As we have seen above, it has only one solution $y$ in the half-open interval $[0,2\pi)$, but it is also satisfied by all $y+2\pi n$ for $n \in \ZZ$. We see then that \textit{every complex number other than $0$ has infinitely many logarithms which differ from each other by multiples of $2\pi i$}.
+
+The imaginary part of $\log w$ is called the \emph{argument} of $w$, $\arg w$, and is interpreted geometrically as the \emph{angle}, measured in radians, between the positive real axis and the half-line from $)$ through the point $w$. According to this definition the argument has infinitely may values which differ by $2\pi$, and $$\log w=\log \abs{w}+i \arg w.$$ With a change of notation, if $\abs{z}=r$ and $\arg z=\theta$, then $z=re^{i \theta}$. The reader probably recalls this from high-school complex geometry.
+
+By convention the logarithm of a positive number shall always mean the real logarithm, unless the contrary is stated. The symbol $a^b$, where $a$ and $b$ are arbitrary complex numbers except for the condition $a \neq 0$, is always interpreted as an equivalent of $\exp(b \log a)$ ($e^{b \log a}$). If $a$ is restricted to positive numbers, $\log a$ shall be real, and $a^b$ has a single value. Otherwise $\log a$ is the complex logarithm , and $a^b$ has in general infinitely many values which differ by factors $e^{2 \pi i nb}$. There will be a single value if and only if $b$ is an integer $n$, and then $a^b$ can be interpreted as a power of $a$ or $a^{-1}$. If $b$ is a rational number with the reduced form $p/q$, then $a^b$ has exactly $q$ values and can be represented as $\sqrt[q]{a^p}$.
+
+The homomorphism represented by the exponential clearly implies that
+\begin{align*}
+	\log(z_1z_2) &=\log z_1+\log z_2, \\
+	\arg(z_1z_2) &=\arg z_1+\arg z_2,
+\end{align*}
+so that $\log \colon \CC \rightarrow \CC$ is also a homomorphism from the multiplicative group of complex numbers to the additive group of complex numbers. If we want to compare a value on the left with a value on the right, then we can merely assert that they differ by a multiple of $2\pi i$ (or $2\pi$).
+
+Finally, we discuss the inverse cosine which is obtained by solution of the equation $$\cos z=\dfrac{1}{2}\left(e^{iz}+e^{-iz}\right)=w.$$ This is a quadratic equation in $e^{iz}$ with the roots $$e^{iz}=w \pm \sqrt{w^2-1},$$ and consequently $$z= \arccos w=\cos^{-1}(w)=-i \log \left(w \pm \sqrt{w^2-1}\right).$$ We can also write these values in the form $$\arccos w=\pm i \log\left(w+\sqrt{w^2-1}\right),$$ for $w+\sqrt{w^2-1}$ and $w-\sqrt{w^2-1}$ are reciprocal numbers. The infinitely many values of $\arccos w$ now reflect the evenness and periodicity of the cosine function.
+
+The inverse sine is more easily defined by $$\arcsin w=\dfrac{\pi}{2}-\arccos w.$$ It is worth emphasizing that in the theory of complex analytic functions, all elementary transcendental functions can thus be expressed through $e^z$ and its inverse $\log z$. In other words, there is essentially only one elementary transcendental function. Compare our development here with its more difficult counterpart through purely real analysis.
+
+\begin{exercise}
+	Prove that $3<\pi<2\sqrt{3}$.
+	
+	\begin{sol}
+		The text has already proven the right inequality, since we showed that $\cos(\sqrt{3})<0$, so that $$2\pi<4\sqrt{3} \then \pi<2\sqrt{3}.$$ For the left inequality, we may use (after integrating again) $$\cos y>1-\dfrac{y^2}{2}+\dfrac{y^4}{24}-\dfrac{y^6}{720}.$$ Substituting $3/2$ on both sides gives
+		\begin{align*}
+		\cos(3/2) &<1-\dfrac{3^2}{2^2 \cdot 2}+\dfrac{3^4}{2^4 \cdot 4!}-\dfrac{3^6}{2^6 \cdot 6!} \\
+		&=\dfrac{2^6 \cdot 6!-3^2 \cdot 2^4 \cdot 3 \cdot 4 \cdot 5 \cdot 6+3^4 \cdot 2^2 \cdot 5 \cdot 6-3^6}{2^6 \cdot 6!} \\
+		&=\dfrac{2^6 \cdot 6!-3^2 \cdot 2^3 \cdot 6!+3^3 \cdot 6!/2-3^6}{2^6 \cdot 6!} \\
+		&=\dfrac{6!(2^6-3^2 \cdot 2^3+3^3/2)-3^6}{2^6 \cdot 6!} \\
+		&=\dfrac{6!(11/2)-3^6}{2^6 \cdot 6!} \\
+		&>0.
+		\end{align*}
+		SInce we have already set $2\pi$ to be the smallest positive period of cosine, and $\frac{3}{2}<\sqrt{3}$, there cannot be any $y_0 \in [0,3/2]$ such that $\cos y_0=0$. Hence, $$2\pi>4 \cdot \dfrac{3}{2}=6 \then \pi>\dfrac{3}{2},$$ as desired.
+		
+		\begin{remark}
+			Notice that, in the course of this proof, we have essentially shown the following stronger result:
+			\begin{center}
+			\textit{For real $y$, the remainder of the Taylor series expansion of both $\cos$ and $\sin$ has the same sign as its leading term}.
+			\end{center}
+		 	The proof is by using the fact that $(\sin y)'=\cos y$ and $(\cos y)'=-\sin y$, and integrating successive inequalities to bootstrap, as in the text and in this solution.
+		\end{remark}
+	\end{sol}
+\end{exercise}

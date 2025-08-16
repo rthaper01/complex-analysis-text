@@ -1,0 +1,42 @@
+\documentclass[12pt, twoside=semi,openright,numbers=noenddot,titlepage=false]{scrbook}
+\usepackage[spicy, fancy, book, solutions]{rishubh}
+
+\title{Complex Analysis}
+
+\begin{document}
+
+\frontmatter
+% \renewcommand{\thepage}{\arabic{page}}
+\maketitle
+
+\include{tex/preface}
+
+\mainmatter
+
+\tableofcontents
+
+\part{Complex Numbers}
+\include{tex/complex-arithmetic}
+\include{tex/complex-geometry}
+\part{Complex Functions}
+\include{tex/analytic-functions}
+\include{tex/power-series}
+\include{tex/exponential-and-trig}
+\part{Analytic Functions as Mappings}
+\include{tex/point-set-topology}
+\include{tex/conformality}
+\include{tex/linear-transformations}
+\include{tex/elementary-conformal-mappings}
+\part{Complex Integration}
+Having thoroughly studied the differentiable aspects of complex functions, we now turn to the study of integration. The theory of complex integration is one of the most beautiful and powerful parts of complex analysis, and it is the key to many important results in the field.
+
+Many important properties of analytic functions are very difficult to prove without use of complex integration. And even if there do exist integration-free proofs, they are considerably more difficult.
+
+We'll begin our exploration by building up some of the most important results on integrating analytic functions over various curves; this will ultimately lead to the powerful Cauchy Integral Formula. Following Ahlfors' philosophy, we will prove all theorems purely analytically. However, we must note that Cauchy's Integral Formula (and, frankly, all related results appearing beforehand) is a special case of Stokes' Theorem and the degree formula from differential topology. The reader who is well-acquainted with differential forms on smooth manifolds may have already derived Cauchy's Integral Formula as an exercise using these methods. In all honesty, we believe that the analytical arguments, particularly the ones that Ahlfors employs, are so simply beautiful that they should not be neglected. The interested reader can consult the appendix for a brief foray into differential topology, in which we quickly introduce differential forms, prove Stokes' Theorem, connect the analytical and topological notions of degree and winding number, and prove Cauchy's Integral Formula in this alternative manner.
+\include{tex/fundamental-theorems}
+\include{tex/cauchy-integral-formula}
+
+\makehints[Hints to Exercises]
+\makesolutions[Solutions to Exercises]
+
+\end{document}

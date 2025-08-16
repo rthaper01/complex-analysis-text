@@ -1,0 +1,28 @@
+\chapter{Cauchy's Integral Formula}
+\label{chap:cauchy-integral-formula}
+Through a very simple application of Cauchy's theorem it becomes possible to represent an analytic function $f(z)$ as a line integral in which the variable $z$ centers as a parameter. This representation, known as \textit{Cauchy's Integral Formula}, has numerous important applications, not just in complex analysis, but also in physics and electrical engineering. Above all, it enables us to study the local properties of an analytic function in great detail.
+
+As we declared at the beginning of this part on complex integration, we will prove Cauchy's Integral Formula purely analytically. That is, we will define winding number as an analytical, rather than a topological, quantity. For completeness, and to illustrate the connection between the two definitions, the Appendix, we will include a full topological proof of this quintessential theorem.
+
+\section{Winding Number}
+Central to many questions in function theory and physics (particularly string theory) is the notion of a curve winding around a point not on it. let us make this idea precise, inspired by the following lemma:
+\begin{lemma}
+If the piecewise differentiable closed curve $\gamma$ does not pass through the point $a$, then the value of the integral $$\int_{\gamma} \dfrac{dz}{z-a}$$ is a multiple of $2\pi i$.
+\end{lemma}
+\begin{proof}
+This lemma may seem trivial, for we can write $$\int_{\gamma}\dfrac{dz}{z-a}=\int_{\gamma} d(\log(z-a))=\int_{\gamma}d(\log \abs{z-a})+i\int_{\gamma}d(\arg(z-a)).$$ When $z$ describes a closed durve, $\log\abs{z-a}$ returns to its intial value and $\arg(z-a)$ increases or decreases by a multiple of $2\pi$. This would seem to imply the lemma, but more careful thought shows that the reasoning is of no value unless we define $\arg(z-a)$ in a unique way. We could do this, but there is an easier way to proceed.
+
+The simplest proof is computational, exploiting the theory of first-order ordinary differential equations. If the equation of $\gamma$ is $z=z(t)$, $\alpha \le t \le \beta$, let us consider the function $$h(t)=\int_{\alpha}^{t}\dfrac{z'(t)}{z(t)-a}dt.$$ It is defined and continuous on the closed interval $[\alpha, \beta]$, and it has the derivative $$h'(t)=\dfrac{z'(t)}{z(t)-a}$$ whenever $z'(t)$ is continuous. From this equation it follows that the derivative of $e^{-h(t)}(z(t)-a)$ is $$e^{-h(t)} \cdot z'(t)-h'(t)e^{-h(t)}(z(t)-a)=e^{-h(t)} \cdot z'(t)-e^{-h(t)} \cdot z'(t)=0$$ except perhaps at a finite number of points, and since this function is continuous it must reduce to a constant.
+
+With the initial condition $h(\alpha)=0$, we solve the differential equation to get $$e^{h(t)}=\dfrac{z(t)-a}{z(\alpha)-a}.$$ Since $z(\beta)=z(\alpha)$ we obtain $e^{h(\beta)}=1$, and therefore $h(\beta)$ must be a multiple of $2\pi i$. This proves the lemma.
+\end{proof}
+
+Motivated by this fact, we can now precisely define the winding number of a point with respect to a curve.
+
+\begin{definition}
+Given a curve $\gamma$ and a point $a$ not on it, the \emph{winding number} of $\gamma$ with respect to $a$, denoted by $W(\gamma, a)$, is defined as the integer $$W(\gamma, a)=\frac{1}{2\pi i}\int_{\gamma} \dfrac{dz}{z-a}.$$
+\end{definition}
+
+It is clear that $W(-\gamma, a)=-W(\gamma, a)$, and the following property is an immediate consequence of \ref{thm:cauchy-disk}:
+
+\textit{if $\gamma$ lies inside of a circle, then $W(\gamma,a)=0$ for all points $a$ outside of the same circle}.

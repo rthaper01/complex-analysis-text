@@ -1,0 +1,217 @@
+\chapter{The Algebra of Complex Numbers}
+\label{chap:complex-algebra}
+
+This chapter will mostly be review from high-school algebra, and also a way to flex calculation muscles and peel off the rust after not working with complex numbers in a while.
+
+\section{Arithmetic Operations}
+We define the \emph{imaginary unit $i$} as a quantity that obeys the property $i^2=-1$. By taking the linear span of the set $\{1,i\}$ over real coefficients, we produce a new mathematical object:
+
+\begin{definition}
+A \emph{complex number} is of the form $a+bi$, with $a,b \in \RR$, where $a$ and $b$ are the \emph{real} and \emph{imaginary} parts of the complex number, respectively.
+\end{definition}
+
+If we are well-acquainted with basic abstract algebra, then we note that the complex number system, denoted by $\CC=\{a+bi \colon a,b \in \RR\}$, can also be thought of as the quotient $\RR[t]/(t^2+1)$; that is, the ring of polynomials with real coefficients modulo the quadratic $t^2+1$. It should be clear, then, that the degree of $\CC$ over $\RR$, written $[\CC \colon \RR]$, is equal to $2$. In other words, the complex numbers form a quadratic field extension of the real numbers.
+
+In fact, the field $\CC$ is \textit{algebraically closed}, meaning that every polynomial with real coefficients has a root in $\CC$. There are a number of proofs of this fact, called the Fundamental Theorem of Algebra, but my favorite is the one by Milnor via differential topology.
+
+Back to arithmetic. If $a=0$, then we call $a+bi$ \emph{purely imaginary}, and if $b=0$, then -- of course -- $a+bi$ is \textit{real}.
+
+Addition of two complex numbers is defined component-wise: $$(a+bi)+(c+di)=(a+c)+(b+d)i,$$ while multiplication is carried out distributively, keeping in mind the fundamental property that $i^2=-1$:
+\begin{align*}
+	(a+bi)(c+di) &=ac+adi+bci+bdi^2 \\
+	&=ac+(ad+bc)i-bd \\
+	&=(ac-bd)+(ad+bc)i.
+\end{align*}
+
+We remember from high school that two complex numbers may also be divided by mutiplying both the numerator and denominator by the conjugate of the denominator to realize the denominator:
+\begin{align*}
+	\dfrac{a+bi}{c+di} &=\dfrac{a+bi}{c+di} \cdot \dfrac{c-di}{c-di} \\
+	&=\dfrac{(ac+bd)+(bc-ad)i}{c^2+d^2} \\
+	&=\dfrac{ac+bd}{c^2+d^2}+\dfrac{bc-ad}{c^2+d^2}i.
+\end{align*}
+
+\begin{exercise}
+	If $z=a+bi$, then find the real and imaginary parts of the complex number $\frac{z-1}{z+1}$.
+	
+	\begin{sol}
+		Define the complex numbers $z'=z-1=(a-1)+bi$ and $z''=z+1=(a+1)+bi$, and set $w=\frac{z-1}{z+1}=\frac{z'}{z''}$. Then by the formula for division, we have
+		\begin{align*}
+			\Real w &=\dfrac{(a-1)(a+1)+b^2}{(a+1)^2+b^2} \\
+			&=\boxed{\dfrac{a^2+b^2-1}{a^2+b^2+2a+1}},
+		\end{align*}
+		and
+		\begin{align*}
+			\Imag w &=\dfrac{b(a+1)-(a-1)b}{(a+1)^2+b^2} \\
+			&=\boxed{\dfrac{2b}{a^2+b^2+2a+1}}.
+		\end{align*}
+	\end{sol}
+\end{exercise}
+
+\section{Square Roots}
+Here, we give a procedure for finding the square root of a complex number. Let $z=a+bi$, and suppose $w \in \CC$ with $w^2=z$. Say that $w=x+yi$; then, write $$(x+yi)^2=a+bi \then (x^2-y^2)+2xyi=a+bi.$$ Equating real and imaginary parts yields the system of equations
+\begin{align*}
+	x^2-y^2 &=a, \\
+	2xy &=b.
+\end{align*}
+
+Substituting $y=b/2x$ into the first equation gives
+\begin{align*}
+	x^2-\left(\dfrac{b}{2x}\right)^2 &=a \\
+	\then x^2-\dfrac{b^2}{4x^2} &=a,\\
+	\then 4x^4-4ax^2-b^2 &=0,
+\end{align*}
+so $$x^2=\dfrac{4a+4\sqrt{a^2+b^2}}{8}=\dfrac{a+\sqrt{a^2+b^2}}{2}.$$ We take the positive square root of the discriminant in the quadratic formula because $\sqrt{a^2+b^2} \ge a$, and we want $x$ to be real.
+
+From this, we also get $$y^2=x^2-a=\dfrac{-a+\sqrt{a^2+b^2}}{2}.$$ Now, we can take either the positive or the negative square root to get two opposite values of $x$ and $y$, but we must be careful, as these values cannot be multiplied arbitrarily -- they must multiply to the sign of $b$. Hence, instead of $4$ square roots, we do get the anticipated $2$, namely, $$w=x+yi=\pm \left(\sqrt{\dfrac{a+\sqrt{a^2+b^2}}{2}}+\sign(b)\sqrt{\dfrac{-a+\sqrt{a^2+b^2}}{2}}i\right),$$ provided $b \neq 0$. If $b=0$, then simply $$w=\pm \sqrt{a}, \quad a \ge 0,$$ or $$w=\pm i\sqrt{-a}, \quad a<0.$$
+
+\begin{exercise}
+	Compute $\sqrt[4]{i}$.
+	
+	\begin{sol}
+		We don't have access to the geometric interpretation of complex numbers yet, so we'll content ourselves to solve this problem algebraically.
+		
+		First, let us find $\sqrt{i}$: we have $\Real i=0$ and $\Imag i=1$, so
+		\begin{align*}
+			\sqrt{i} &=\pm\left(\sqrt{\dfrac{1}{2}}-\sqrt{\dfrac{1}{2}}i\right) \\
+			&=\pm\left(\dfrac{1-i}{\sqrt{2}}\right).
+		\end{align*}
+		
+		Now, we get two additional square roots each of $1-i$ and $-1+i$, which are
+		\begin{align*}
+			\sqrt{-1+i} &=\pm\left(\sqrt{\dfrac{1+\sqrt{2}}{2}}-\sqrt{\dfrac{-1+\sqrt{2}}{2}}i\right) \\
+			&=\pm\left(\dfrac{\sqrt{1+\sqrt{2}}-i\sqrt{-1+\sqrt{2}}}{\sqrt{2}}\right),
+		\end{align*}
+		and
+		\begin{align*}
+			\sqrt{1-i} &=\pm\left(\sqrt{\dfrac{-1+\sqrt{2}}{2}}+\sqrt{\dfrac{1+\sqrt{2}}{2}}i\right) \\
+			&=\pm\left(\dfrac{\sqrt{-1+\sqrt{2}}+i\sqrt{1+\sqrt{2}}}{\sqrt{2}}\right),
+		\end{align*}.
+		Therefore,
+		\begin{align*}
+			\sqrt[4]{i} &=\boxed{\left\{\pm\left(\dfrac{\sqrt{1+\sqrt{2}}-i\sqrt{-1+\sqrt{2}}}{\sqrt[4]{2}}\right), \pm\left(\dfrac{\sqrt{-1+\sqrt{2}}+i\sqrt{1+\sqrt{2}}}{\sqrt[4]{2}}\right)\right\}}.
+		\end{align*}
+	\end{sol}
+\end{exercise}
+
+\section{Conjugation and Absolute Value}
+We mentioned the conjugate of a complex number in the first section. Here, we make the notion precise:
+
+\begin{definition}
+	The \textit{conjugate} of the complex number $z=a+bi$ is the complex number $\overline{z}=a-bi$. 
+\end{definition}
+
+\begin{definition}
+	The \emph{absolute value}, or \emph{norm}, of the complex number $z=a+bi$ is the positive real-valued quantity $$\abs{z}=\sqrt{z\overline{z}}=\sqrt{(a+bi)(a-bi)}=\sqrt{a^2+b^2}.$$
+\end{definition}
+
+Note the following properties of conjugation and absolute value, for $z,w \in \CC$:
+\begin{itemize}
+	\item $\overline{z+w}=\overline{z}+\overline{w}$,
+	\item $\overline{zw}=\overline{z} \cdot \overline{w}$,
+	\item $\Real z=\dfrac{z+\overline{z}}{2}$,
+	\item $\Imag z=\dfrac{z-\overline{z}}{2i}$, and
+	\item $\abs{zw}=\abs{z} \cdot \abs{w}$.
+\end{itemize}
+
+It should be clear that the absolute value is multiplicative; that is, for any $z,w \in \CC$ ,we have $$\abs{zw}=\abs{z} \cdot \abs{w}.$$
+
+\begin{exercise}
+	Prove that $\left\abs{\dfrac{w-z}{1-\overline{w}z}\right}=1$ if either $\abs{w}=1$ or $\abs{z}=1$. What happens when $\abs{w}=\abs{z}=1$?
+	
+	\begin{sol}
+		Suppose, without loss of generality, that $\abs{w}=1$ and $\abs{z} \neq 1$. Note that, in this case, $\overline{w}b \neq 1$, so we are not dividing by $0$. This is because if it was equal to $1$, then we would have $a\overline{z}=\overline{1}=1$, so that $\overline{w}zw\overline{z}=\overline{w}w\overline{z}z=\abs{w}\abs{z}=\abs{z}=1$, which is assumed not to be true.
+		
+		Next, observe that $\abs{wz}=\abs{z}$, so we have
+		\begin{align*}
+			\left\abs{\dfrac{w-z}{1-\overline{w}z}\right}^2 &=\dfrac{w-z}{1-\overline{w}z} \cdot \dfrac{\overline{w}-\overline{z}}{1-w\overline{z}} \\
+			&=\dfrac{\abs{w}+\abs{z}-w\overline{z}-\overline{w}z}{1-w\overline{z}-\overline{w}z+\abs{wz}} \\
+			&=\dfrac{1-w\overline{z}-\overline{w}w+\abs{z}}{1-w\overline{z}-\overline{w}z+\abs{z}} \\
+			&=1.
+		\end{align*}
+		
+		On the other hand, if $\abs{w}=\abs{z}=1$, then the identity also holds, provided that $\overline{w}z \neq 1$.
+	\end{sol}
+\end{exercise}
+
+\section{Useful Inequalities}
+There is no standard order imposed on the complex number system, but we can extract some valuable inequalities by comparing real and imaginary parts and by taking absolute values to transfer computations into the real number system.
+
+We first note that, since $\abs{z}^2=(\Real z)^2+(\Imag z)^2$, we can immediately say that
+\begin{align*}
+	-\abs{z} &\le \Real z \le \abs{z}, \text{ and } \\
+	-\abs{z} &\le \Imag z \le \abs{z}.
+\end{align*}
+
+Observe that
+\begin{align*}
+	\abs{w+z}^2 &=(w+z)(\overline{w}+\overline{z}) \\
+	&=w\overline{w}+w\overline{z}+\overline{w}z+z\overline{z} \\
+	&=\abs{w}+\abs{z}+w\overline{z}+\overline{w\overline{z}} \\
+	&=\abs{w}+\abs{z}+2\Real(w\overline{z}) \\
+	&\le \abs{w}+\abs{z}+2\abs{w\overline{z}} \\
+	&=\abs{w}+\abs{z}+2\abs{wz} \\
+	&=\left(\abs{w}+\abs{z}\right)^2,
+\end{align*}
+so taking square roots gives 
+\begin{proposition}[Triangle Inequality]
+	\label{prop:triangle-inequality}
+	For any complex numbers $z,w$, we have $$\abs{w+z} \le \abs{w}+\abs{z}.$$
+\end{proposition}
+
+Note that, by the derivation, equality holds if and only if $\Real(w\overline{z})=\abs{wz}$, or that $w\overline{z}$ is real and positive. Writing $w=a+bi$ and $z=c+di$, we find that $$w\overline{z}=(ac+bd)+(-ad+bc)i$$ is real implies that $ad=bc$, or that $a/c=b/d$. In other words, $w$ and $z$ differ by a positive real number.
+
+We can extend this reasoning by induction to show that for any finite set of complex numbers $\{z_1,z_2,\dots,z_n\}$, we have $$\abs{z_1+z_2+\cdots+z_n} \le \abs{z_1}+\abs{z_2}+\cdots+\abs{z_n},$$ with \textit{equality holding if and only if the ratio of any two nonzero terms is a positive real number.}
+
+Notice that, expressed another way, the triangle inequality becomes $$\abs{w-z}+\abs{z} \le \abs{(w-z)+z}=\abs{w},$$ and rearranging gives $$\abs{w}-\abs{z} \ge \abs{w-z}.$$ Swapping the roles of $w$ and $z$ results in $$\abs{z}-\abs{w} \ge \abs{z-w}=\abs{w-z},$$ so we can combine these two inequalities to get $$\abs{w-z} \le \abs{\abs{w}-\abs{z}}.$$ Of course, the same estimate can easily be applied to $\abs{w+z}$.
+
+We conclude this section with another famous and extremely useful inequality.
+
+\begin{theorem}[Cauchy-Schwarz Inequality]
+	\label{thm:cauchy-schwarz}
+	Given $z_1,\dots,z_n$ and $w_1,\dots,w_n$, the following holds: $$\abs{w_1z_1+\cdots+w_nz_n}^2 \le \left(\abs{w_1}^2+\cdots+\abs{w_n}^2\right) \cdot \left(\abs{z_1}^2+\cdots+\abs{z_n}^2\right).$$
+\end{theorem}
+
+\begin{proof}
+	We proceed by induction on $n$. For $n=1$, it is obvious that $$\abs{w_1z_1}^2=\abs{w_1}^2\abs{z_1}^2,$$ so assume the result to be true for some $n \ge 1$.
+	
+	Then, by the triangle inequality,
+	\begin{align}
+		\abs{w_1z_1+\cdots+w_nz_n+w_{n+1}z_{n+1}}^2 &\le \left(\abs{w_1z_1+\cdots+w_nz_n}+\abs{w_{n+1}z_{n+1}}\right)^2 \nonumber \\
+		&=\abs{w_1z_1+\cdots+w_nz_n}^2 \nonumber \\&+2\abs{w_1z_1+\cdots+w_nz_n}\abs{w_{n+1}z_{n+1}}+\abs{w_{n+1}}^2\abs{z_{n+1}}^2 \nonumber \\
+		&\le \left(\abs{w_1}^2+\cdots+\abs{w_n}^2\right) \cdot \left(\abs{z_1}^2+\cdots+\abs{z_n}^2\right) \nonumber \\&+2\abs{w_1z_1+\cdots+w_nz_n}\abs{w_{n+1}z_{n+1}}+\abs{w_{n+1}}^2\abs{z_{n+1}}^2 & \text{(Induction)}.
+	\end{align}
+	Now, observe that, for all $1 \le i \le n$, we have $$0 \le \left(\abs{w_{n+1}z_i}-\abs{w_iz_{n+1}}\right)=\abs{w_{n+1}}^2\abs{z_i}^2-2\abs{w_{n+1}z_{n+1}w_iz_i}+\abs{w_i}^2\abs{z_{n+1}^2},$$ so $$2\abs{w_{n+1}z_{n+1}w_iz_i} \le \abs{w_{n+1}}^2\abs{z_i}^2+\abs{w_i}^2\abs{z_{n+1}^2}.$$ Hence, by the Triangle Inequality again,
+	\begin{align}
+		2\left\abs{\sum_{i=1}^{n}w_iz_i\right} \cdot \abs{w_{n+1}z_{n+1}} &\le 2\sum_{i=1}^{n}\abs{w_{n+1}z_{n+1}w_iz_i} \nonumber \\ &\le \sum_{i=1}^{n}\abs{w_{n+1}}^2\abs{z_i}^2+\sum_{i=1}^{n}\abs{w_i}^2\abs{z_{n+1}^2} \nonumber \\
+		&=\abs{w_{n+1}}^2\sum_{i=1}^{n}\abs{z_i}^2+\abs{z_{n+1}}^2\sum_{i=1}^{n}\abs{w_i}^2.
+	\end{align}
+	
+	Plugging (1.2) into (1.1) yields
+	\begin{align*}
+		\abs{w_1z_1+\cdots+w_nz_n+w_{n+1}z_{n+1}}^2 &\le \left(\abs{w_1}^2+\cdots+\abs{w_n}^2\right) \cdot \left(\abs{z_1}^2+\cdots+\abs{z_n}^2\right) \\&+2\abs{w_1z_1+\cdots+w_nz_n}\abs{w_{n+1}z_{n+1}}+\abs{w_{n+1}}^2\abs{z_{n+1}}^2 \\
+		&\le \left(\abs{w_1}^2+\cdots+\abs{w_n}^2\right) \cdot \left(\abs{z_1}^2+\cdots+\abs{z_n}^2\right)+ \\ &+\abs{w_{n+1}}^2\left(\abs{z_1}^2+\cdots+\abs{z_n}^2\right)+\abs{z_{n+1}}^2\left(\abs{w_1}^2+\cdots+\abs{w_n}^2\right) \\ &+\abs{w_{n+1}}^2\abs{z_{n+1}}^2 \\
+		&=\left(\abs{w_1}^2+\cdots+\abs{w_{n+1}}^2\right) \cdot \left(\abs{z_1}^2+\cdots+\abs{z_{n+1}}^2\right),
+	\end{align*}
+	completing the induction and proving the inequality.
+\end{proof}
+
+The Cauchy-Schwarz inequality can be proven more generally for inner product spaces, of which the complex numbers are one canonical example, but we will not be needing that form here.
+
+Analysis frequently comes down to bounding, and one may be a bit surprised to learn that just these simple tools -- the triangle inequality and Cauchy-Schwarz inequality -- can go a long way towards most of our estimates. The running joke is that analysts can do a lot with few tools.
+
+\begin{exercise}
+	Prove that $$\left\abs{\dfrac{w-z}{1-\overline{w}z}\right}<1$$ if $\abs{w}<1$ and $\abs{z}<1$.
+	
+	\begin{sol}
+		Note that $$0<(\abs{w}-1)(\abs{z}-1),$$ so $$\abs{w}+\abs{z}<1+\abs{wz}.$$ Adding $-(w\overline{z}+\overline{w}z)$ to both sides gives 
+		\begin{align*}
+		\abs{w}+\abs{z}-w\overline{z}-\overline{w}z &<1+\abs{wz}-w\overline{z}-\overline{w}z \\
+		\Rightarrow (w-z)(\overline{w}-\overline{z}) &<(1-\overline{w}z)(1-w\overline{z}) \\
+		\Rightarrow \abs{w-z}^2 &<\abs{1-w\overline{z}}^2 \\
+		\Rightarrow \left\abs{\dfrac{w-z}{1-w\overline{z}}\right}^2 &<1 \\
+		\Rightarrow \left\abs{\dfrac{w-z}{1-w\overline{z}}\right} &<1,
+		\end{align*}
+		as desired.
+	\end{sol}
+\end{exercise}
+

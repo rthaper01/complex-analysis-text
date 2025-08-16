@@ -1,0 +1,507 @@
+A function $w=f(z)$ may be viewed as a mapping which represents a point $z$ by its image $w$. Using this insight, we turn to the preliminary study of the special properties of a mapping that is defined by an analytic function.
+
+In order to carry out this program, it is desirable to develop the underlying geometric concepts with sufficient generality, for otherwise we would soon be forced to introduce a great number of ad hoc definitions whose mutual relationship is far from clear. But the undergraduate reader has probably already been exposed to abstract mathematics, as early as in their freshman year, so this coming chapter should (hopefully) be a quick review.
+
+\chapter{Elementary Point Set Topology}
+\label{chap:topology}
+The branch of mathematics which goes under the name of \emph{topology} is concerned with all questions directly or indirectly related to continuity (in \emph{differential topology}, the more restictive category of \emph{smoothness} takes precedence). The term is traditionally used in a very wide sense and without strict limitations. Topological considerations are extremely important for the foundation of the study of analytic functions, and the first systematic study of topology was motivated by this need.
+
+In this chapter, we'll most state the relevant definitions and results, with the assumption that the reader has already taken a topology course which covers this material in more detail. For some more important propositions, we'll provide a short proof (or a sketch).
+
+\section{Metric Spaces}
+Topology is usually introduced via the specific case of a \emph{metric space} first, as these objects come with a built-in quantitative measure of nearness that lends itself to geometric intuition very easily.
+
+\begin{definition}
+	A \emph{metric space} is a set $X$ equipped with a \emph{metric} $d \colon X \times X \rightarrow \RR_{\ge 0}$ that satisfies the following axioms, for all $x,y,z \in X$:
+	\begin{enumerate}
+		\item[(i)] $d(x,y)=0$ if and only if $x=y$ (Non-degeneracy),
+		\item[(ii)] $d(x,y)=d(y,x)$ (Symmetry),
+		\item[(iii)] $d(x,z) \le d(x,y)+d(y,z)$ (Triangle Inequality).
+		\end{enumerate}
+\end{definition}
+We have already seen a few examples:
+\begin{example}
+	$ $
+	\begin{enumerate}
+		\item Both $\RR$ and $\CC$ are metric spaces with $d(x,y)=\abs{x-y}$.
+		
+		\item The extended complex plane can also be made into a metric space with the function derived in Section \ref{sec:riemann-sphere}: $$d(z,z')=\dfrac{2\abs{z-z'}}{\sqrt{(1+\abs{z}^2)(1+\abs{z'}^2)}}.$$
+		
+		\item Denote by $\cC^0([a,b])$ the space of continuous functions with domain $[a,b] \subset \RR$. It can be given the \emph{norm} $$\norm{f}_{\cC^0}=\sup_{a \le x \le b}\abs{f(x)},$$ which then induces the metric $$d(f,g)_{\cC^0}=\sup_{a \le x \le b}\abs{f(x)-g(x)}.$$
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	Given $x \in X$ and a real $\eps>0$, the $\eps$-\emph{neighborhood} of $x$ (or the open $\eps$-\emph{ball} around $x$)is the set of all $y \in X$ with $d(x,y)<\eps$, and is denoted $B_{\eps}(x)$.
+	
+	A set $N \subset X$ is called a \emph{neighborhood} of $x$ if there exists $\eps>0$ such that $x \in B_{\eps}(x) \subset N$.
+\end{definition}
+
+\begin{definition}
+	A set $U \subset X$ is called \emph{open} if and only if it is a neighborhood of each of its elements.
+\end{definition}
+
+Note that this definition implies that $\emptyset$ and $X$ itself are also open. We also note that every open $\eps$-ball is, as expected, open, by the triangle inequality: for any $y \in B_{\eps}(x)$, choose $0<\delta<\eps-d(x,y)$; then $B_{\delta}(y) \subset B_{\eps}(x)$, since for any $z \in B_{\delta}(y)$, we have $$d(x,z) \le d(x,y)+d(y,z)<d(x,y)+\eps-d(x,y)=\eps.$$
+
+Any open ball in the complex plane is an open disk.
+
+\begin{definition}
+	A set $A \subset X$ is called \textit{closed} if and only if its complement is open.
+\end{definition}
+
+Note that a set may be both open and closed; for example, the empty set $\emptyset$ and all of $X$ itself are both open and closed.
+
+The following properties of open and closed sets are fundamental:
+
+\begin{itemize}
+	\item The intersection of a finite number of open sets is open;
+	\item The union of \textit{any} collection of open sets is open;
+	\item The union of a finite number of closed sets is closed;
+	\item The intersection of \textit{any} collection of closed sets is closed.
+\end{itemize}
+
+\begin{definition}
+	Given a set $S \subset X$, we call $y \in X$ a \emph{limit point} (and say that $y$ is \emph{adherent} to $S$) if and only if for every $\eps>0$, $B_{\eps}(y) \cap S \neq \emptyset$.
+\end{definition}
+
+Of course, every $x \in S$ is vacuously a limit point of $S$. Consider as another example the open interval $(0,1) \subset \RR$. It has two limit points on the outside: $0$ and $1$.
+
+With this definition, we may reformulate the definition of a closed set more directly as:
+\begin{center}
+	\textit{A set $A \subset X$ is closed if and only if it contains all of its limit points, which implies that if a sequence $\{x_n\}_{n=1}^{\infty} \subset A$ converges to $x$, then $x \in A$.}
+\end{center}
+
+\begin{definition}
+	Let $(X,d)$ be a metric space, and let $S \subset X$ be a set.
+	\begin{enumerate}
+		\item[(a)] The \emph{interior} of $S$ is defined as $$\intr S=\{x \in S \colon \exists \eps>0, B_{\eps}(x) \subset S\},$$ and is the largest open set contained in $S$. It can also be considered as the union of all open sets contained in $S$.
+		\item[(b)] The \emph{closure} of $S$ is defined as $$\overline{S}=\{x \in X \colon x \text{ is adherent to } S\}.$$ Note that, vacuously, $S \subset \overline{S}$, and $\overline{S}$ can also be thought of as the intersection of all closed sets containing $S$, or the smallest closed set containing $S$.
+		\item[(c)] A set $S \subset X$ is said to be \emph{dense} in $X$ if $\overline{S}=X$. As a canonical example, the rationals $\QQ$ are dense in the reals $\RR$
+		\item[(d)] The \emph{boundary} of $S$ is $$\partial S=\overline{S}-\intr S=\{x \in X \colon \forall \eps>0, B_{\eps}(x) \cap S \neq \emptyset \text{ and } B_{\eps}(x) \cap (X \backslash S) \neq \emptyset\};$$ that is, a point is in the boundary of $S$ if and only every one of its neighborhoods intersects both $S$ and  its complement.
+		\item[(e)] The \emph{exterior} of $S$ is defined as $$\extr S=\intr(X \backslash S).$$ Verify that it is also the complement of the closure.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Let $S \subset X$. A point $x \in S$ is an \emph{isolated point} of $S$ if it has a neighborhood whose intersection with $S$ reduces to the point $x$.
+	
+	An \emph{accumulation point} of $S$ is a point of $\overline{S}$ which is not an isolated point.
+\end{definition}
+
+It is clear that $x$ is an accumulation point of $X$ if and only if every neighborhood of $x$ contains infinitely many points from $X$, and that every accumulation point is also a limit point.
+
+\begin{exercise}
+	if $(X,d)$ is a metric space, then show that $(X,d')$ with $$d'(x,y)=\dfrac{d(x,y)}{1+d(x,y)}$$ is also a metric space. The latter space is bounded in the sense that $d'(x,y) \le 1$ for all $x,y \in X$.
+	
+	\begin{sol}
+		Clearly, $d'(x,y) \ge 0$ for all $x,y \in X$. Now, we verify the three axioms of a metric on $X$:
+		\begin{enumerate}
+			\item[(i)] If $d'(x,y)=0$, then $d(x,y)=0$ and $x=y$. Conversely, if $x=y$, then $d'(x,y)=d(x,x)/[1+d(x,x)]=0/1=0$.
+			\item[(ii)] The symmetry of $d'$ follows easily from the symmetry of $d$.
+			\item[(iii)] For any $x,y,z \in X$, we need to show that $$\dfrac{d(x,y)}{1+d(x,y)}+\dfrac{d(y,z)}{1+d(y,z)} \ge \dfrac{d(x,z)}{1+d(x,z)}.$$ Multiplying through yields
+			\begin{align*}
+				d(x,y)\left[1+d(y,z)\right]\left[1+d(x,z)\right]+d(y,z)\left[1+d(x,y)\right]\left[1+d(x,z)\right]  \\ \ge d(x,z)\left[1+d(x,y)\right]\left[1+d(y,z)\right] \\
+				\then d(x,y)+d(x,y)d(x,z)+2d(x,y)d(y,z)+2d(x,y)d(y,z)d(x,z)+d(y,z)+d(y,z)d(x,z) \\ \ge d(x,z)+d(x,z)d(y,z)+d(x,z)d(x,y)+d(x,z)d(x,y)d(y,z) \\
+				\then d(x,y)+d(y,z)+2d(x,y)d(y,z)+d(x,y)d(y,z)d(x,z) \ge 0,
+			\end{align*}
+			which is obviously true.
+		\end{enumerate}
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	A set is said to be \emph{discrete} if all its points are isolated. Show that a discrete set in $\RR$ is countable.
+	
+	\begin{sol}
+		Let $S \subset \RR$ be discrete. By hypothesis, for every $x \in S$, there exists $\eps_x>0$ such that $(x-\eps_x,x+\eps_x) \cap S=\{x\}$. Define $$I_x=(x-\eps_x/2,x+\eps_x/2).$$ Since $\QQ$ is dense in $\RR$, we may find a rational number $q_x \in I_x$. Then for any distinct $x,y \in S$, it must be that $q_x \neq q_y$. Why? Because $I_x \cap I_y=\emptyset$, which can be seen by noting that if there was some $z \in I_x \cap I_y$, then we would have $\abs{z-x} < \eps_x/2$ and $\abs{z-y}< \eps_y/2$. Without loss of generality, let $\max(\eps_x,\eps_y)=\eps_x$. Then by the Triangle Inequality, $$\abs{x-y} \le \abs{z-x}+\abs{y-z}<\dfrac{\eps_x+\eps_y}{2} \le \eps_x,$$ so $y \in (x-\eps,x+\eps)$, a contradiction.
+		
+		Hence, we may map $S$ bijectively to a subset of $\QQ$, which is countable. We conclude that $S$ is also countable.
+	\end{sol}
+\end{exercise}
+
+\section{Topological Spaces}
+The reality is that it is quite hard to do any kind of abstract mathematics without at least some exposure to general topology. Metric spaces provide the inspiration for this field, but it is important that we be familiar with the relevant topological concepts in more generic terms, as in many cases, we will not have a convenient distance function to work with in the space we are given.
+
+The basic intuition between the formulation of topology is that even if we do not have a notion of distance, we can still delineate some idea of ``nearness" of points in our space via open sets only, the point being that we can simply designate certain sets as ``open" without deferring to $\eps$-balls.
+
+\begin{definition}
+	A \emph{topological space} is a subset $X$ equipped with a collection $\cT$ of its subsets that are designated \emph{open}. The collection $\cT$ is called a \emph{topology} for $x$, and the open subsets within it satisfy the following three axioms:
+	\begin{enumerate}
+		\item[(i)] The empty set $\emptyset$ and the entire set $X$ are both open (and hence in $\cT$);
+		\item[(ii)] For any arbitrary sub-collection $\{U_{\alpha}\}$ of open sets, the union $\bigcup_{\alpha} U_{\alpha}$ is also open;
+		\item[(iii)] For any \emph{finite} sub-collection $\{U_i\}_{i=1}^{n}$ of open sets, the intersection $\bigcap_{i=1}^{n} U_i$ is also open.
+	\end{enumerate}
+\end{definition}
+
+Where do these ``infinite union" and ``finite intersection" axioms of open sets come from? Metric spaces, which are the specific examples that inspired the abstraction to the field of topology. The point is that any arbitrary union of $\eps$-balls is open in a metric space, but not necessarily any intersection. The canonical example is the collection of balls $\{B_{1/n}(0)\}_{n=1}^{\infty}$ of radius $1/n$ around $0$, in $\RR^N$. Their intersection is the single point $\{0\}$, which is obviously not open in $\RR^N$.
+
+What if we declare \textit{all} subsets of $X$ to be open? Then we get something called the \emph{discrete topology} on $X$. Geometrically speaking, all the points of $X$ are ``separate" from each other, as they all define their own neighborhoods.
+
+On the opposite end of the spectrum is the \emph{indiscrete topology}, or \emph{trivial topology}, in which only the empty set and $X$ are declared open. In this kind of topology, all points can be thought of as ``glued" together.
+
+The discrete and indiscrete topologies are almost never used except to produce interesting counterxamples to various statements that we want to be true.
+
+Many times, when we are given a topology, it is good to have a more reasonable collection of open sets to work with, from which we can generate the entire topology.
+
+\begin{definition}
+	Let $(X,\cT)$ be a topological space. A collection of open sets $\cB$ is called a \emph{base} for the topology on $X$, or simply a base for $X$, if every open set in $\cT$ is expressible as a union of some sets in $\cB$.
+\end{definition}
+
+Obviously, $\cT$ itself is vacuously a base for $X$. But when is a base ``reasonable"? What restrictions would we like to have on a base? A finite base would be ideal, but this is a bit too prohibitive, so we should be comfortable with it being countable.
+
+\begin{definition}
+	A topological space $X$ is called \emph{second countable} if it has a countable base.
+\end{definition}
+
+Note that, through some abuse of notation, we will not refer to a topological space explicitly as $(X,\cT)$; we will take it as guaranteed that if we call $X$ a topological space, then it has some topology $\cT$.
+
+As the reader may have guessed, there is also a notion of \emph{first countability}, but we will not need that here.
+
+We conclude this quick review of topological spaces by briefly listing the most important \textit{separation axioms}.
+
+\begin{definition}
+	Let $X$ be a topological space. Then $X$ is called \emph{Hausdorff} if for any two distinct points $x,y \in X$, there exist disjoint open sets $U, V$ with $x \in U$ and $y \in V$.
+\end{definition}
+
+A Hausdorff space is one in which points can be separated by neighborhoods. It, of course, rules out the weird example of the indiscrete topology.
+
+These are the only two slightly advanced topological concepts we will need, primarily because $\RR$ is both second countable and Hausdorff. It should be clear that every metric space is Hausdorff (since we can simply take suitable $\eps$-balls to separate points), and $\RR$ is second countable because the open balls with rational center and radius form a base for $\RR$.
+
+What does it mean for a sequence to converge in a topological space? Well, recall that we defined convergence in metric spaces via $\eps$-balls, so we simply restate this in terms of open sets instead.
+
+\begin{definition}
+	A sequence $\{x_n\} \subseteq X$, where $X$ is a topological space, is said to \emph{converge} to $x$ if and only if for every neighborhood $U$ (open set) containing $x$, there exists $N$ such that for all $n \ge N$, $x_n \in U$.
+\end{definition}
+
+The benefit of working with Hausdorff spaces is that limits of sequences are unique. Surprisingly, it's not true that a sequence must converge to one and only one limit in any topological space! But no need to worry in a Hausdorff space.
+
+\begin{proposition}
+	Let $X$ be a Hausdorff space, and $\{x_n\}_{n=1}^{\infty} \subseteq X$ be a convergent sequence. Then $\lim_{n \rightarrow \infty} x_n$ is unique.
+\end{proposition}
+\begin{proof}
+	Suppose $\{x_n\}$ converges to $x$ and $y$, and that $x \neq y$. Since $X$ is Hausdorff, we can find open sets $U,V \subseteq X$ such that $x \in U$, $y \in V$, and $U \cap V=\emptyset$. Also, since $x_n \rightarrow x$, there is $N_1$ such that for all $n \ge N_1$, $x_n \in U$. Similarly, since $x_n \rightarrow x$, there is $N_2$ such that for all $n \ge N_2$, $x_n \in V$. But then, setting $N=\max\{N_1,N_2\}$, we find that for all $n \ge N$, $x_n \in U \cap V$, contradicting the fact that $U$ and $V$ are disjoint.
+	
+	We conclude that $x=y$.
+\end{proof}
+
+\section{Connectedness}
+The results in this section are true for any topological space, not necessarily one that has a metric, so we state them more generally as such.
+
+If $E \subseteq X$ is any subset of a topological space $X$, then it inherits a \emph{subspace topology} from $X$, where a set $V \subset E$ is open if and only if $V=U \cap E$ for some open set $U \subset X$, and we say that $V$ is \emph{relatively open} in $E$. When $X$ is a metric space, $E$ inherits the \emph{restricted metric} from $X$.
+
+\begin{definition}
+	A topological space $X$ is not \emph{connected} if there exists a partition $S=A \coprod B$ of disjoint open sets $A$ and $B$. We call such a partition a \emph{separation}. Otherwise, we say that $X$ is \emph{connected}.
+\end{definition}
+
+The same definition, of course, applies to any subset of $X$ with respect to the subspace topology. Note that if $X$ is disconnected, then we may also take it to be a disjoint union of two closed sets, since the complement of any open set is closed.
+
+Intuitively speaking, connectedness means that a space consists of just one ``piece," and we can equivalently characterize a connected space as one in which the only subsets that are \textit{both} open and closed are the empty set and the whole space itself.
+
+Connected subsets of the real line are completely characterized, and we can now state our first non-trivial topological theorem.
+
+\begin{theorem}
+	The nonempty connected subsets of $\RR$ are the intervals $[a,b]$ for $a \le b$.
+\end{theorem}
+\begin{proof}
+	We reproduce one of the classical proofs, based on the fact that any monotone sequence is either unbounded or has a finite limit.
+	
+	First, suppose that $\RR=A \coprod B$, with $A$ and $B$ open and closed. If neither is empty, then we can find $a\in A$ and $b \in B$; we may assume that $a<b$. Let $$c=\sup(A \cap [a,b]).$$ Then $a \le c \le b$. Why? Because $b$ is obviously an upper bound of $A \cap [a,b]$, so certainly $c \le b$. At the same time, since $a \in A \cap [a,b]$, we cannot have $c<a$.
+	
+	We now consider two cases:
+	\begin{enumerate}
+		\item Suppose $c \in A$. Since $A$ is open, there exists $\eps>0$ such that $(c-\eps,c+\eps) \subseteq A$ and $c<b$. This implies that there exists $0<\delta<\min\{\eps, b-c\}$, so that $c-\eps<c+\delta<c+\eps$ and $c+\delta \in A$. But $c+\delta>c$, contradicting the fact that $c$ is the supremum of $A \cap [a,b]$.
+		
+		\item On the other hand, if $c \in B$, then -- because $c=\sup(A \cap [a,b])$, there exists a sequence $a_n \rightarrow c$ with $a_n \in A \cap [a,b]$ for all $n$. Since $A$ is closed, we get that $c \in A$, contradicting the fact that $A \cap B=\emptyset$.
+	\end{enumerate}
+	In either case, we have a contradiction, so $\RR$ must be connected. The same proof essentially shows that any interval is also connected.
+	
+	In the proof of one direction above, we assumed that the supremum of a subset of the real line exists (and it may be infinite if the set is unbounded). Let us justify this. Let $E \subseteq \RR$ and $A$ be the set of all upper bounds of $E$. It is evident that the complement of $A$ is open, since if $x \in \RR \backslash A$, then there exists $y \in E$ with $x<y$. Choose $0<\eps<y-x$; then $(x-\eps,x+\eps) \subset A$, as well. Now, as to $A$ itself, it is easily seen that $A$ is open whenever it does not contain any finite minimum. Because the real line is connected, $A$ and $\RR \backslash A$ cannot both be open unless one of them is empty. There are thus three possibilities: either $A$ is empty, $A$ contains a largest number, or $A$ is the whole line. In the first case, we get that $\sup E=+\infty$; in the second case, $\sup E$ is finite; and the third case, we set $\sup E=-\infty$. It is clear that $\sup E=-\infty$ if and only if $E$ is empty. In a similar fashion, we can define the infinum. The existence of a supremum and infinum is known as the Completeness Property of the real numbers.
+	
+	Returning to the proof of the theorem, we assume that $E$ is a connected set with infinum $a$ and supremum $b$. All points of $E$ lie between $a$ and $b$, limits included. Suppose that a point $\xi$ from the interval $(a,b)$ does not belong to $E$. Then the open sets $(-\infty, \xi)$ and $(\xi, +\infty)$ would cover $E$, and because $E$ is connected, one of them must fail to intersect $E$. Suppose, for instance, that $(\xi, +\infty) \cap E=\emptyset$. Then $\xi$ is an upper bound for $E$ strictly less than $b$, contradicting the fact that $b=\sup E$. Similarly, $(-\infty,\xi)$ must also intersect $E$ nontrivially. But then $E$ is not connected. Hence, we conclude that $\xi$ belongs to $E$, and so $E$ is identical with one of the four intervals delimited by $a$ and $b$ (open, closed, or half-open on either end).
+	
+	This completes the proof.
+\end{proof}
+
+The structure of connected sets in the plane is not nearly so simple as in the case of the line, but the following characterization of \emph{open} connected sets contains essentially all the information we shall need.
+
+\begin{theorem}
+	A nonempty open set in the plane is connected if and only if any two of its points can be joined by a polygon which lies in the set.
+\end{theorem}
+\begin{proof}
+	The proof of necessity is as follows: let $A$ be an open connected set, and choose a point $a \in A$. We denote by $A_1$ the subset of $A$ whose points can be joined to $a$ by polygons in $A$, and by $A_2$ the subset of points whose points cannot be so joined. Let us prove that $A_1$ and $A_2$ are both open (this is a common proof technique in proofs involving connectedness). First, if $a_1 \in A_1$ then there exists a neighborhood $\abs{z-a_1}<\eps$ contained in $A$. All points in this neighborhood can be joined to $a_1$ by a line segment, and from there to $a$ by a polygon. Hence, $A_1$ is open. Secondly, if $a_2 \in A_2$, let $\abs{z-a_2}<\eps$ be a neighborhood contained in $A$. If a point in this neighborhood could be joined to $a$ by a polygon, then $a_2$ could be joined to this point by a line segment, and from there to $a$. This is contrary to the definition of $A_2$, so we conclude that $A_2$ is open. Since $A$ is connected, either $A_1$ or $A_2$ must be empty. But $A_1$ contains the point $a_1$, so it is $A_2$ that must be empty, and $A$ has the desired characterization.
+	
+	Conversely, suppose $A=A_1 \coprod A_2$ for disjoint open sets $A_1$ and $A_2$. Chooise $a_1 \in A_1$ and $a_2 \in A_2$ and suppose that these two points can be joined by a polygon in $A$. One of the sides of this polygon must then join a point in $A_1$ to a point in $A_2$, and for this reason it is sufficient to reduce to the case where $a_1$ and $a_2$ are joined by a line segment. This segment has the parametric representation $z=a_1+t(a_2-a_1)$ (recall Section \ref{sec:analytic-geometry}), where $t \in [0,1]$. The subsets of the open interval $0<t<1$ which correspond to points in $A_1$ and $A_2$, respectively, are evidently open, disjoint, and nonempty. This contradicts the connectedness of the interval, and we have proved that the condition of the theorem is sufficient.
+\end{proof}
+
+This theorem generalizes easily to $\RR^n$ and $\CC^n$, but we really need only the case of $\RR^2$. We also note that there is a related, more general, quality of a set $S$ being \emph{path-connected}, when any two points $x,y \in S$ are such that there exists some continuous function $f \colon [0,1] \rightarrow S$ with $f(0)=x$ and $f(1)=y$. However, we will not need that here; it is best left to the topologists rather than the analysts.
+
+\begin{definition}
+	A nonempty connected open set is called a \emph{region}.
+\end{definition}
+
+We see that any open disk $\abs{z-a}<\rho \subset \CC$ is a region, and a half plane is also a region. The same is true of any open $\eps$-ball in $\RR^n$. The closure of a region is called a \emph{closed region}. It should be observed that different regions may have the same closure.
+
+Given a topological space $X$, we define an equivalence relation $\overset{c}{\sim}$ as follows: we say that $a \overset{c}{\sim} b$ if and only if there is some connected subspace containing both $a$ and $b$. It is easy to prove that $\overset{c}{\sim}$ is, indeed, an equivalence relation. It is obviously reflexive, for given any $x \in X$, the space consisting of just the single point $x$ is clearly connected. It is also symmetric, since if $x \overset{c}{\sim} y$, then there exists some connected subspace $A \subseteq X$ containing both $x$ and $y$, so that $y \overset{c}{\sim} x$. And finally, if $x \overset{c}{\sim} y$ and $y \overset{c}{\sim} z$, then let $x,y \in A$ and $y,z \in B$ with $A,B$ both connected. Set $C=A \cup B$. Then $C$ must also be connected, since if there did exist some separatiom $C=C_1 \coprod C_2$ with $C_1,C_2$ open, then both $C_1 \cap A$ and $C_2 \cap A$ are relatively open (recall that this means under the subspace topology) in $A$, and $A=(C_1 \cap A) \coprod (C_2 \cap A)$ is a separation of $A$. This is a contradiction, so $C$ must be connected. Since $x,z \in C$, we have that $x \overset{c}{\sim} z$, and $\overset{c}{\sim}$ is an equivalence relation.
+
+\begin{definition}
+	Given a topological space $X$, The equivalence classes under $\overset{c}{\sim}$ are called the \emph{connected components} of $X$.
+\end{definition}
+
+\begin{definition}
+	We call a space $X$ \emph{locally connected} if for every point $x \in X$, any neighborhood of $x$ contains a connected neighborhood of $x$.
+\end{definition}
+
+\begin{theorem}
+	\label{thm: open-connected}
+	In a locally connected topological space $X$, the connected components of any open set are also open.
+\end{theorem}
+
+\begin{proof}
+	Let $U \subseteq X$ be open. Let $x \in U$, and denote by $C(x)$ the connected component of $S$ in which $x$ is contained. Then $C$ is certainly the largest connected set containing $x$, for if there were a larger set $D$ containing $C$ that was also connected, then $x$ would be equivalent under the connectedness equivalence relation to every point in $D \backslash C$.
+	
+	Now, since $U$ is open, it is also a neighborhood of $x$. Thus, it contains a connected neighborhood of $x$; call this $N(x)$. By definition, $N(x) \subset C(x)$, as $C(x)$ is the \textit{largest} connected set containing $x$. Hence, $C(x)$ is open.
+\end{proof}
+
+The statement in the proof above -- that $U$ is a neighborhood of $x$ -- may not be so clear if $X$ is not a metric space; what is a neighborhood in the context of a general topological space? The reader probably remembers that a set $N$ is called a neighborhood of $x$ if there exists some open set $U$ with $x \in U \subseteq X$. Hence, every open set containing $x$ is vacuously a neighborhood of $x$.
+
+Note that, in $\RR^n$, every $\eps$-ball is connected, so $\RR^n$ is locally connected, and the statement of Theorem \ref{thm: open-connected} applies to $\RR^n$ (and, of course, also to $\CC^n$). In this case, we can also conclude that the number of connected components of any open set $U \subseteq \RR^n$ is countable. Why? Because $U$ obviously contains a point with rational coordinates (as the rationals are dense in the reals). The set of points with rational coordinates is countable, and may be expressed as a sequence $\{p_k\}_{k=1}^{\infty}$. For each connected component $C$ of $U$, determine the smallest $k$ such that $p_k \in C$. Such a mapping is injective, as if the same point belongs to two different connected components, then their union is a larger connected set containing both. Hence, the set of connected components has cardinality at most the cardinality of the rational numbers, and so is countable.
+
+\begin{definition}
+	A topological space is called \emph{separable} if it has a countable dense subset.
+\end{definition}
+
+Our discussion above leads us to the following important observaton:
+\begin{proposition}
+	In a locally connected separable space, every open set is the countable union of disjoint regions.
+\end{proposition}
+
+\begin{exercise}
+	Prove that the closure of a connected set is also connected.
+	
+	\begin{sol}
+		Let $C \subseteq X$ be a connected subset of a topological space $X$. Suppose for the sake of contradiction that there exists a subset $\emptyset \neq A \subset \overline{C}$ that is both open and closed. Then $A \cap C$ is also both open and closed in $C$, so either $A \cap C=\emptyset$ or $A \cap C=C$.
+		
+		In the first case, $A \subseteq \overline{C}-C$, so for every point of $A$, each of its neighborhoods has nontrivial intersection with $C$. Hence, no neighborhood lies completely in $A$, and $A$ cannot be open.
+		
+		In the second case, $C \subseteq A$. But $A$ is closed in $\overline{C}$, so there exists some closed set $B \subset X$ with $A=B \cap \overline{C}$. Since intersections of closed sets are closed in the total topology, $A$ is closed in $X$ and is a smaller closed set containing $C$. This contradicts the definition of $\overline{C}$.
+		
+		Thus, in either case, we get a contradiction, so $\overline{C}$ must be connected.
+	\end{sol}
+\end{exercise}
+
+\section{Compactness}
+We return to metric spaces for this section. The notions of convergent and Cauchy sequences are obviously meaningful in any metric space. Indeed, we would say that $\{x_n\}$ is a Cauchy sequence if $d(x_m,x_n) \rightarrow 0$. It is clear that every convergent sequence is Cauchy, but the converse is not necessarily true. For example, take $\QQ$ with the Euclidean metric, and consider the sequence of continued fractions $$1,\dfrac{1}{1+1},\dfrac{1}{1+\frac{1}{1+1}},\dots=\{F_n/F_{n+1}\}_{n=1}^{\infty},$$ where $F_n$ is the $n$th Fibonacci number. This sequence is Cauchy but converges to $\phi=(1+\sqrt{5})/2$, which is not rational.
+
+Metric spaces, like $\RR^n$ or $\CC^n$, which do satisfy both directions of the above statement are special because we can ``do analysis" freely on them. As we progress, the importance of knowing that any sequence whose terms get arbitrarily close together converges will hopefully become apparent.
+
+\begin{definition}
+	A metric space is said to be \emph{complete} if every Cauchy sequence is convergent.
+\end{definition}
+
+This is not the place to discuss $\RR$ as the completion of $\QQ$ under the Euclidean metric, but we will assume it as such.
+
+Next, we turn to another important concept related to convergent sequences: compactness. As the reader may remember, the definition of compactness seems to come out of the blue, and it takes time and practice with the notion to fully appreciate why mathematicians have defined it in its peculiar way. The bais intuition is that we want to consider a set compact if it is somehow ``well-contained."
+
+\begin{definition}
+	Let $X$ be a topological space, and let $A \subseteq X$ be a subset. An \emph{open cover} of $A$ is a collection $\{U_{\alpha}\}_{\alpha \in I}$ of open sets, indexed by some set $I$, such that $A \subseteq \bigcup_{\alpha \in I}U_{\alpha}$.
+	
+	We say that $A$ is \emph{compact} if every open cover of $A$ has a finite subcover.
+\end{definition}
+
+Another commonly used definition of compactness is so-called \emph{sequential compactness}, which brings in the idea of convergent sequences.
+\begin{definition}
+	We say that $A \subseteq X$ is \emph{sequentially compact} if every sequence in $A$ has a convergent subsequence.
+\end{definition}
+
+It's not trivial to equate these two definitions, so let us do that.
+\begin{proposition}
+	\label{prop:compact-seq}
+	A compact topological space is also sequentially compact. A sequentially compact, second countable, space is compact.
+\end{proposition}
+\begin{proof}
+	Suppose $X$ is compact, and let $\{x_n\} \subseteq X$ be an infinite sequence in $X$. Call $S$ the infinite set formed by the elements of the sequence. We wish to show that $S$ has a limit point (that some subset of points converges). If, for the sake of contradiction, $S$ has no limit point in $X$, then for every point $x \in X$, we can find a neighborhood $U_x$ such that $U_x \cap S=\emptyset$ or $U_x \cap S=\{x\}$ (the latter case occurring if and only if $x \in S$). Then the collection $\{U_x\}_{x \in X}$ is an open cover of $X$, so it has a finite subcover $\{U_{x_i}\}_{i=1}^{n}$. But then $\{U_{x_i} \cap S\}_{i=1}^{n}$ covers $S$, and since $U_{x_i} \cap S=\emptyset$ or $\{x_i\}$ for each $i=1,2,\dots,n$, it follows that $S$ is finite, which is a contradiction. We conclude that $X$ must be sequentially compact.
+	
+	On the other hand, let $X$ be sequentially compact and also second countable. We first prove the following general lemma for second countable spaces:
+	\begin{lemma}
+		Every open cover of a second countable space $X$ has a countable subcover.
+	\end{lemma}
+	\begin{proof}
+		Let $\cU$ be an open cover of $X$, and let $\cB$ be a base for $X$, which is countable. Define a subcollection $\cB' \subseteq \cB$ by declaring $B \in \cB$ to be in $\cB'$ if and only if $B$ is entirely contained in some $U_B \in \cU$. Then, for each $B \in \cB'$, choose a corresponding $U_B \supseteq B$, and set $\cU'=\{U_B\}_{B \in \cB'}$. It is clear that $\cU'$ is countable; we only need to show that it also covers $X$.
+		
+		Indeed, for any $x \in X$, by definition of $\cU$, there exists some $U \in \cU$ such that $x \in U$. But by the definition of $\cB$, there is also some $B \in \cB$ with $x \in B \subseteq U$. Hence, $B \in \cB'$, and there is some $U_B \in \cU'$ with $x \in B \subseteq U_B$. This shows that $\cU'$ also covers $X$.
+	\end{proof}
+	
+	Now, let $\cU$ be an open cover of $X$, and extract a countable subcover $\{U_i\}_{i=1}^{\infty}$ by the lemma. Assume no finite subcollection of $U_i$'s covers $X$. Then, for each $i$, there exists $q_i \in X$ such that $q_i \notin U_1 \cap \cdots \cap U_i$. By hypothesis, there exists a convergent subsequence $\{q_{i_k}\}$; say that $q_{i_k} \rightarrow q$. Now, $q \in U_m$ for some $m \ge 1$ because the $U_i$'s cover $X$, and the definition of convergence implies that $q_{i_k} \in U_m$ for all but finitely many values of $k$. But by construction, $q_{i_k} \notin U_m$ as soon as $i_k \ge m$, which is a contradiction.
+	
+	We conclude that $\cU$ must have a finite subcover, not just a countable one, and so $X$ is compact.
+\end{proof}
+
+As a consequence of Proposition \ref{prop:compact-seq}, we get that in $\RR^n$ and $\CC^n$, the two definitions of compactness are the same. In fact, the two definitions are equivalent for any metric space, since any sequentially compact metric space is second countable. We omit the proof of that statement here.
+
+Another fact we can deduce is that a compact metric space is complete. For let $\{x_n\}$ be a Cauchy sequence in $X$. Since $X$ is sequentially compact, $\{x_n\}$ has a convergent subsequence $\{x_{n_k}\}$ with $x_{n_k} \rightarrow x$. Then, if $\eps>0$, there exists $N_1$ such that for all $k \ge N_1$, $d(x_{n_k},x)<\eps/2$. Also, there exists $N_2$ such that for all $m,n \ge N_2$, $d(x_m,x_n)<\eps/2$. Take $N=\max\{N_1,N_2\}$, and let $k$ be such that $n_k \ge N$. Then for all $n \ge N$, $$d(x_n,x) \le d(x_n,x_{n_k})+d(x_{n_k},x)<\dfrac{\eps}{2}+\dfrac{\eps}{2}=\eps,$$ and $x_n \rightarrow x$, as well.
+
+Next, we observe that a compact metric space $X$ is necessarily \emph{bounded}, meaning that all distances are bounded. To see why, take a point $x_0 \in X$, and consider the collection of all (concentric) open balls $\{B_{\rho}(x_0)\}_{\rho \in \RR}$. This is an open cover of $X$ since every point must be at some real-valued distance from $x_0$, and it has a finite subcover $B_{\rho_1}(x_0) \cap \cdots \cap B_{\rho_n}(x)$. Set $\rho=\max\{\rho_1,\dots,\rho_n\}$; then for any $x,y \in X$, we have that $$d(x,y) \le d(x,x_0)+d(x_0,y) \le \rho+\rho=2\rho,$$ and $X$ is bounded.
+
+But it is convenient to define an even stronger property than boundedness, called \emph{total boundedness}:
+\begin{definition}
+	A metric space $X$ is totally bounded if, for every $\eps>0$, $X$ can be covered by finitely many $\eps$-balls.
+\end{definition}
+
+This is certainly true of any compact space, for the collection of all $\eps$-balls around every point is an open cover that has a finite subcover. We also observe that a totally bounded space is also bounded, for if $X \subseteq B_{\eps}(x_1) \cap \cdots \cap B_{\eps}(x_n)$, then $d(x,y) \le 2\eps+\max_{1 \le i<j \le n} d(x_i,x_j)$ for any two points $x,y \in X$.
+
+We have thus proved one direction of the following important theorem:
+\begin{theorem}
+	A metric space is compact if and only if it is complete and totally bounded.
+\end{theorem}
+\begin{proof}
+	It remains to prove the other direction. So let $X$ be complete and totally bounded. Suppose that there exists an open cover $\cU$ with no finite subcover. Set $\eps_n=2^{-n}$. We know that $X$ can be covered by finitely many $\eps_1$-balls. If each had a finite subcover from $\cU$ the same would be true of $X$, so there is some $B_{\eps_1}(x)$, with $x \in X$, that does not have a finite subcover. Because $B_{\eps_1}(x)$ is itself totally bounded, we can find an $x_2 \in B_{\eps_1}(x)$ such that $B_{\eps_2}(x_2)$ has no finite subcovering. Continuing in this fashion, we obtain a sequence $\{x_n\}_{n=1}^{\infty}$ such that $d(x_n,x_{n+1})<\eps_n$, and hence $$d(x_n,x_{n+p})<\eps_n+\eps_{n+1}+\cdots+\eps_{n+p}=2^{-n}\sum_{k=0}^{p}2^k<2^{-n+1}.$$ It follows that $\{x_n\}$ is a Cauchy sequence, and since $X$ is complete, this sequence converges to a limit $y$, which belongs to some open set $U \in \cU$. Because $U$ is open, it contains a $B_{\delta}(y)$. Choose $n$ so large that $d(x_n,y)<\delta/2$ and $\eps_n<\delta/2$. Then $B_{\eps_n}(x_n) \subset B_{\delta}(y)$, since for any $x \in B_{\eps_n}(x_n)$, $$d(x,y) \le d(x,x_n)+d(x_n,y)<\eps_n+\dfrac{\delta}{2}<\dfrac{\delta}{2}+\dfrac{\delta}{2}=\delta.$$ Therefore, $B_{\eps_n}(x_n)$ admits a finite subcover, namely the set $U$. This is a contradiction, so we conclude that $X$ must be compact.
+\end{proof}
+
+\begin{corollary}[Heine-Borel Theorem]
+	A subset of $\RR$ or $\CC$ is compact if and only if it is closed and bounded.
+\end{corollary}
+\begin{proof}
+	We have already shown that compactness implies boundedness and completeness, and since both $\RR$ and $\CC$ are complete, any complete subset is closed (this is easily proved if not so clear). 
+	
+	On the other hand, suppose $S \subset \RR$ is closed and bounded. A closed subset of a complete metric space is complete (again, easily seen), so $S$ is complete. It remains to show that $S$ is also totally bounded. Since $S$ is bounded, it is entirely contained in some interval $[-K,K]$, and then for any $\eps>0$, the finite collection of open intervals $\{\left(-K+(n-1)\eps,-K+n\eps\right)\}_{n=0}^{\ceil{2K/\eps}}$ covers $S$.
+	
+	The case of $\CC$ is similar, using squares instead of intervals.
+\end{proof}
+
+In fact, we can confirm what the reader knows from elementary analysis in higher dimensions, that a subset of $\RR^n$ or $\CC^n$ is compact if and only if it is closed and bounded. This follows easily by induction, with the base case $n=1$ and the fact (easily shown) that the Cartesian product of two compact sets is also compact.
+
+So, we have now seen three equivalent characterizations of compactness for metric spaces:
+\begin{itemize}
+	\item Every open cover has a finite subcover.
+	\item Every sequence has a convergent subsequence.
+	\item The space is complete and totally bounded.
+\end{itemize}
+
+\begin{exercise}
+	Prove that any closed subset of a compact space is also compact.
+	
+	\begin{sol}
+		Let $X$ be compact, and $S \subseteq X$ be closed. Let $\cU=\{U_{\alpha}\}$ be an open cover of $S$. Since $S$ is closed, $X \backslash S$ is open, so we may adjoin $X \backslash S$ to the cover to get that $\{U_{\alpha}\} \cup (X \backslash S)$ is an open cover of $X$. Hence, it has a finite subcover. If this subcover includes $X \backslash S$, we can simply drop it, and the remaining sets in the subcover cover $S$ (since $X \backslash S$ only includes elements not in $S$). Hence, $S$ is compact.
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	Let $X$ be a Hausdorff space, and let $S \subseteq X$ be compact.
+	\begin{enumerate}
+		\item[(a)] Prove that for all $x \in X \backslash S$, there exist open sets $U,V \subseteq X$ such that $x \in U$, $S \subseteq V$, and $U \cap V=\emptyset$. In other words, $x$ can be separated from $S$ by open sets. (Hint: Find an open cover of $S$ by neighborhoods disjoint from $x$.)
+		\item[(b)] Prove that $S$ is closed.
+	\end{enumerate}
+	\begin{sol}
+		$ $
+		\begin{enumerate}
+			\item[(a)] For each $y \in S$, choose disjoint open sets $V_y,U_y$ around $y$ and $x$, respectively, by the Hausdorff property. Then $\{V_y\}_{y \in S}$ is an open cover of $S$, so it admits a finite subcover $S \subseteq V_{y_1} \cup \cdots \cup V_{y_n}=V$. Now, set $$U=U_{y_1} \cap \cdots \cap U_{y_n}.$$ Then $U$ is open as the finite intersection of open sets, $x \in U$, and $U \cap V=\emptyset$, as desired.
+			\item[(b)] We will show that $X \backslash S$ is open. By part (a), for any $x \in X \backslash S$, we can find disjoint open sets $U_x,V_x \subseteq X$ such that $x \in U_x$ and $S \subseteq V_x$. In particular, this means that $U_x$ is disjoint from $S$, so $X \backslash S=\bigcup_{x \in X \backslash S} U_x$ is open.
+		\end{enumerate}
+	\end{sol}
+\end{exercise}
+
+\begin{exercise}
+	Show that if $E_1 \supseteq E_2 \supseteq E_3 \supseteq \cdots$ is a decreasing sequence of nonempty compact sets, then the intersection $\bigcap_{n=1}^{\infty} E_n$ is not empty. This is known as \emph{Cantor's lemma}. Show by example that this need not be true if the sets are merely closed.
+	
+	\begin{sol}
+		We use the fact that the sets $E_n$ are also sequentially compact. Since they are nonempty, we may choose, arbitrarily, an element $x_n$ from each $E_n$ to obtain a sequence $x_1,x_2,\dots.$ This sequence lies entirely in $E_1$ as the sets are nested, so it has a convergent subsequence $x_{n_1},x_{n_2},\dots$ in $E_1$. Say that $x_{n_k} \rightarrow x$. The subsequence $x_{n_2},x_{n_3},\dots$ lies entirely in $E_{n_2}$, and it also converges to $x$. Since $E_{n_2}$ is sequentially, compact, a subsequence of $x_{n_2},x_{n_3},\dots$ converges to $x$ (since the limit of any subsequence of a convergent sequence is equal to the limit of the overall sequence), and $x$ lies in $E_{n_2}$. Continuing in this way, we find that $x \in E_{n_k}$ for all $k=1,2,\dots$. It is clear that if $x \in E_n$ for any $n$, then $x \in E_1,E_2,\dots,E_n$ by the nested property, so $x \in \bigcap_{n=1}^{\infty}E_n$, and the intersection of all the sets in nonempty.
+		
+		As an example to show that this may not be true if the sets are merely closed, take $E_n=[n,\infty) \subset \RR$. These sets are closed in $\RR$, but their intersection is empty.
+	\end{sol}
+\end{exercise}
+
+\section{Continuous Functions}
+Let us generalize continuity of functions to topological spaces. The reader probably recalls from real analysis that
+
+\begin{definition}
+	 A function, or map, $f \colon X \rightarrow Y$ from a metric space $X$ to a metric space $Y$ is called \emph{continuous} at a point $a \in X$ if for each $\eps>0$, there exists $\delta>0$ such that $d(x,a)<\delta$ implies that $d(f(x),f(a))<\eps$. We may also restate this property as $\lim_{x \rightarrow a}f(x)=f(a)$.
+	 
+	 If a function is continuous at all $a \in X$, then it is simply called continuous.
+\end{definition}
+
+Without a metric, we can simply restate this definition in terms of open sets, as $\{x \colon d(x,a)<\delta\}$ is obviously an open $\delta$-ball.
+
+\begin{definition}
+	A function, or map, $f \colon X \rightarrow Y$ from a topological space $X$ to a topological space $Y$ is called \emph{continuous} if for every open set $V \subseteq Y$, the \emph{preimage} $f^{-1}(V)=\{x \in X \colon f(x) \in V\}$ is also open. Similarly, $f$ is continuous if the inverse image of every closed set in $Y$ is closed in $X$.
+	
+	Continuity at a point $a \in X$ means that for any open set $f(a) \in V \subseteq Y$, there exists an open set $a \in U \subseteq X$ such that $f(U) \subseteq V$.
+\end{definition}
+
+If the function is not defined on the whole space, then we consider it a map from its smaller domain with the subspace topology.
+
+Let us prove the equivalence of the two definitions given above.
+
+\begin{proposition}
+	A function $f \colon X \rightarrow Y$ is continuous if and only if it is continuous at every point.
+\end{proposition}
+\begin{proof}
+	Suppose $f$ is continuous at every point, and let $V \subseteq Y$ be open. Let $U=f^{-1}(V)$. We want to show that $U$ is open. For any $a \in U$, $f(a) \in V$, so there exists an open set $a \in U_a$ such that $f(U_a) \subseteq V$. Hence, $U_a \subseteq U$, and so $U=\bigcup_{a \in U}U_a$ and is open.
+	
+	Conversely, suppose $f$ is continuous, and let $a \in X$. Let $f(a) \in V \subseteq Y$ with $V$ open. Then $U=f^{-1}(V)$ is open and contains $a$, so $f$ is continuous at $a$.
+\end{proof}
+
+The power of continuous functions, as they are defined, is that they preserve the important topological properties we have discussed in this chapter.
+
+\begin{theorem}
+	Under a continuous mapping, the image of every compact set is compact. If the target space is a metric space, then, of course, the image is closed.
+\end{theorem}
+
+\begin{proof}
+	Let $f \colon X \rightarrow Y$, and let $X$ be compact. Let $\{V_{\alpha}\}$ be an open cover of $f(X) \subset Y$. Then the preimages $\{f^{-1}(V_{\alpha})\}$ are also open, as $f$ is continuous, and they cover $X$. Since $X$ is compact, there exists a finite subcover $X \subseteq f^{-1}(V_1) \cup \cdots \cup f^{-1}(V_n)$. For any $y \in f(X)$, we have that $f^{-1}(y) \in f^{-1}(V_i)$ for some $1 \le i \le n$, so that $y \in V_i$ and $\{V_i\}_{i=1}^{n}$ is an open subcover of $f(X)$. This proves that $f(X)$ is also compact.
+\end{proof}
+
+\begin{theorem}[Extreme Value Theorem]
+	A continuous real-valued function on a compact space attains a minimum and maximum.
+\end{theorem}
+\begin{proof}
+	Let $f \colon X \rightarrow \RR$ be continuous, with $X$ compact. Then $f(X)$ is compact, so it is closed and bounded by the Heine-Borel Theorem and attains a minimum and maximum (it is bounded so has a finite supremum and infinum, and it is closed, so these values must be elements of the set).
+\end{proof}
+
+\begin{theorem}
+	Under a continuous mapping the image of any connected set is connected.
+\end{theorem}
+\begin{theorem}
+	Let $f \colon X \rightarrow Y$ be continuous, and without loss of generality, we may replace $f(X)$ with $Y$. Suppose $Y=A \coprod B$ with $A$ and $B$ open. Then $X=f^{-1}(A) \cup f^{-1}(B)$ with both preimages open, and since $X$ is connected, either $f^{-1}(A)$ or $f^{-1}(B)$ must be empty. But this is impossible, since neither $A$ nor $B$ is empty. Hence, $Y$ must be connected.
+\end{theorem}
+
+\begin{corollary}[Intermediate Value Theorem]
+	Let $f \colon X \rightarrow \RR$ be continuous, with $X$ connected. Let $a,b \in X$ with $f(a)<f(b)$. Then $f$ attains all values in the interval $[a,b]$.
+\end{corollary}
+\begin{proof}
+	This follows from the fact that $f(X)$ is connected in $\RR$ and so must be an interval.
+\end{proof}
+
+A useful application of the Intermediate Value Theorem, which the reader probably remembers from single-variable calculus, is that if $f \colon \RR \rightarrow \RR$, and $f(a)<0$ while $f(b)>0$, then there exists $c \in [a,b]$ with $f(c)=0$. In other words, if $f$ switches sign between any two points, then it must have a root between those two points.
+
+\begin{definition}
+	A map $f \colon X \rightarrow Y$ is called a \emph{homeomorphism} or a \emph{topological mapping} if it is bijective, continuous, and its inverse $f^{-1} \colon Y \rightarrow X$ is also continuous.
+\end{definition}
+
+We see that connectedness and compactness are preserved under homeomorphism, and as such, we deem them topological properties. Some other topological properties are Hausdorff-ness and second countability.
+
+However, open-ness is \textit{not} a topological property, meaning that if a set is open, then its image under a homeomorphism need not necessarily be open. This statement is true if the source and target are both $\RR^n$, but this is a deep theorem called the Open Mapping Theorem that we will not need.
+
+Finally, the notion of uniform continuity in relation to maps between metric spaces will be useful.
+
+\begin{definition}
+	A function $f \colon X \rightarrow Y$ between metric spaces is said to be \emph{uniformly continuous} if for every $\eps>0$, there exists $\delta>0$ such that \emph{for all} $x,y \in X$, we have that $d(x,y)<\delta$ implies that $d(f(x),f(y))<\eps$.
+\end{definition}
+
+Informally, uniform continuity means that the $\delta$ for every $\eps$ does not depend on the point; the degree of continuity is the same across the entire domain.
+
+\begin{theorem}
+	On a compact space every continuous function is uniformly continuous.
+\end{theorem}
+\begin{proof}
+	The proof is typical of the way compactness is exploited.
+	
+	Suppose that $f \colon X \rightarrow Y$ is continuous, and $X$ is compact. Every $y \in X$ has a neighborhood $B_{\rho}(y)$ such that $d(f(x),f(y))<\eps/2$ for all $x \in B_{\rho}(y)$; here, $\rho$ depends on $y$. Consider the open cover of $X$ given by the smaller neighborhoods $B_{\rho/2}(y)$. We can find a finite subcover: $X \subseteq B_{\rho_1/2}(y_1) \cup \cdots B_{\rho_n/2}(y_n)$. Let $\delta=\min\{\rho_1/2,\dots,\rho_n/2\}$. Consider a pair $x_1,x_2$ with $d(x_1,x_2)<\delta$. There exists a $y_k$ with $d(x_1,y_k)<\rho_k/2$, and we obtain $d(x_2,y_k)<\rho_k/2+\delta \le \rho_k$. Hence, $d(f(x_1),f(y_k))<\eps/2$ and $d(f(x_2),f(y_k))<\eps/2$ and we obtain $$d(f(x_1),f(x_2)) \le d(f(x_1),f(y_k))+d(f(y_k),f(x_2))<\dfrac{\eps}{2}+\dfrac{\eps}{2}=\eps,$$ as desired.
+\end{proof}
+
+\begin{exercise}
+	Prove that every continuous bijective mapping of a compact topological space onto a Hausdorff one is a homeomorphism.
+	
+	\begin{sol}
+		Let $X$ be a compact space, $Y$ be Hausdorff, and $f \colon X \rightarrow Y$ be bijective and continuous. Let $A \subseteq X$ be a closed subset. Then it is also compact, and $f(A) \subseteq Y$ is compact. Since $Y$ is Hausdorff, $f(A)$ is closed, so $f$ maps closed sets onto closed sets. Hence, $f^{-1}$ is continuous, and $f$ is a homeomorphism.
+	\end{sol}
+\end{exercise}

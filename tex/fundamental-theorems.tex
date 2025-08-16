@@ -1,0 +1,400 @@
+\chapter{Fundamental Theorems}
+\label{chap:fundamental-theorems}
+As in the real case we distinguish between \emph{definite} and \emph{indefinite} integrals. An indefinite integral is a function whose derivative equals a given analytic function in a region; in many elementary cases indefinite integrals can be found by inversion of known derivation formulas. The definite integrals are taken over differentiable or piecewise differentiable arcs and are not limited to analytic functions. They can be defined by a limit process which mimics the definition of a real definite integral. Actually, we shall prefer to define complex definite integrals in terms of real integrals. This will save us from repeating existence proofs which are essentially the same as in the real case. Naturally, we presuppose that the reader is familiar with real integral calculus.
+
+\section{Line Integrals}
+The most immediate generalization of a real integral is to the definite integral of a complex function over a real interval. 
+
+\begin{definition}[Line Integral]
+If $f(t)=u(t)+iv(t)$ is a continuous function defined in an interval $(a,b)$, we set $$\int_{a}^{b}f(t)dt=\int_{a}^{b}u(t)dt+i\int_{a}^{b}v(t)dt.$$ This integral is called the \emph{line integral} of the function $f$ over the interval $(a,b)$.
+\end{definition}
+
+This integral has most of the properties of a real integral. In particular, if $c=\alpha+i\beta$ is a complex constant, then we obtain $$\int_{a}^{b} cf(t)dt=\int_{a}^{b}(\alpha u-\beta v)dt+i\int_{a}^{b}(\alpha v+\beta u)dt=c\int_{a}^{b} f(t)dt.$$ When $a \le b$, the fundamental inequality $$\left\abs{\int_{a}^{b} f(t)dt\right}\le \int_{a}^{b} \abs{f(t)}dt$$ holds for arbitrary complex $f(t)$. To see this we choose $c=e^{-i\theta}$ with a real $\theta$ and find that $$\Real\left[e^{-i\theta} \int_{a}^{b}f(t)dt\right]=\int_{a}^{b}\int_{a}^{b}\Real\left[e^{-i \theta}f(t)\right]dt \le \int_{a}^{b}\abs{f(t)}dt.$$ For $\theta=\arg \int_{a}^{b}f(t)dt$ the expression on the left reduces to the absolute value of the integral, and the desired inequality results. (Note: $\theta$ is not defined when $\int_{a}^{b} fdt=0$, but then there is nothing to prove.)
+
+We now define a generalized line integral over a complex-valued arc, rather than a real interval.
+
+\begin{definition}[Line Integral over an Arc]
+    Let $\gamma$ be a piecewise differentiable arc with the equation $z=z(t)$, $a \le t \le b$. If the function $f(z)$ is defined and continuous on $\gamma$, then $f(z(t))$ is also continuous, and we define the \emph{line integral} of $f$ over $\gamma$ by $$\int_{\gamma}f(z)dz=\int_{a}^{b}f(z(t))z'(t)dt.$$
+\end{definition}
+
+In the right-hand side of the definition above, if $z'(t)$ is not continuous throughout, the interval of integration has to be subdivided in the obvious manner. Whenever a line integral over an arc $\gamma$ is considered, let it be tacitly understood that $\gamma$ is piecewise differentiable.
+
+The most important property of the line integral is its invariance under a change of parameter. A change of parameter is determined by an increasing function $t=t(\tau)$ which maps an interval $\alpha \le \tau \le \beta$ diffeomorphically onto $a \le t \le b$; we assume that $t(\tau)$ is piecewise differentiable. By the rule for changing the variable of integration, we have $$\int_{a}^{b} f(z(t))z'(t)dt=\int_{\alpha}^{\beta} f(z(t(\tau)))z'(t(\tau))t'(\tau)d\tau.$$ But $z'(t(\tau))t'(\tau)$ is the derivative of $z \circ t$ with respect to $\tau$, and hence the integral has the same value whether $\gamma$ be represented by the equation $z=z(t)$ or by the equation $z=z(t(\tau))$.
+
+Recall that we defined the \emph{opposite} arc $-\gamma$ by the equation $z=z(-t)$, $-b \le t \le -a$. We have thus $$\int_{-\gamma} f(z)dz = -\int_{-b}^{a}f(z(-t))(-z'(-t))dt=\int_{b}^{a}f(z(t))z'(t)dt=-\int_{\gamma}f(z)dz.$$ This shows that the line integral over an opposite arc is the negative of the line integral over the original arc.
+
+The line integral also has a very obvious additive property. It is quite clear what is meant by subdividing an arc $\gamma$ into a finite number of subarcs. A subdivision can be indicated by a symbolic equation $$\gamma=\gamma_1+\gamma_2+\cdots+\gamma_n,$$ where each $\gamma_i$ is a piecewise differentiable arc. The corresponding line integrals then satisfy the relation $$\int_{\gamma}f(z)dz=\sum_{i=1}^{n}\int_{\gamma_i}f(z)dz.$$ Finally, the integral over a closed curve is also invariant under a shift of parameter. The old and the new initial point determine two subarcs $\gamma_1,\gamma_2$, and the invariance follows from the fact that the integral over $\gamma_1+\gamma_2$ is the same as the integral over $\gamma_2+\gamma_1$.
+
+In addition, we can also consider line integrals with respect to $\overline{z}$. The most convenient definition is by double conjugation: $$\int_{\gamma} f d\overline{z}=\overline{\int_{\gamma} \overline{f} dz}.$$ Using this notation, line integrals with respect to $x$ and $y$ can be introduced. Let $\gamma$ be parametrized as $z(t)=x(t)+iy(t)$. Then $z'(t)=x'(t)+iy'(t)$ (remember, $x$ and $y$ are just real functions of a real variable, so there are no partial derivatives to worry about). Hence,
+\begin{align*}
+\int_{\gamma} f \overline{dz} &=\overline{\int_{\gamma} \overline{f} dz} \\
+&=\overline{\int_{a}^{b} \overline{f(z(t))} z'(t) dt} \\
+&=\int_{a}^{b} f(z(t)) \overline{z'(t)} dt \\
+&=\int_{a}^{b} f(z(t)) \left[x'(t)-iy'(t)\right]dt.
+\end{align*}
+Setting $$\int_{\gamma} fdx=\int_{a}^{b}f(z(t))x'(t)dt \quad \text{and} \quad \int_{\gamma} fdy=\int_{a}^{b}f(z(t))y'(t)dt,$$ we obtain the relations
+\begin{align*}
+\int_{\gamma} f dx &=\dfrac{1}{2}\left(\int_{\gamma} f dz + \int_{\gamma} f \overline{dz}\right), \\
+\int_{\gamma} f dy &=\dfrac{1}{2i}\left(\int_{\gamma} f dz - \int_{\gamma} f \overline{dz}\right).
+\end{align*}
+With $f=u+iv$ we find that the line integral can also be written in the form $$\int_{\gamma} (u dx-v dy)+i\int_{\gamma} (u dx+v dy)$$ which separates the real and imaginary parts.
+
+An essentially different line integral is obtained by integration with respect to \emph{arc length}. Two notations are in common use, and the definition is $$\int_{\gamma} f ds=\int_{\gamma} f \abs{dz}=\int_{a}^{b} f(z(t)) \abs{z'(t)} dt.$$ This integral is again independent of the choice of parameter. We have $$\int_{-\gamma} f \abs{dz}=\int_{-b}^{-a} f(z(-t)) \abs{-z'(-t)} dt=\int_{a}^{b} f(z(t)) \abs{z'(t)} dt,$$ and again, by the change of parameter $t=-\tau$, we find that $$\int_{-\gamma}f\abs{dz}=-\int_{b}^{a} f(z(t)) \abs{z'(t)} dt=\int_{\gamma} f \abs{dz}.$$ The additive property is also valid, and the inequality $$\left\abs{\int_{\gamma} f dz\right}\le \int_{\gamma} \abs{f} \abs{dz}$$ holds.
+
+For $f=1$ the arc length integral reduces to $\int_{\gamma} \abs{dz}$, which is by definition the \emph{length} of the curve $\gamma$.
+
+\begin{example}[Circumference of a circle]
+As an exercise in overkill, let us use the theory we have developed of line integrals to compute the length of a circle. As usual, parameterize a circle $C$ with center $a$ and radius $\rho$ by $z=z(t)=a+\rho e^{it}$, $0 \le t \le 2\pi$ (we can leave $2\pi$ out to make the parameterization bijective, but this has no consequence on the integral). Then the circumference is simply the line integral of the constant function $f=1$ over the entire circle, so we get $$\int_{C}dz=\int_{0}^{2\pi}\abs{z'(t)}dt=\int_{0}^{2\pi}\abs{i\rho e^{it}}dt=\int_{0}^{2\pi}\rho dt=2\pi\rho,$$ as expected.
+\end{example}
+
+\section{Line Integrals as Functions of Arcs}
+
+General line integrals of the form $\int_{\gamma} p dx+q dy$ are often studied as functions (or \emph{functionals}) of the arc $\gamma$. It is then assumed that $p$ and $q$ are defined and continuous in a region $\Omega$ and that $\gamma$ is free to vary in $\Omega$.
+
+An important class of integrals is characterized by the property that the integral over an arc depends only on its endpoints. In other words, if $\gamma_1$ and $\gamma_2$ have the same initial point and the same end point, we require that $$\int_{\gamma_1} p dx+q dy=\int_{\gamma_2} p dx+q dy.$$ Why? Well, to say that an integral depends only on the endpoints is equivalent to saying that the integral over any closed curve is zero. Indeed, if $\gamma$ is a closed curve, then $\gamma$ and $-\gamma$ have the same endpoints, and if the integral depends only on the end points, then $$\int_{\gamma}=\int_{-\gamma}=-\int_{\gamma},$$ giving $\int_{\gamma}=0$. Conversely, if $\gamma_1$ and $\gamma_2$ have the same endpoints, then $\gamma_1-\gamma_2$ is a closed curve, and if the integral over any closed curve vanishes, it follows by the additive property of the integral that $\int_{\gamma_1}=\int_{\gamma_2}$.
+
+The following theorem, our first major one on integration, gives a necessary and sufficient condition for the integral to depend only on the endpoints.
+
+\begin{theorem}
+\label{thm:exact-differential}
+The line integral $\int_{\gamma} p dx+q dy$, defined in $\Omega$, depends only on the endpoints of $\gamma$ if and only if there exists a function $U(x,y)$ defined in the region $\Omega$ such that $$p=\frac{\partial U}{\partial x}, \quad q=\frac{\partial U}{\partial y}$$ in $\Omega$.
+\end{theorem}
+
+\begin{proof}
+The sufficiency follows at once, for if the condition is fulfilled we can write, with the usual notations,
+\begin{align*}
+    \int_{\gamma} p dx+q dy &= \int_{a}^{b} \frac{\partial U}{\partial x} x'(t) + \frac{\partial U}{\partial y} y'(t) dt \\
+    &= \int_{a}^{b} \dfrac{d}{dt}U(x(t),y(t))dt \\
+    &=U(x(b),y(b))-U(x(a),y(a)),
+\end{align*}
+and the value of this difference, of course, only depends on the endpoints $x(a)+iy(a)$ and $x(b)+iy(b)$.
+
+To prove the necessity we choose a fixed point $(x_0,y_0) \in \Omega$, join it to $(x,y)$ by a polygon $\gamma$, contained in $\Omega$, whose sides are parallel to the coordinate axes, and define a function by $$U(x,y)=\int_{\gamma} p dx+q dy.$$ Since the integral depends only on the end points, the function is well defined. Moreover, if we choose the last segment of $\gamma$ horizontal, we can keep $\gamma$ constant and let $x$ vary without changing the other segments. On the last segment, we can choose $x$ for paramter and obtain $$U(x,y)=\int^{x}p(x,y)dx+C$$ for some constant $C$, the lower limit of the integral being irrelevant. From this expression it follows at once that $\partial U/\partial X=p$. In the same way, by choosing the last segment vertical, we can show that $\partial U/\partial y=q$. Thus, the function $U$ exists and satisfies the required conditions.
+\end{proof}
+
+If you have studied differential geometry, you may recognize the expression $dU=(\partial U/\partial X)dx+(\partial U/\partial y)dy$ as an \emph{exact differential form}; the function $U$ is called the \emph{exterior derivative} of the form $p dx+q dy$. If a differential form $p dx+q dy$ is exact, then the function $U$ is uniquely determined, up to a constant.
+
+In the case of complex functions, when is $f(z)dz=f(z)dx+if(z)dy$ an exact differential form? According to the definition there must exist a function $F(z)$ in $\Omega$ with the partial derivatives
+\begin{align*}
+\frac{\partial F}{\partial x} &= f(z) \\
+\frac{\partial F}{\partial y} &= if(z).
+\end{align*}
+If this is so, then $F(z)$ fulfills the Cauchy-Riemann equation $$\dfrac{\partial F}{\partial x}=-i\dfrac{\partial F}{\partial y},$$ and hence $f(z)$ is analytic in $\Omega$. Thus, we have the following corollary:
+\begin{corollary}
+\label{cor:line-integral-endpoints}
+The integral $\int_{\gamma} fdz$, with continuous $f$, depends only on the endpoints of $\gamma$ if and only if $f$ is the derivative of an analytic function in the region $\Omega$ containing $\gamma$.
+\end{corollary}
+Under these circumstances we shall prove later that $f(z)$ is itself analytic.
+
+\begin{example}
+As an immediate application of the Corollary \ref{cor:line-integral-endpoints}, we find that $$\int_{\gamma}(z-a)^ndz=0$$ for all closed curves $\gamma$, provided that the integer $n \ge 0$. In fact, $(z-a)^n$ is the derivative of $(z-a)^{n+1}/(n+1)$, which is analytic in the whole plane. If $n$ is negative, but not equal to $-1$, the same result holds for all closed curves $\gamma$ which do not pass through $a$. And for $n=-1$, the result is not necessarily true, for consider a circle $C$ with center $a$, represented by the equation $z=a+\rho e^{it}$, $0 \le t \le 2\pi$. We obtain $$\int_{C}\dfrac{dz}{z-a}=\int_{0}^{2\pi}\dfrac{ipe^{it}}{pe^{it}}dt=\int_{0}^{2\pi}idt=2\pi i.$$ This result shows that it is impossible to define a single-valued branch of $\log(z-a)$ in an annulus $\rho_1<\abs{z-a}<\rho_2$. On the other hand, if the closed curve is contained in a half plane which does not contain $a$, the integral vanishes, for in such a half plane a single-valued and analytic branch of $\log(z-a)$ can be defined.
+\end{example}
+
+\begin{exercise}
+    Compute the following integrals.
+    \begin{enumerate}
+    \item[(a)] $\int_{\gamma} x dz,$ where $\gamma$ is the directed line segment from $0$ to $1+i$.
+    \item[(b)] $\int_{\abs{z}=r} x dz$ for the positive sense of the circle.
+    \item[(c)] $\int_{\abs{z}=2}\dfrac{dz}{z^2-1}$ for the positive sense of the circle.
+    \end{enumerate}
+
+    \begin{sol}
+    $ $
+    \begin{enumerate}
+    \item[(a)] The answer is $\boxed{\frac{1}{2}+\frac{1}{2}i}$.
+    
+    Parametrize $\gamma$ as $z(t)=(1+i)t=t+it$, $0 \le t \le 1$. Then \begin{align*}
+    \int_{\gamma} x dz &=\int_{0}^{1} t(1+i)dt \\
+    &=\int_{0}^{1}t dt+i\int_{0}^{1}t dt \\
+    &=\left[\frac{t^2}{2}\right]_{0}^{1}+i\left[\frac{t^2}{2}\right]_{0}^{1} \\
+    &=\frac{1}{2}+\frac{1}{2}i.
+    \end{align*}
+    \item[(b)] The answer is $\boxed{\pi i r^2}$.
+    We'll show two different approaches to this problem. First, parameterize the circle as $z(t)=re^{it}$ for $0 \le t \le 2\pi$; then \begin{align*}
+    \int_{\abs{z}=r} x dz &=\int_{0}^{2\pi} r\cos(t) i r e^{it} dt \\
+    &=i r^2 \int_{0}^{2\pi} \cos(t)e^{it} dt \\
+    &=\dfrac{ir^2}{2} \int_{0}^{2\pi}(e^{2it}+1)dt \\
+    &=\dfrac{ir^2}{2}\left[t\right]_{0}^{2\pi} \\
+    &=\dfrac{2\pi ir^2}{2} \\
+    &=\pi i r^2,
+    \end{align*}
+
+    where we used the fact that $\int_{0}^{2\pi} e^{nit} dt=0$ for any $n \in \ZZ$.
+
+    On the other hand, we can employ a slicker idea: observe that $x=\frac{1}{2}\left(z+\overline{z}\right)=\frac{1}{2}\left(z+\frac{r^2}{z}\right)$ on the circle $\abs{z}=r$. Note that $\int_{\abs{z}=r}zdz=0$ as $z$ is the derivative of an analytic function. Hence, $$\int_{\abs{z}=r} x dz=\dfrac{r^2}{2}\int_{\abs{z}=r}\dfrac{dz}{z}=\dfrac{r^2}{2}\cdot 2\pi i=\pi i r^2,$$ where we used the fact from the text that $\int_{\abs{z}=r} \frac{dz}{z}=2\pi i$.
+    \item[(c)] The answer is $\boxed{0}$. Via partial fraction decomposition, write $$\dfrac{1}{z^2-1}=\dfrac{1/2}{z-1}-\dfrac{1/2}{z+1}.$$ Hence, $$\int_{\abs{z}=2}\dfrac{dz}{z^2-1}=\dfrac{1}{2}\left(\int_{\abs{z}=2}\dfrac{dz}{z-1}-\int_{\abs{z}=2}\dfrac{dz}{z+1}\right)=0.$$
+    \end{enumerate}
+    \end{sol}
+\end{exercise}
+
+\begin{exercise}
+Suppose that $f(z)$ is $C^1$ analytic on a closed curve $\gamma$ (i.e., $f$ is analytic in a region containing $\gamma$). Show that $$\int_{\gamma}\overline{f(z)}f'(z)dz$$ is purely imaginary.
+
+\begin{sol}
+    There a number of ways to solve this problem, some slicker than others. We'll use a bit more computational method expressing the complex integral in terms of real differential forms, which the reader is probably more familiar with.
+
+    Write $f(z)=u(x,y)+iv(x,y)$. Then \begin{align*}
+    \Real \int_{\gamma}\overline{f(z)}f'(z)dz &= \int_{\gamma}(u-iv)\left(\frac{\partial u}{\partial x}+i\dfrac{\partial v}{\partial x}\right)\left(dx+idy\right) \\
+    &=\Real \int_{\gamma}\left[u \cdot \dfrac{\partial u}{\partial x}+v \cdot \dfrac{\partial v}{\partial x}+i\left(u \cdot \dfrac{\partial v}{\partial x}-v \cdot \dfrac{\partial u}{\partial x}\right)\right](dx+idy) \\
+    &=\int_{\gamma}\left(u \cdot \dfrac{\partial u}{\partial x}v \cdot \dfrac{\partial v}{\partial x}\right)dx+\left(-u \cdot \dfrac{\partial v}{\partial x}+v \cdot \dfrac{\partial u}{\partial x}\right)dy \\
+    &=\int_{\gamma} \left(u \cdot \dfrac{\partial u}{\partial x}v \cdot \dfrac{\partial v}{\partial x}\right)dx+\left(u \cdot \dfrac{\partial u}{\partial y}+v \cdot \dfrac{\partial v}{\partial y}\right)dy & \text{Cauchy-Riemann} \\
+    &=\int_{\gamma}d(u^2+v^2) \\
+    &=0,
+    \end{align*}
+    as the integral of an exact differential form over a closed curve is zero. Hence, the real part of the given integral is zero, and thus the integral is purely imaginary.
+\end{sol}
+\end{exercise}
+
+\section{Cauchy's Theorem for a Rectangle}
+As we noted in the introduction to this chapter, Cauchy's Theorem falls out of Stokes' Theorem once that more general case is known. However, in the interest of not using a sledgehammer to crack a nut, let us begin by building up our theory in a purely analytical way.
+
+First, consider a rectangle $R$ defined by inequalities $a \leq x \leq b$, $c \leq y \leq d$. Its perimeter can be considered as a simple closed curve consisting of four line segments whose direction we choose so that $R$ lies to the left of the directed segments. The order of the vertices is thus $(a,c)$, $(b,c)$, $(b,d)$, $(a,d)$, and back to $(a,c)$. We denote the perimeter of $R$ by $\partial R$ and refer to it as the \emph{boundary curve} or \emph{contour} of $R$; note that this is standard notation from topology.
+
+We emphasize that $R$ is chosen as a closed point set and, hence, is not a region. In the theorem that follows we consider a function which is analytic on the rectangle $R$. We recall that such a function is by definition defined and analytic in a region which contains $R$.
+
+The following is a preliminary version of \emph{Cauchy's Theorem}:
+\begin{theorem}[Cauchy]
+\label{thm:cauchy-rectangle}
+If the function $f(z)$ is analytic on $R$, then $$\int_{\partial R} f(z)dz=0.$$
+\end{theorem}
+
+\begin{proof}
+The proof is quite beautiful and based on the method of bisection. Let us introduce the notation $$\eta(R)=\int_{\partial R} f(z)dz,$$ which we will also use for any rectangle contained in the given one. If $R$ is divided into four congruent rectangles $R^{(1)}, R^{(2)}, R^{(3)}, R^{(4)}$, then by the linearity of the integral and the observation that the integrals over the common sides cancel each other, we have $$\eta(R)=\sum_{j=1}^{4}\eta(R^{(j)}).$$
+
+\begin{figure}[h]
+\caption{Bisection of rectangle.}
+\centering
+\begin{asy}
+unitsize(2.5cm);
+
+// Define the rectangle
+real a = 3;
+real b = 2;
+
+// Rectangle corners
+pair A = (0,0);
+pair B = (a,0);
+pair C = (a,b);
+pair D = (0,b);
+
+// Midpoints for bisection
+pair M1 = (a/2, 0);    // bottom midpoint
+pair M2 = (a, b/2);    // right midpoint  
+pair M3 = (a/2, b);    // top midpoint
+pair M4 = (0, b/2);    // left midpoint
+pair O = (a/2, b/2);   // center point
+
+// Draw outer rectangle with thick boundary
+draw(A--B--C--D--cycle, linewidth(2bp));
+
+// Draw bisection lines (dashed)
+draw(M1--M3, dashed + gray(0.5));
+draw(M4--M2, dashed + gray(0.5));
+
+// Function to draw arrow next to a segment
+void drawArrowNearSegment(pair start, pair end, real offset=0.1, real arrowsize=3) {
+    pair mid = 0.5*(start + end);
+    pair dir = unit(end - start);
+    pair perp = rotate(90)*dir;  // perpendicular direction
+    pair arrowStart = mid + offset*perp;
+    pair arrowEnd = arrowStart + 0.2*dir;
+    draw(arrowStart--arrowEnd, Arrow(size=arrowsize));
+}
+
+// Draw arrows for internal horizontal segments only (not outer boundary)
+drawArrowNearSegment(A, M1, -0.08);    // bottom-left horizontal
+drawArrowNearSegment(M1, B, -0.08);    // bottom-right horizontal
+drawArrowNearSegment(D, M3, 0.08);     // top-left horizontal (leftward)
+drawArrowNearSegment(M3, C, 0.08);     // top-right horizontal (leftward)
+
+// Draw arrows for internal vertical segments only (not outer boundary)
+drawArrowNearSegment(D, M4, -0.08);    // left-top vertical (downward)
+drawArrowNearSegment(M4, A, -0.08);    // left-bottom vertical (downward)
+drawArrowNearSegment(B, M2, 0.08);     // right-bottom vertical (upward)
+drawArrowNearSegment(M2, C, 0.08);     // right-top vertical (upward)
+
+// Draw clearly opposing arrows for center cross segments to show cancellation
+// Horizontal center line - arrows on opposite sides pointing in opposite directions
+drawArrowNearSegment(M4, O, -0.08);    // left half: rightward, below line
+drawArrowNearSegment(O, M2, -0.08);    // right half: rightward, below line
+drawArrowNearSegment(O, M4, 0.08);     // left half: leftward, above line
+drawArrowNearSegment(M2, O, 0.08);     // right half: leftward, above line
+
+// Vertical center line - arrows on opposite sides pointing in opposite directions
+drawArrowNearSegment(M1, O, -0.08);    // bottom half: upward, left of line
+drawArrowNearSegment(O, M3, -0.08);    // top half: upward, left of line
+drawArrowNearSegment(O, M1, 0.08);     // bottom half: downward, right of line
+drawArrowNearSegment(M3, O, 0.08);     // top half: downward, right of line
+
+// Add rectangle labels
+label("$R^{(1)}$", (a/4, b/4));
+label("$R^{(2)}$", (3*a/4, b/4));
+label("$R^{(3)}$", (3*a/4, 3*b/4));
+label("$R^{(4)}$", (a/4, 3*b/4));
+
+// Add corner labels
+label("$(a,c)$", A, SW);
+label("$(b,c)$", B, SE);
+label("$(b,d)$", C, NE);
+label("$(a,d)$", D, NW);
+\end{asy}
+\end{figure}
+
+It follows that at least one of the rectangle $R^{(k)}$, $1 \le k \le 4$, must satisfy the condition $$\abs{\eta(R^{(k)})} \ge \dfrac{1}{4}\abs{\eta(R)}.$$ If we continue this process, we can find a sequence of rectangles $R_1 \supset R_2 \supset \cdots \supset R_n \supset \cdots$ such that $$\abs{\eta(R_n)} \ge 4^{-n}\abs{\eta(R)}.$$ The rectangles converge to a point $z^* \in R$ in the sense that $R_n$ will be contained in a prescribed neighborhood $\abs{z-z^*}<\delta=B_{\delta}(z^*)$ as soon as $n$ is sufficiently large. First of all, we choose $\delta$ so small that $f(z)$ is defined and analytic in $\abs{z-z^*}<\delta$. Secondly, if $\eps>0$ is given, we can choose $\delta$ so that $$\left\abs{\dfrac{f(z)-f(z^*)}{z-z^*}-f'(z^*)\right} \le \eps$$ or $$\abs{f(z)-f(z^*)-(z-z^*)f'(z^*)}\le \eps\abs{z-z^*}$$ for all $z$ in the neighborhood $B_{\delta}(z^*)$. We assume that $\delta$ satisfies both conditions and that $R_n$ is contained in $B_{\delta}(z^*)$.
+
+We make now the observation that
+\begin{align*}
+\int_{\partial(R_n)}dz &=0, \\
+\int_{\partial(R_n)}zdz &=0,
+\end{align*}
+as both $dz$ and $zdz$ are exact differentials and $\partial(R_n)$ is a closed curve. By virtue of these equations, and noting that $z^*$ is a fixed constant, we are able to write
+\begin{align*}
+\eta(R_n) &= \int_{\partial(R_n)} f(z)dz \\
+&=\int_{\partial(R_n)}\left[f(z)-f(z^*)-(z-z^*)f'(z^*)\right]dz,
+\end{align*}
+and it follows that $$\abs{\eta(R_n)} \le \eps \int_{\partial(R_n)}\abs{z-z^*} \cdot \abs{dz}.$$ In this last integral $\abs{z-z^*}$ is at most equal to the diagonal $d_n$ of $R_n$. If $L_n$ denotes the length of the perimeter of $R_n$, the integral is hence at most $d_nL_n$. But if $d$ and $L$ are the corresponding quantities for the original rectangle $R$, then it is clear that $d_n=2^{-n}d$ and $L_n=2^{-n}L$ by construction. Hence, $$\abs{\eta(R)} \le 4^{n}\abs{\eta(R_n)} \le 4^{n} \cdot 4^{-n}dL\eps=dL\eps.$$ Since $\eps$ is arbitrary, we can only have $\abs{\eta(R)}=0$, and the theorem is proved.
+\end{proof}
+
+It turns out that the hypothesis in Theorem \ref{thm:cauchy-rectangle} can be weakened considerably. We shall prove at once the stronger theorem which will find very important use.
+
+\begin{theorem}
+\label{thm:cauchy-rectangle-stronger}
+Let $f(z)$ be analytic on the set $R'$ obtained from a rectangle $R$ by omitting a finite number of interior points $\zeta_j$. If it is true that $$\lim_{z \rightarrow \zeta_j} (z-\zeta_j)f(z)=0$$ for all $j$, then $$\int_{\partial R} f(Z)dz=0.$$
+\end{theorem}
+\begin{proof}
+It is sufficient to consider the case of a single exceptional point $\zeta$, for evidently $R$ can be divided into smaller rectangles which contain at most one $\zeta_j$.
+
+We divide $R$ into nine rectangles, as shown in the figure below, and apply Theorem \ref{thm:cauchy-rectangle} to all but the rectangle $R_0$ in the center.
+
+\begin{figure}[h]
+\caption{Bisection of a rectangle into nine parts.}
+\centering
+\begin{asy}
+import math;
+size(300);
+
+// Define the large rectangle dimensions
+real width = 6;
+real height = 4;
+
+// Draw the large rectangle
+draw((0,0)--(width,0)--(width,height)--(0,height)--cycle, linewidth(1.5));
+
+// Define grid divisions (3x3 grid)
+real dx = width/3;
+real dy = height/3;
+
+// Draw vertical grid lines
+for(int i = 1; i <= 2; ++i) {
+    // Dashed lines extending to outer edges
+    draw((i*dx, 0)--(i*dx, dy), linewidth(1) + dashed);
+    draw((i*dx, 2*dy)--(i*dx, height), linewidth(1) + dashed);
+    
+    // Solid line through the central rectangle
+    draw((i*dx, dy)--(i*dx, 2*dy), linewidth(1));
+}
+
+// Draw horizontal grid lines
+for(int i = 1; i <= 2; ++i) {
+    // Dashed lines extending to outer edges
+    draw((0, i*dy)--(dx, i*dy), linewidth(1) + dashed);
+    draw((2*dx, i*dy)--(width, i*dy), linewidth(1) + dashed);
+    
+    // Solid line through the central rectangle
+    draw((dx, i*dy)--(2*dx, i*dy), linewidth(1));
+}
+
+// Mark the point ζ in the central rectangle
+pair zeta = (1.5*dx, 1.5*dy);
+dot(zeta, linewidth(4));
+label("$\zeta$", zeta, NE, fontsize(12));
+
+\end{asy}
+\end{figure}
+This gives $$\int_{\partial R} fdz=\int_{\partial R_0} f dz.$$ By hypothesis, if $\eps>0$ we can choose the rectangle $R_0$ so small that $$\abs{f(z)} \le \dfrac{\eps}{\abs{z-\zeta}}$$ on $\partial R_0$. Hence, $$\left\abs{\int_{\partial R} f dz\right} \le \eps \int_{\partial R_0} \dfrac{\abs{dz}}{\abs{z-\zeta}}.$$ If we assume, as we may, that $R_0$ is a square of center $\zeta$ with side length $s$, then by elementary estimates, we find that
+\begin{align*}
+\int_{\partial R_0} \dfrac{\abs{dz}}{\abs{z-\zeta}} &<\int_{\partial R_0} \dfrac{\abs{dz}}{\inf_{z \in \partial R_0}(\abs{z-\zeta})} \\
+&=2\int_{\partial R_0} \dfrac{\abs{dz}}{s} \\
+&=2 \cdot 4s \cdot \dfrac{1}{s} \\
+&=8.
+\end{align*}
+Thus, we obtain $$\left\abs{\int_{\partial R} fdz\right}<8\eps,$$ and -- again -- since $\eps$ is arbitrary, the theorem follows.
+\end{proof}
+
+We observe that the hypothesis of the theorem is certainly fulfilled if $f(z)$ is analytics and \emph{bounded} on $R'$.
+
+\section{Cauchy's Theorem in a Circular Disk}
+It is not true that the integral of an analytic function over a closed curve is always zero. Indeed, we have found that $$\int_{C} \dfrac{dz}{z-a}=2\pi i$$ where $C$ is a circle about $a$. In order to make sure that the integral vanishes, it is necessary to make a special assumption concerning the region $\Omega$ in which $f(z)$ is known to be analytic and to which the curve $\gamma$ is restricted. We are not yet in a position to formulate this condition, and for this reason we must restrict attention to a very special case. In what follows we assume that $\Omega$ is an open circular disk $\abs{z-z_0}<\rho$ to be denoted by $\Delta$.
+
+\begin{theorem}
+\label{thm:cauchy-disk}
+If $f(z)$ is analytic in an open disk $\Delta$, then $$\int_{\gamma} f(z)dz=0$$ for every closed curve $\gamma$ in $\Delta$.
+\end{theorem}
+\begin{proof}
+The proof is a repetition of the argument used in proving the second half of Theorem \ref{thm:exact-differential}. We define a function $F(z)$ by $$F(z)=\int_{\sigma} f dz$$ where $\sigma$ consists of the horizontal line segment from the center $(x_0,y_0)$ to $(x, y_0)$ and the vertical segment from $(x,y_0)$ to $(x,y)$; it is immediately seen that $\partial F/\partial y=if(z)$. On the other hand, $\sigma$ can be replaced by a path consisting of vertical segment followed by a horizontal segment. By Theorem \ref{thm:cauchy-rectangle}, this choice defines the same function $F(z)$ (since the signed sum of the integrals over both paths is zero). Hence, $\partial F/\partial x=f(z)$, and $F(z)$ is analytic in $\Delta$ with the derivative $f(z)$, making $f(z)dz$ an exact differential form.
+\end{proof}
+
+Clearly, the same proof would go through for any region with contains the rectangle with opposite vertices $z_0$ and $z$ as soon as it contains $z$, such as a half plane, or the inside of an ellipse. Howeever, this method does ot generalize to all types of regions.
+
+As for the case of a rectangle, we may weaken the hypothesis.
+\begin{theorem}
+let $f(z)$ be analytic in the region $\Delta'$ obtained by omitting a finite number of points $\zeta_j$ from the disk $\Delta$. If it is true that $$\lim_{z \rightarrow \zeta_j} (z-\zeta_j)f(z)=0$$ for all $j$, then $$\int_{\gamma} f(z)dz=0$$ for every closed curve $\gamma$ in $\Delta'$.
+\end{theorem}
+\begin{proof}
+The proof must be modified, for we cannot let $\sigma$ pass through the exceptional points. Assume first that no $\zeta_j$ lies on the lines $x=x_0$ and $y=y_0$. It is then possible to avoid the exceptional points by letting $\sigma$ consist of three segments, as shown in the figure below.
+
+\begin{figure}[h]
+\centering
+\begin{asy}
+size(8cm);
+
+// Define the circle
+pair center = (0, 0);
+real radius = 2;
+draw(circle(center, radius));
+
+// Label the center
+label("$(x_0, y_0)$", center, S);
+dot(center);
+
+// Define point z inside the circle (upper right)
+pair z = (1.0, 0.8);
+dot(z);
+label("$z$", z, NE);
+
+// Define exceptional point ζ between center and z
+pair zeta = (0.4, 0.3);
+dot(zeta, linewidth(3));
+label("$\zeta$", zeta, SW);
+
+// Draw the three-segment path from center to z avoiding zeta
+// Segment 1: horizontal right from center
+pair p1 = (zeta.x + 0.2, center.y);  // go right past zeta's x-coordinate
+draw(center--p1, linewidth(1.2));
+
+// Segment 2: vertical up 
+pair p2 = (p1.x, z.y);  // go up to z's y-coordinate
+draw(p1--p2, linewidth(1.2));
+
+// Segment 3: horizontal right to z
+draw(p2--z, linewidth(1.2));
+
+// Draw the dashed alternative path (vertical, horizontal, vertical)
+// Segment 1: vertical up from center
+pair q1 = (center.x, zeta.y + 0.15);  // go up past zeta's y-coordinate
+draw(center--q1, dashed + linewidth(1.0));
+
+// Segment 2: horizontal right (crossing the solid path)
+pair q2 = (z.x, q1.y);  // go right to z's x-coordinate
+draw(q1--q2, dashed + linewidth(1.0));
+
+// Segment 3: vertical down to z
+draw(q2--z, dashed + linewidth(1.0));
+
+\end{asy}
+\end{figure}
+
+By an obvious application of Theorem \ref{thm:cauchy-rectangle-stronger}, we find that the value of $F(z)$ is independent of the choice of the middle segment; moreover, the last segment can be either vertical or horizontal. We conclude as before that $F(z)$ is an indefinite integral of $f(z)$, and the theorem follows.
+
+In case there are exceptional points on the lines $x=x_0$ and $y=y_0$, the reader will easily convince himself that a similar proof can be carried out, provided we use four line segments in the place of three.
+\end{proof}
