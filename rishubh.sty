@@ -1,0 +1,628 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{rishubh}
+
+\newif\ifrishfancy\rishfancyfalse
+\newif\ifrishhdr\rishhdrtrue
+\newif\ifrishthm\rishthmtrue
+\newif\ifrishmdthm\rishmdthmfalse
+\newif\ifrishsecthm\rishsecthmfalse
+\newif\ifrishchapthm\rishchapthmfalse
+\newif\ifrishcolorsec\rishcolorsecfalse
+\newif\ifrishhw\rishhwfalse
+\newif\ifrishnotes\rishnotesfalse
+\newif\ifrishsols\rishsolsfalse
+
+\DeclareOption{normal}{\rishmdthmfalse}
+\DeclareOption{spicy}{\rishmdthmtrue\rishsecthmtrue\rishcolorsectrue} % long docs
+\DeclareOption{homework}{\rishhwtrue}
+\DeclareOption{book}{\rishsecthmfalse\rishchapthmtrue}
+\DeclareOption{notes}{\rishnotestrue}
+\DeclareOption{fancy}{\rishfancytrue}
+\DeclareOption{solutions}{\rishsolstrue}
+
+\ProcessOptions\relax
+
+\ifrishnotes
+    \RequirePackage[margin=0.25in]{geometry}
+\else
+    \RequirePackage{geometry}
+\fi
+
+\ifrishchapthm
+    \RequirePackage{tcolorbox}
+    \tcbuselibrary{breakable,skins,hooks}
+\fi
+
+\RequirePackage{amsmath,amssymb,amsfonts,amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{mathtools}
+\RequirePackage{xcolor}
+\RequirePackage{array}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\RequirePackage{graphicx}
+\graphicspath{./}
+\makeindex
+\RequirePackage{epigraph}
+\RequirePackage{setspace}
+\onehalfspacing
+\RequirePackage{mathrsfs}
+\RequirePackage{hyperref}
+\RequirePackage{xurl}
+\RequirePackage{asymptote}
+\RequirePackage{tikz-cd}
+\usetikzlibrary{arrows,arrows.meta}
+
+\hypersetup{
+	linkcolor={red!50!black},
+	citecolor={green!50!black},
+	urlcolor={blue!80!black},
+	colorlinks,
+}
+
+%Some small commands
+\newcommand{\inner}[2]{\langle #1, #2 \rangle}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\at}{\big\vert}
+\newcommand{\restrict}{\big \vert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\ol}{\overline}
+\newcommand{\ul}{\underline}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\eps}{\varepsilon}
+
+%More commands and math operators
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator*{\lcm}{lcm}
+\DeclareMathOperator*{\argmin}{arg min}
+\DeclareMathOperator*{\argmax}{arg max}
+
+\newcommand{\liff}{\Leftrightarrow}
+\newcommand{\then}{\Rightarrow}
+
+%Inequalities
+\newcommand{\cycsum}{\sum_{\mathrm{cyc}}}
+\newcommand{\symsum}{\sum_{\mathrm{sym}}}
+\newcommand{\cycprod}{\prod_{\mathrm{cyc}}}
+\newcommand{\symprod}{\prod_{\mathrm{sym}}}
+
+%Algebra
+\newcommand{\CC}{\mathbb C}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\HH}{\mathbb H}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\fraka}{\mathfrak{a}}
+\newcommand{\frakb}{\mathfrak{b}}
+\newcommand{\frakm}{\mathfrak{m}}
+\newcommand{\frakp}{\mathfrak{p}}
+\newcommand{\frakq}{\mathfrak{q}}
+\newcommand{\frakB}{\mathfrak{B}}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\fieldchar}{char} % Field characteristic
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Frob}{Frob} % Frobenius element
+\DeclareMathOperator{\GL}{GL} % General linear group
+\DeclareMathOperator{\SL}{SL} % Special linear group
+\DeclareMathOperator{\Vol}{Vol} % Volume
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\lin}{lin} % Linear span (for infinite dimensions)
+\DeclareMathOperator{\clin}{clin} % Closed linear span (for infinite dimensions)
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\mat}{Mat}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Fr}{Fr} % Frobenius map for rings
+\DeclareMathOperator{\Cl}{Cl} % Ideal class group
+\DeclareMathOperator{\swap}{swap}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\codim}{codim}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\card}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\Vert#1 \Vert}
+\newcommand{\bvec}[1]{\mathbf{#1}}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\quotient}{\slash}
+\DeclareMathOperator{\ind}{ind} % Index
+\DeclareMathOperator{\img}{im} % Image
+\DeclareMathOperator{\Img}{Im} % Image
+\DeclareMathOperator{\coker}{coker} % Cokernel
+\DeclareMathOperator{\Coker}{Coker} % Cokernel
+\DeclareMathOperator{\Ker}{Ker} % Kernel
+\DeclareMathOperator{\Spec}{Spec} % spectrum
+\DeclareMathOperator{\Tr}{Tr} % trace
+\DeclareMathOperator{\proj}{proj} % projection
+\DeclareMathOperator{\Nm}{Nm} % norm
+\DeclareMathOperator{\pr}{pr} % projection
+\DeclareMathOperator{\ext}{ext} % extension
+\DeclareMathOperator{\pred}{pred} % predecessor
+\DeclareMathOperator{\dom}{dom} % domain
+\DeclareMathOperator{\ran}{ran} % range
+\DeclareMathOperator{\Hom}{Hom} % homomorphism
+\DeclareMathOperator{\Mor}{Mor} % morphisms
+\DeclareMathOperator{\End}{End} % endomorphism
+\DeclareMathOperator{\intr}{int} % interior
+\DeclareMathOperator{\extr}{ext} % interior
+
+% Probability distributions
+\DeclareMathOperator{\Unif}{Unif} % Uniform
+\DeclareMathOperator{\Bin}{Bin} % Binomial
+
+\newcommand{\stirling}[2]{
+	\ensuremath{\begin{Bmatrix}
+			#1 \\ #2
+\end{Bmatrix}}}
+\newcommand{\orb}[1]{
+	\ensuremath{\text{orb}\left(#1\right)}
+}
+\newcommand{\stab}[1]{
+	\ensuremath{\text{stab}(#1)}
+}
+\newcommand{\fix}[1]{
+	\ensuremath{\text{fix}(#1)}
+}
+\newcommand{\stir}[2]{
+	\ensuremath{\begin{bmatrix}
+			#1 \\ #2
+	\end{bmatrix}}
+}
+\newcommand{\eulerian}[2]{
+	\ensuremath{\genfrac<>{0pt}{0}{#1}{#2}
+	}	
+}
+
+\title{} % empty title to avoid crashes
+\author{Rishubh Thaper}
+\date{\today}
+
+\ifrishthm
+    \ifrishmdthm
+        \RequirePackage[framemethod=TikZ]{mdframed}
+        \usetikzlibrary{shadows}
+        % https://tex.stackexchange.com/a/292090/76888
+        % https://github.com/marcodaniel/mdframed/issues/12
+        \RequirePackage{xpatch}
+        \xpatchcmd{\endmdframed}
+        {\aftergroup\endmdf@trivlist\color@endgroup}
+        {\endmdf@trivlist\color@endgroup\@doendpe}
+        {}{}
+        
+        \mdfdefinestyle{mdbluebox}{%
+        	roundcorner=10pt,
+        	linewidth=1pt,
+        	skipabove=12pt,
+        	innerbottommargin=9pt,
+        	skipbelow=2pt,
+        	linecolor=blue,
+        	nobreak=false,
+        	backgroundcolor=blue!5,
+        }
+        \declaretheoremstyle[
+        headfont=\sffamily\bfseries\color{blue},
+        mdframed={style=mdbluebox},
+        headpunct={\\[3pt]},
+        postheadspace={0pt}
+        ]{thmbluebox}
+        
+        \mdfdefinestyle{mdredbox}{%
+        	linewidth=0.5pt,
+        	skipabove=12pt,
+        	frametitleaboveskip=5pt,
+        	frametitlebelowskip=0pt,
+        	skipbelow=2pt,
+        	frametitlefont=\bfseries,
+        	innertopmargin=4pt,
+        	innerbottommargin=8pt,
+        	nobreak=false,
+        	backgroundcolor=red!10,
+        	linecolor=red,
+        }
+        \declaretheoremstyle[
+        headfont=\bfseries\color{red},
+        mdframed={style=mdredbox},
+        headpunct={\\[3pt]},
+        postheadspace={0pt},
+        ]{thmredbox}
+        
+        \mdfdefinestyle{mdgreenbox}{%
+        	skipabove=8pt,
+        	skipbelow=0pt,
+        	linewidth=2pt,
+        	rightline=false,
+        	leftline=true,
+        	topline=false,
+        	bottomline=false,
+        	linecolor=green,
+        	backgroundcolor=green!5,
+        }
+        \declaretheoremstyle[
+        headfont=\bfseries\sffamily\color{green!70!black},
+        bodyfont=\normalfont,
+        spaceabove=2pt,
+        spacebelow=1pt,
+        mdframed={style=mdgreenbox},
+        headpunct={ --- },
+        ]{thmgreenbox}
+        
+        \mdfdefinestyle{mdblackbox}{%
+        	skipabove=8pt,
+        	linewidth=3pt,
+        	rightline=false,
+        	leftline=true,
+        	topline=false,
+        	bottomline=false,
+        	linecolor=black,
+        	backgroundcolor=violet!5!gray!5,
+        }
+        \declaretheoremstyle[
+        headfont=\bfseries,
+        bodyfont=\normalfont\small,
+        spaceabove=0pt,
+        spacebelow=0pt,
+        mdframed={style=mdblackbox}
+        ]{thmblackbox}
+        
+        \mdfdefinestyle{mdpurplebox}{%
+        	roundcorner=10pt,
+        	linewidth=1pt,
+        	skipabove=12pt,
+        	skipbelow=12pt,
+        	innertopmargin=9pt,
+        	innerbottommargin=9pt,
+        	linecolor=black,
+        	nobreak=false,
+        	backgroundcolor=purple!10,
+        	shadow=true,
+        	shadowsize=6pt,
+        	shadowcolor=black!30,
+        	frametitleaboveskip=8pt,
+        	frametitlebelowskip=8pt,
+        	frametitlebackgroundcolor=violet!50!black,
+        	frametitlefont=\bfseries\sffamily\color{white},
+        	frametitlerule=true,
+        }
+        \declaretheoremstyle[
+        headfont=\sffamily\bfseries\color{purple},
+        mdframed={style=mdpurplebox},
+        headpunct={\\[3pt]},
+        postheadspace={0pt}
+        ]{thmpurplebox}
+        \newcommand{\listhack}{$\empty$\vspace{-2em}}
+    \fi
+\fi
+
+\ifrishchapthm
+	\newenvironment{moral}{%
+		\begin{tcolorbox}[boxrule=0.4pt,colframe=green!70!black,sharp corners,
+			standard jigsaw,opacityback=0,left=10pt,right=10pt,top=3pt,bottom=3pt,
+			before skip=10pt,after skip=20pt]%
+			\bfseries\color{green!50!black}}%
+		{\end{tcolorbox}}
+	    \declaretheoremstyle[
+	    headfont=\bfseries,
+	    bodyfont=\normalfont\small
+	    ]{thmques}
+	    
+	    \tcbset{
+	    	theorem box/.style={
+	    		enhanced,
+	    		arc=9pt,
+	    		outer arc=10pt,
+	    		colframe=blue,
+	    		colback=TealBlue!5,
+	    		boxrule=1pt,
+	    		before skip=12pt,
+	    		after skip=14pt,
+	    		left=10pt,
+	    		right=10pt
+	    	},
+	    	remark box/.style={
+	    		boxrule=0pt,
+	    		frame hidden,
+	    		sharp corners,
+	    		enhanced,
+	    		borderline west={2pt}{0pt}{ForestGreen},
+	    		before skip=8pt,
+	    		colback=ForestGreen!5,
+	    		after skip=12pt,
+	    		breakable,
+	    		left=10pt,
+	    		right=10pt
+	    	},
+	    	example box/.style={
+	    		enhanced,
+	    		sharp corners,
+	    		arc=9pt,
+	    		outer arc=10pt,
+	    		colframe=RawSienna,
+	    		colback=Salmon!5,
+	    		boxrule=0.5pt,
+	    		before skip=12pt,
+	    		after skip=14pt,
+	    		breakable,
+	    		top=6pt,
+	    		bottom=8pt,
+	    		breakable,
+	    		left=10pt,
+	    		right=10pt
+	    	},
+	    	ques box/.style={
+	    		boxrule=0pt,
+	    		frame hidden,
+	    		enhanced,
+	    		sharp corners,
+	    		before skip=8pt,
+	    		after skip=12pt,
+	    		borderline west={3pt}{0pt}{black},
+	    		colback=violet!5!gray!5,
+	    		breakable,
+	    		left=10pt,
+	    		right=10pt
+	    	}
+	    }
+\fi
+
+    
+    
+\ifrishthm
+    \ifrishmdthm
+        \ifrishsecthm
+            \declaretheorem[style=thmbluebox,name=Theorem,numberwithin=section]{theorem}
+        \else
+            \ifrishchapthm 
+                \declaretheorem[style=thmbluebox,name=Theorem,numberwithin=chapter]{theorem}
+            \else
+                \declaretheorem[style=thmbluebox,name=Theorem]{theorem}
+            \fi
+        \fi
+        \declaretheorem[style=thmgreenbox,name=Lemma,sibling=theorem]{lemma}
+        \declaretheorem[style=thmbluebox,name=Proposition,sibling=theorem]{proposition}
+        \declaretheorem[style=thmbluebox,name=Corollary,sibling=theorem]{corollary}
+        \declaretheorem[style=thmbluebox,name=Assumption,sibling=theorem]{assume}
+        \declaretheorem[style=thmbluebox,name=Theorem,numbered=no]{theorem*}
+        \declaretheorem[style=thmbluebox,name=Lemma,numbered=no]{lemma*}
+        \declaretheorem[style=thmbluebox,name=Proposition,numbered=no]{proposition*}
+        \declaretheorem[style=thmbluebox,name=Corollary,numbered=no]{corollary*}
+        \declaretheorem[style=thmbluebox,name=Assumption,numbered=no]{assume*}
+    \else
+        \ifrishsecthm
+            \declaretheorem[name=Theorem,numberwithin=section]{theorem}
+        \else
+            \ifrishchapthm
+                \declaretheorem[name=Theorem,numberwithin=chapter]{theorem}
+            \else
+                \declaretheorem[name=Theorem]{theorem}
+            \fi
+        \fi
+        \declaretheorem[name=Lemma,sibling=theorem]{lemma}
+        \declaretheorem[name=Proposition,sibling=theorem]{proposition}
+        \declaretheorem[name=Corollary,sibling=theorem]{corollary}
+        \declaretheorem[name=Assumption,sibling=theorem]{assume}
+        \declaretheorem[name=Theorem,numbered=no]{theorem*}
+        \declaretheorem[name=Lemma,numbered=no]{lemma*}
+        \declaretheorem[name=Proposition,numbered=no]{proposition*}
+        \declaretheorem[name=Corollary,numbered=no]{corollary*}
+        \declaretheorem[name=Assumption,numbered=no]{assume*}
+    \fi
+\fi
+
+\ifrishthm
+    \ifrishmdthm
+        \declaretheorem[style=thmgreenbox,name=Algorithm,sibling=theorem]{algorithm}
+        \declaretheorem[style=thmgreenbox,name=Algorithm,numbered=no]{algorithm*}
+        \declaretheorem[style=thmgreenbox,name=Claim,sibling=theorem]{claim}
+        \declaretheorem[style=thmgreenbox,name=Claim,numbered=no]{claim*}
+    \else
+        \declaretheorem[name=Algorithm,sibling=theorem]{algorithm}
+        \declaretheorem[name=Algorithm,numbered=no]{algorithm*}
+        \declaretheorem[name=Claim,sibling=theorem]{claim}
+        \declaretheorem[name=Claim,numbered=no]{claim*}
+    \fi
+\fi
+
+\ifrishthm
+    \ifrishmdthm
+        \declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+        \declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
+    \else
+         \declaretheorem[name=Example,sibling=theorem]{example}
+         \declaretheorem[name=Example,numbered=no]{example*}
+    \fi
+\fi
+
+% Remark-style theorems
+\ifrishthm
+    \ifrishmdthm
+        \declaretheorem[style=thmblackbox,name=Remark,sibling=theorem]{remark}
+        \declaretheorem[style=thmblackbox,name=Remark,numbered=no]{remark*}
+    \else
+        \declaretheorem[name=Remark,sibling=theorem]{remark}
+        \declaretheorem[name=Remark,numbered=no]{remark*}
+    \fi
+\fi
+
+\ifrishmdthm
+    \declaretheoremstyle[
+    headfont=\color{blue!40!black}\normalfont\bfseries,
+    spaceabove=8pt,
+    spacebelow=8pt,
+    bodyfont=\normalfont
+    ]{basehead}
+\else
+    \declaretheoremstyle[spaceabove=6pt,spacebelow=6pt]{basehead}
+\fi
+
+\declaretheorem[style=basehead,name=Answer,sibling=theorem]{answer}
+\declaretheorem[style=basehead,name=Answer,numbered=no]{answer*}
+\declaretheorem[style=basehead,name=Conjecture,sibling=theorem]{conjecture}
+\declaretheorem[style=basehead,name=Conjecture,numbered=no]{conjecture*}
+\declaretheorem[style=basehead,name=Definition,sibling=theorem]{definition}
+\declaretheorem[style=basehead,name=Definition,numbered=no]{definition*}
+\ifrishchapthm
+	\declaretheorem[name=Question,sibling=theorem,style=thmques]{ques}
+	\tcolorboxenvironment{ques}{ques box}
+	\declaretheorem[name=Exercise,sibling=theorem,style=thmques]{exercise}
+	\tcolorboxenvironment{exercise}{ques box}
+\else
+    \declaretheorem[style=basehead,name=Exercise,sibling=theorem]{exercise}
+    \declaretheorem[style=basehead,name=Exercise,numbered=no]{exercise*}
+    \declaretheorem[style=basehead,name=Question,sibling=theorem]{ques}
+    \declaretheorem[style=basehead,name=Question,numbered=no]{ques*}
+\fi
+\declaretheorem[style=basehead,name=Fact,sibling=theorem]{fact}
+\declaretheorem[style=basehead,name=Fact,numbered=no]{fact*}
+
+
+\ifrishhw
+    \ifrishmdthm
+        \declaretheorem[style=thmpurplebox,name=Problem]{problem}
+    \else
+        \declaretheorem[style=basehead,name=Problem]{problem}
+        \declaretheorem[style=basehead,name=Problem,numbered=no]{problem*}
+    \fi
+    \declaretheorem[style=basehead,name=Solution]{solution}
+    \declaretheorem[style=basehead,name=Solution,numbered=no]{solution*}
+\else
+    \ifrishsecthm
+        \declaretheorem[name=Problem, numberwithin=section]{problem}
+    \else
+        \declaretheorem[name=Problem]{problem}
+    \fi
+\fi
+
+%%fakesection Fancy section and chapter heads
+\ifrishcolorsec
+\@ifundefined{KOMAClassName}{}{
+	\@ifundefined{chapter}{}{
+		\addtokomafont{partprefix}{\rmfamily}
+		\renewcommand*{\partformat}{\color{purple}
+			\scalebox{2.5}{\thepart}\enlargethispage{2em}}
+		\addtokomafont{chapterprefix}{\raggedleft}
+		\RedeclareSectionCommand[beforeskip=0.5em]{chapter}
+		\renewcommand*{\chapterformat}{\mbox{%
+				\scalebox{1.5}{\chapappifchapterprefix{\nobreakspace}}%
+				\scalebox{2.718}{\color{purple}\thechapter}\enskip}}
+	}
+	\addtokomafont{partprefix}{\rmfamily}
+	\renewcommand*{\partformat}{\color{purple}\scalebox{2.5}{\thepart}}
+	\renewcommand*{\sectionformat}%
+	{\color{purple}\S\thesection\enskip}
+	\renewcommand*{\subsectionformat}%
+	{\color{purple}\S\thesubsection\enskip}
+	\renewcommand*{\subsubsectionformat}%
+	{\color{purple}\S\thesubsubsection\enskip}
+	\addtokomafont{paragraph}{\color{orange!35!black}\P\ }
+	\KOMAoptions{numbers=noenddot}
+	%\usetocstyle{KOMAlike}
+}
+\fi
+
+%%fakesection \maketitle configuration
+\@ifundefined{KOMAClassName}%
+{} % do nothing outside KOMA class
+{% If KOMA exists. . .
+	\addtokomafont{subtitle}{\Large}
+	\setkomafont{author}{\Large\scshape}
+	\setkomafont{date}{\Large\normalsize}
+}
+\providecommand{\thetitle}{\@title}
+\providecommand{\theauthor}{\@author}
+\providecommand{\thedate}{\@date}
+
+%%fakesection Page setup
+\ifrishfancy
+\@ifundefined{KOMAClassName}
+{
+	\RequirePackage{fancyhdr}
+	\setlength{\headheight}{0.75in}
+	\setlength{\oddsidemargin}{0in}
+	\setlength{\evensidemargin}{0in}
+	\setlength{\voffset}{-1.0in}
+	\setlength{\headsep}{10pt}
+	\setlength{\textwidth}{6.5in}
+	\setlength{\headwidth}{6.5in}
+	\setlength{\textheight}{8.75in}
+	\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+	\setlength{\footskip}{0.3in}
+	\ifrishhdr
+	    \renewcommand{\headrulewidth}{0.5pt}
+	    \renewcommand{\footrulewidth}{0.0pt}
+	    \pagestyle{fancy}
+	    \lhead{Rishubh Thaper}
+	    \chead{}
+	    \rhead{\nouppercase{\leftmark}}
+	    \lfoot{}
+	    \cfoot{\thepage}
+	    \rfoot{}
+	\fi
+}
+{
+	\usepackage[headsepline]{scrlayer-scrpage}
+	\renewcommand{\headfont}{}
+	\addtolength{\textheight}{3.14cm}
+	\setlength{\footskip}{0.5in}
+	\setlength{\headsep}{10pt}
+	\ihead{\footnotesize\textbf{\theauthor} --- \thedate}
+	\automark{section}
+	\chead{}
+	\ohead{\footnotesize\textbf{\thetitle}}
+	% \cfoot{\pagemark}
+}
+\fi
+
+\ifrishsols
+	\usepackage{answers}
+	\Newassociation{hint}{Hint}{hints}
+	\Newassociation{sol}{Solution}{solutions}
+	\renewcommand{\solutionextension}{out}
+	\Opensolutionfile{hints}
+	\Opensolutionfile{solutions}
+	% Print the collected hints/solutions as a proper chapter (or section if no chapters)
+	% Usage: \makehints[Hints]  and  \makesolutions[Solutions]
+	% The optional argument customizes the title; defaults provided in brackets.
+	\newcommand{\makehints}[1][Hints]{%
+		\Closesolutionfile{hints}%
+		\ifdefined\cleardoublepage\cleardoublepage\else\clearpage\fi
+		\@ifundefined{chapter}{\section{#1}}{\chapter{#1}}%
+		\input{hints.out}%
+	}
+	\newcommand{\makesolutions}[1][Solutions]{%
+		\Closesolutionfile{solutions}%
+		\ifdefined\cleardoublepage\cleardoublepage\else\clearpage\fi
+		\@ifundefined{chapter}{\section{#1}}{\chapter{#1}}%
+		\input{solutions.out}%
+	}
+\fi
