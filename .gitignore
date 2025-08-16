@@ -1,0 +1,32 @@
+# LaTeX auxiliary files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.toc
+*.idx
+*.ilg
+*.ind
+*.out
+*.pre
+
+# Generated PDFs (usually you don't want to track these)
+*.pdf
+
+# Asymptote files
+*.asy
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+*.temp
