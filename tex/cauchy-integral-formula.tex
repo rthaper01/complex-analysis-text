@@ -26,3 +26,11 @@ Given a curve $\gamma$ and a point $a$ not on it, the \emph{winding number} of $
 It is clear that $W(-\gamma, a)=-W(\gamma, a)$, and the following property is an immediate consequence of \ref{thm:cauchy-disk}:
 
 \textit{if $\gamma$ lies inside of a circle, then $W(\gamma,a)=0$ for all points $a$ outside of the same circle}.
+
+As the point set $\gamma$ is closed and bounded, its complement is open and can be represented as a union of disjoint regions, the components of the complement. We shall say, for short, that $\gamma$ determines these regions. If the complementary regions are considered in the extended plane, there is exactly one which contains the point at infinity. Consequently, $\gamma$ determines one and only one unbounded region.
+
+\textit{As a function of $a$ the winding number $W(\gamma, a)$ is constant in each of the regions determined by $\gamma$, and zero in the unbounded region.}
+
+To justify this, we note that any two points in the same region determined by $\gamma$ can be joined by a polygon which does not meet $\gamma$. For this reason it is sufficient to prove that $W(\gamma, a)=W(\gamma,b)$ if $\gamma$ does not meet the line segment from $a$ to $b$. Outside of this segment the function $(z-a)/(z-b)$ is never real and $\le 0$. Therefore, it is on the principal branch of $\log \left[(z-a)/(z-b)\right]$, which has derivative $(z-a)^{-1}-(z-b)^{-1}$. If $\gamma$ does not meet the segment we must have $$\int_{\gamma} \left(\dfrac{1}{z-a}-\dfrac{1}{z-b}\right)dz=0;$$ hence, $W(\gamma, a)=W(\gamma,b)$. If $\abs{a}$ is sufficiently large, $\gamma$ is contained in a disk $\abs{z}<\rho<\abs{z}$ and we conclude by the first main observation that $W(\gamma, a)=0$. Having established that the winding number is locally constant, we conclude that $W(\gamma,a)=0$ for all points $a$ in the unbounded region.
+
+We shall find the case $W(\gamma, a)=1$ particularly important, and it is desirable to formulate a geometric condition which leads to this consequence. For simplicity we take $a=0$.
