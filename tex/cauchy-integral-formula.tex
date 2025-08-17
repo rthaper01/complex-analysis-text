@@ -34,3 +34,122 @@ As the point set $\gamma$ is closed and bounded, its complement is open and can 
 To justify this, we note that any two points in the same region determined by $\gamma$ can be joined by a polygon which does not meet $\gamma$. For this reason it is sufficient to prove that $W(\gamma, a)=W(\gamma,b)$ if $\gamma$ does not meet the line segment from $a$ to $b$. Outside of this segment the function $(z-a)/(z-b)$ is never real and $\le 0$. Therefore, it is on the principal branch of $\log \left[(z-a)/(z-b)\right]$, which has derivative $(z-a)^{-1}-(z-b)^{-1}$. If $\gamma$ does not meet the segment we must have $$\int_{\gamma} \left(\dfrac{1}{z-a}-\dfrac{1}{z-b}\right)dz=0;$$ hence, $W(\gamma, a)=W(\gamma,b)$. If $\abs{a}$ is sufficiently large, $\gamma$ is contained in a disk $\abs{z}<\rho<\abs{z}$ and we conclude by the first main observation that $W(\gamma, a)=0$. Having established that the winding number is locally constant, we conclude that $W(\gamma,a)=0$ for all points $a$ in the unbounded region.
 
 We shall find the case $W(\gamma, a)=1$ particularly important, and it is desirable to formulate a geometric condition which leads to this consequence. For simplicity we take $a=0$.
+
+\begin{lemma}
+Let $z_1,z_2$ be two points on a closed curve $\gamma$ which does not pass through the origin. Denote the subarc from $z_1$ to $z_2$ in the direction of the curve by $\gamma_1$ and the subarc from $z_2$ to $z_1$ by $\gamma_2$. Suppose that $z_1$ lies in the lower half plane and $z_2$ lies in the upper half plane. If $\gamma_1$ does not meet the negative real axis and $\gamma_2$ does not meet the positive real axis, then $W(\gamma, 0)=1$.
+\end{lemma}
+
+\begin{proof}
+The proof, as is usually the case in complex analysis, is quite beautiful and elementary. Draw the half lines $L_1$ and $L_2$ from the origin through $z_1$ and $z_2$. Let $\zeta_1,\zeta_2$ be the points in which $L_1,L_2$ intersect a circle $C$ about the origin. If $C$ is described in the positive sense, the arc $C_1$ from $\zeta_1$ to $\zeta_2$ does not intersect the negative axis, and the arc $C_2$ from $\zeta_2$ to $\zeta_1$ does intersect the positive axis (since $z_1$ lies in the lower half plane while $z_2$ lies in the upper half plane). Denote the directed line segments from $z_1$ to $\zeta_1$ and from $z_2$ to $\zeta_2$ by $\delta_1$ and $\delta_2$, respectively. Introducing the closed curves $\sigma_1=\gamma_1+\delta_2-C_1-\delta_1$ and $\sigma_2=\gamma_2+\delta_1-C_2-\delta_2$, we find that $$W(\gamma, 0)=W(C_1,0)+W(C_2,0)+W(\sigma_1,0)+W(\sigma_2,0)-W(\delta_2,0)+W(\delta_1,0)+W(\delta_2,0)-W(\delta_1,0)=W(C,0)+W(\sigma_1,0)+W(\sigma_2,0).$$ But $\sigma_1$ does not meet the negative axis. Hence the origin belongs to the unbounded region determined by $\sigma_1$, and therefore $W(\sigma_1,0)=0$. Similarly, $\sigma_2$ does not meet the positive axis, so $W(\sigma_2,0)=0$. Finally, since $C$ is a circle about the origin, $W(C,0)=1$. Thus we conclude that $$W(\gamma, 0)=1+0+0=1.$$
+
+\begin{figure}[h]
+\centering
+\begin{asy}
+import graph;
+size(10cm);
+
+// Set up coordinate system
+real xmin = -3, xmax = 3, ymin = -2.5, ymax = 2.5;
+
+// Draw axes
+draw((xmin,0)--(xmax,0), gray+0.5bp, Arrow);
+draw((0,ymin)--(0,ymax), gray+0.5bp, Arrow);
+
+// Define key points
+pair z1 = (2.2, -1.5);  // Point in lower half-plane
+pair z2 = (-1.8, 2.0);  // Point in upper half-plane
+pair origin = (0, 0);
+
+// Draw circle C about origin through a convenient radius
+real radius = 1.0;
+path circle_C = circle(origin, radius);
+draw(circle_C, black+0.5bp);
+label("$C$", (radius*cos(pi/6), radius*sin(pi/6)), NE);
+
+// Draw half-lines L1 and L2 from origin through z1 and z2
+real line_length = 2.5;
+pair L1_end = origin + line_length * unit(z1);
+pair L2_end = origin + line_length * unit(z2);
+
+draw(origin--L1_end, dashed+gray+0.5bp);
+draw(origin--L2_end, dashed+gray+0.5bp);
+label("$L_1$", L1_end + (0.1, -0.1), SE);
+label("$L_2$", L2_end + (-0.1, 0.1), NW);
+
+// Find intersection points ζ₁ and ζ₂ of half-lines with circle
+pair zeta1 = origin + radius * unit(z1);
+pair zeta2 = origin + radius * unit(z2);
+
+// Draw and label the intersection points
+dot(zeta1, black+3bp);
+dot(zeta2, black+3bp);
+label("$\zeta_1$", zeta1 + (0.15, 0.15), NE);
+label("$\zeta_2$", zeta2 + (-0.25, 0.15), NW);
+
+// Draw the closed curve γ
+// γ₁: from z1 to z2 (avoiding negative real axis)
+path gamma1 = z1{N+E}..{W+N}(1.5, 1.2)..{W+N}(0.3, 1.8)..{W+N}z2;
+draw(gamma1, blue+0.7bp, Arrow(Relative(0.7)));
+
+// γ₂: from z2 to z1 (avoiding positive real axis)  
+path gamma2 = z2{S+W}..{E+S}(-1.2, -0.8)..{E+S}(0.5, -1.5)..{E+S}z1;
+draw(gamma2, red+0.7bp, Arrow(Relative(0.7)));
+
+// Draw and label the curve points
+dot(z1, black+2bp);
+dot(z2, black+2bp);
+label("$z_1$", z1 + (0, -0.2), S);
+label("$z_2$", z2 + (0, 0.2), N);
+
+// Label the curve segments
+label("$\gamma_1$", (0.5, 2.2), blue);
+label("$\gamma_2$", (-1.5, -1.8), red);
+label("$\gamma$", (2.7, 0.2), black);
+
+// Draw the line segments δ₁ and δ₂
+draw(z1--zeta1, black+0.5bp+dashed);
+draw(z2--zeta2, black+0.5bp+dashed);
+label("$\delta_1$", (z1+zeta1)/2 + (0.2, 0), E);
+label("$\delta_2$", (z2+zeta2)/2 + (-0.2, 0), W);
+
+// Draw arcs C₁ and C₂ on the circle
+// C₁: from ζ₁ to ζ₂ (not intersecting negative axis)
+real angle1 = atan2(zeta1.y, zeta1.x);
+real angle2 = atan2(zeta2.y, zeta2.x);
+
+// Ensure we go the shorter way that avoids negative axis
+if (angle2 < angle1) angle2 += 2*pi;
+path arc_C1 = arc(origin, radius, degrees(angle1), degrees(angle2));
+draw(arc_C1, heavygreen+0.7bp, Arrow(Relative(0.5)));
+label("$C_1$", radius*(cos((angle1+angle2)/2), sin((angle1+angle2)/2)) + (0.2, 0.1), align=NoAlign, heavygreen);
+
+// C₂: from ζ₂ to ζ₁ (the complementary arc, intersecting positive axis)
+path arc_C2 = arc(origin, radius, degrees(angle2), degrees(angle1+2*pi));
+draw(arc_C2, orange+0.7bp, Arrow(Relative(0.5)));
+label("$C_2$", radius*(cos((angle1+angle2)/2 + pi), sin((angle1+angle2)/2 + pi)) + (-0.2, -0.1), align=NoAlign, orange);
+
+// Add origin point
+dot(origin, black+2bp);
+label("$0$", origin + (-0.15, -0.15), SW);
+\end{asy}
+\end{figure}
+\end{proof}
+
+This proof is a brilliant example of when analytical proofs trump topological ones. Had we started off by defining winding numbers entirely topologically, we would have had to digress into homotopy invariance, differential forms, and Stokes' Theorem, then proven the degree formula to relate the topological and analytical definitions of winding number, and only then prove the integral formula. Along with all of this, we would have to define some more abstract notion of orientation in terms of equivalence classes of bases of tangent spaces to smooth manifolds, rather than sticking to the simple, easily visualized concepts of left and right. All of this is very doable, beautiful in its own way, and is the more general and correct course of action to perform analysis on higher-dimensional manifolds. But we do not need any of it for complex analysis. See the Appendix for a glimpse at the topological machinery.
+
+\section{The Integral Formula}
+We are now ready to state and prove Cauchy's Integral Formula.
+
+\begin{theorem}[Cauchy's Integral Formula]
+\label{thm:cauchy-integral-formula}
+Suppose that $f(z)$ is analytic in an open disk $\Delta$, and let $\gamma$ be a closed curve in $\Delta$. For any point $a$ not on $\gamma$, we have $$W(\gamma, a) \cdot f(a)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(z)dz}{z-a}.$$
+\end{theorem}
+\begin{proof}
+If $a \notin \Delta$, then $W(\gamma, a)=0$ and $\int_{\gamma} \frac{f(z)dz}{z-a}=0$ since the integrand is analytic in $\Delta$, so the theorem is vacuously true regardless of what value $f$ takes on at $a$. We may therefore assume that $a \in \Delta$.
+
+We apply Cauchy's Theorem to the function $$F(z)=\dfrac{f(z)-f(a)}{z-a}$$, which is analytc for all $z \neq a$. For $z \neq a$ it is not defined, but it satisfies the condition $$\lim_{z \rightarrow a}F(z)(z-a)=\lim_{z \rightarrow a}(f(z)-f(a))=0,$$ which is the condition of Theorem \ref{thm:cauchy-disk-stronger}. We conclude that $$\int_{\gamma} \dfrac{f(z)-f(a)}{z-a}dz=0.$$ This equation can be written in the form $$\int_{\gamma} \dfrac{f(z)dz}{z-a}=f(a)\int_{\gamma} \dfrac{dz}{z-a},$$ and we observe that the integral on the right-hand side is by definition $2\pi i \cdot W(\gamma, a)$. This completes the proof.
+\end{proof}
+
+The most common application of Cauchy's Integral Formula is the case $W(\gamma, a)=1$; we have then $$f(a)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(z)dz}{z-a},$$ and this we interpret as a \emph{representation formula}. Indeed, it permits us to compute $f(a)$ as soon as the values of $f(z)$ on $\gamma$ are given, together with the fact that $f(z)$ is analytic in $\Delta$. Letting $a$ take different values, provided that its winding number with respect to $\gamma$ remains $1$, we can treat it as a parameter in and of itself, and change the notation to write $$f(z)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(\zeta)d\zeta}{\zeta-z}.$$ It is this formula that is usually referred to as \emph{Cauchy's Integral Formula}. We must remember that it is valid only for points $z$ in the region determined by $\gamma$ for which $W(\gamma, z)=1$, and that we have proved it only when $f(z)$ is analytic in a disk.
+
+Cauchy's Integral Formula forms part of a class of results that all end up, in some way or another, extrapolating information from the boundary of a domain to its interior. At the risk of sounding like a broken record, we allude yet again to topology and the classic theorems of Green and Stokes as well as the Boundary Theorem from intersection theory. 
