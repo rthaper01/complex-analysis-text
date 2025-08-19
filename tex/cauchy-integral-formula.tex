@@ -150,6 +150,89 @@ If $a \notin \Delta$, then $W(\gamma, a)=0$ and $\int_{\gamma} \frac{f(z)dz}{z-a
 We apply Cauchy's Theorem to the function $$F(z)=\dfrac{f(z)-f(a)}{z-a}$$, which is analytc for all $z \neq a$. For $z \neq a$ it is not defined, but it satisfies the condition $$\lim_{z \rightarrow a}F(z)(z-a)=\lim_{z \rightarrow a}(f(z)-f(a))=0,$$ which is the condition of Theorem \ref{thm:cauchy-disk-stronger}. We conclude that $$\int_{\gamma} \dfrac{f(z)-f(a)}{z-a}dz=0.$$ This equation can be written in the form $$\int_{\gamma} \dfrac{f(z)dz}{z-a}=f(a)\int_{\gamma} \dfrac{dz}{z-a},$$ and we observe that the integral on the right-hand side is by definition $2\pi i \cdot W(\gamma, a)$. This completes the proof.
 \end{proof}
 
-The most common application of Cauchy's Integral Formula is the case $W(\gamma, a)=1$; we have then $$f(a)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(z)dz}{z-a},$$ and this we interpret as a \emph{representation formula}. Indeed, it permits us to compute $f(a)$ as soon as the values of $f(z)$ on $\gamma$ are given, together with the fact that $f(z)$ is analytic in $\Delta$. Letting $a$ take different values, provided that its winding number with respect to $\gamma$ remains $1$, we can treat it as a parameter in and of itself, and change the notation to write $$f(z)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(\zeta)d\zeta}{\zeta-z}.$$ It is this formula that is usually referred to as \emph{Cauchy's Integral Formula}. We must remember that it is valid only for points $z$ in the region determined by $\gamma$ for which $W(\gamma, z)=1$, and that we have proved it only when $f(z)$ is analytic in a disk.
+The most common application of Cauchy's Integral Formula is the case $W(\gamma, a)=1$; we have then $$f(a)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(z)dz}{z-a},$$ and this we interpret as a \emph{representation formula}. Indeed, it permits us to compute $f(a)$ as soon as the values of $f(z)$ on $\gamma$ are given, together with the fact that $f(z)$ is analytic in $\Delta$. Letting $a$ take different values, provided that its winding number with respect to $\gamma$ remains $1$, we can treat it as a parameter in and of itself, and change the notation to write
+\begin{equation}
+\label{eq:representation-formula}
+f(z)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(\zeta)d\zeta}{\zeta-z}.
+\end{equation} It is this formula that is usually referred to as \emph{Cauchy's Integral Formula}. We must remember that it is valid only for points $z$ in the region determined by $\gamma$ for which $W(\gamma, z)=1$, and that we have proved it only when $f(z)$ is analytic in a disk.
 
-Cauchy's Integral Formula forms part of a class of results that all end up, in some way or another, extrapolating information from the boundary of a domain to its interior. At the risk of sounding like a broken record, we allude yet again to topology and the classic theorems of Green and Stokes as well as the Boundary Theorem from intersection theory. 
+Cauchy's Integral Formula forms part of a class of results that all end up, in some way or another, extrapolating information from the boundary of a domain to its interior. At the risk of sounding like a broken record, we allude yet again to topology and the classic theorems of Green and Stokes as well as the Boundary Theorem from intersection theory.
+
+\begin{exercise}
+Compute the following integrals.
+\begin{enumerate}
+\item[(a)] $\int_{\abs{z}=1}\dfrac{e^z}{z}dz$.
+\item[(b)] $\int_{\abs{z}=2} \dfrac{dz}{z^2+1}$.
+\item[(c)] $\int_{\abs{z}=\rho}\dfrac{\abs{dz}}{\abs{z-a}^2}$.
+\end{enumerate}
+
+\begin{sol}
+$ $
+\begin{enumerate}
+\item[(a)] The answer is $\boxed{2\pi i}$. Since $e^z$ is analytic everywhere, by Cauchy's Integral Formula, we have $$\int_{\abs{z}=1}\dfrac{e^z}{z}dz=2\pi i \cdot W(\{\abs{z}=1\},0) \cdot e^0=1 \cdot 1=2\pi i.$$
+\item[(b)] The answer is $\boxed{0}$. Decompose the integrand into partial fractions: $$\int_{\abs{z}=2} \dfrac{dz}{z^2+1}=\dfrac{1}{2i}\left(\int_{\abs{z}=2}\dfrac{dz}{z-i}-\int_{\abs{z}=2}\dfrac{dz}{z+i}\right).$$ Obviously, the constant function $f(z)=1$ is analytic everywhere, so we get \begin{align*}
+\int_{\abs{z}=2}\dfrac{dz}{z-i} &= 2\pi i \cdot W(\{\abs{z}=2\},i) \cdot f(i) &=2\pi i \cdot 1 \cdot 1=2\pi i,\\
+\int_{\abs{z}=2}\dfrac{dz}{z+i} &= 2\pi i \cdot W(\{\abs{z}=2\},-i) \cdot f(-i) &=2\pi i \cdot 1 \cdot 1 &=2\pi i.
+\end{align*}
+The winding number of any point inside the circle is always $1$.
+
+Hence, the two integrals over the partial fractions cancel, and we are left with $0$.
+\item[(c)] The answer is $\boxed{\dfrac{2\pi r}{\abs{\rho^2-\abs{a}^2}}}$.
+
+This is a fairly involved computational problem. The key insight is to express the real-valued arc-length integral as a complex integral so that we can apply Cauchy's Integral Formula.
+
+First, observe that, on the circle $\abs{z}=\rho$, parameterized as $z(t)=\rho e^{it}$, $0 \le t \le 2\pi$, we have
+\begin{align*}
+\abs{dz} &=\abs{z'(t)}dt \\
+&=\rho dt \\
+&=-i\rho \cdot i dt \\
+&=-i \rho \cdot \dfrac{i \rho e^{it}}{\rho e^{it}}dt \\
+&=-i \rho \cdot \dfrac{dz}{z}.
+\end{align*}
+Hence, we can reframe the integral as \begin{align*}
+\int_{\abs{z}-\rho}\dfrac{\abs{dz}}{\abs{z-a}^2} &= -i \rho\int_{\abs{z}=\rho}\dfrac{dz}{z\abs{z-a}^2} \\
+&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(z-a)(\overline{z}-\overline{a})} \\
+&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(z\overline{z}-\overline{a}z-a\overline{z}+a\overline{a})} \\
+&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(\rho^2-\overline{a}z-a\overline{z}+\abs{a}^2)} \\
+&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{-\overline{a}z^2+(\rho^2+\abs{a}^2)z-a\rho^2} \\
+&=ir \int_{\abs{z}=\rho}\dfrac{dz}{\overline{a}z^2+(\rho^2-\abs{a}^2)z+a\rho^2}.
+\end{align*}
+Let us now decompose the denominator into partial fractions. The roots of the quadratic polynomial $\overline{a}z^2-(\rho^2+\abs{a}^2)z+a\rho^2$, by the quadratic formula, are
+\begin{align*}
+z &=\dfrac{\rho^2+\abs{a}^2 \pm \sqrt{(\rho^2+\abs{a}^2)^2-4\overline{a}a\rho^2}}{2\overline{a}} \\
+&=\dfrac{\rho^2+\abs{a}^2 \pm \sqrt{(\rho^2+\abs{a}^2)^2-4\abs{a}^2\rho^2}}{2\overline{a}} \\
+&=\dfrac{\rho^2+\abs{a}^2 \pm (\rho^2-\abs{a}^2)}{2\overline{a}} \\
+&=a, \dfrac{\rho^2}{\overline{a}}.
+\end{align*}
+These are two points that are symmetric about the circle $\abs{z}=\rho$. The partial fraction decomposition of $\frac{1}{\overline{a}\left(z-a\right)\left(z-\rho^2/\overline{a}\right)}$ is $$\dfrac{1}{\rho^2-\abs{a}^2}\left(\dfrac{1}{z-\frac{\rho^2}{\overline{a}}}-\dfrac{1}{z-a}\right).$$ We consider two cases: (1) $\abs{a}<\rho$ and (2) $\abs{a}>\rho$. In the first case, $\rho^2/\overline{a}$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=0$, $W(\{\abs{z}=\rho\},a)=1$, and the integral is equal to
+\begin{align*}
+\dfrac{ir}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{ir}{\rho^2-\abs{a}^2}\left(0-2\pi i\right) \\
+&=\frac{2\pi r}{\rho^2-\abs{a}^2}.
+\end{align*}
+In case (2), $a$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=1$, $W(\{\abs{z}=\rho\},a)=0$, and the integral is equal to
+\begin{align*}
+\dfrac{ir}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{ir}{\rho^2-\abs{a}^2}\left(2\pi i-0\right) \\
+&=-\frac{2\pi r}{\rho^2-\abs{a}^2}.
+\end{align*}
+In either case, the positive value of $\rho^2-\abs{a}^2$ is taken, so we can combine both cases to get a final answer of $$\dfrac{2\pi r}{\abs{\rho^2-\abs{a}^2}}.$$
+\end{enumerate}
+\end{sol}
+\end{exercise}
+
+\section{Higher Derivatives}
+The representation formula \ref{eq:representation-formula} gives us an ideal tool for the study of the local properties of analytic functions. In particular, we can now show that an analytic function has derivatives of all orders, which are then also analytic.
+
+We consider a function $f(z)$ which is analytic in an arbitrary region $\Omega$. To a point $a \in \Omega$ we determine an $\eps$-neighborhood $\Delta$ contained in $\Omega$, and in $\Delta$ a circle $C$ about $a$ (this is just using the fact that an open set contains an open ball around each point). Theorem \ref{thm:cauchy-integral-formula} can be applied to $f(z)$ in $\Delta$. Since $W(C,a)=1$ and the winding number is locally constant, we have $W(C,z)=1$ for all points $z$ inside of $C$. For such $z$ we obtain by \ref{eq:representation-formula} $$f(z)=\dfrac{1}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{\zeta-z}.$$ Provided that the integral can be differentiated under the sign of integration we find
+\begin{equation}
+f'(z)=\dfrac{1}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{(\zeta-z)^2}
+\end{equation}
+and 
+\begin{equation}
+f^{(n)}(z)=\dfrac{n!}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{(\zeta-z)^{n+1}}.
+\end{equation}
+If the differentations can be justified, we shall have proved the existence of all derivatives at the points inside of $C$. Since every point in $\Omega$ lies inside of some such circle, the existence will be proved in the whole region $\Omega$. At the same time, we shall have obtained a convenient representation formula for the derivatives.
+
+For the justification we could either refer to corresponding theorems in the real case, or we could prove a general theorem concerning line integrals whose integrand depends analytically on a parameter. Actually, we shall prove only the following lemma which is all we need in the present case:
+\begin{lemma}
+Suppose that $\varphi(\zeta)$ is continuous on the arc $\gamma$. Then the function $$F_n(z)=\int_{\gamma}\dfrac{\varphi(\zeta)d\zeta}{(\zeta-z)^n}$$ is analytic in each of the regions determined by $\gamma$, and its derivative is $F_n'(z)=nF_{n+1}(z)$.
+\end{lemma}
