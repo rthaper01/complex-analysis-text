@@ -5,12 +5,12 @@ Through a very simple application of Cauchy's theorem it becomes possible to rep
 As we declared at the beginning of this part on complex integration, we will prove Cauchy's Integral Formula purely analytically. That is, we will define winding number as an analytical, rather than a topological, quantity. For completeness, and to illustrate the connection between the two definitions, the Appendix, we will include a full topological proof of this quintessential theorem.
 
 \section{Winding Number}
-Central to many questions in function theory and physics (particularly string theory) is the notion of a curve winding around a point not on it. let us make this idea precise, inspired by the following lemma:
+Central to many questions in function theory and physics (particularly string theory) is the notion of a curve winding around a point not on it. Let us make this idea precise, inspired by the following lemma:
 \begin{lemma}
 If the piecewise differentiable closed curve $\gamma$ does not pass through the point $a$, then the value of the integral $$\int_{\gamma} \dfrac{dz}{z-a}$$ is a multiple of $2\pi i$.
 \end{lemma}
 \begin{proof}
-This lemma may seem trivial, for we can write $$\int_{\gamma}\dfrac{dz}{z-a}=\int_{\gamma} d(\log(z-a))=\int_{\gamma}d(\log \abs{z-a})+i\int_{\gamma}d(\arg(z-a)).$$ When $z$ describes a closed durve, $\log\abs{z-a}$ returns to its intial value and $\arg(z-a)$ increases or decreases by a multiple of $2\pi$. This would seem to imply the lemma, but more careful thought shows that the reasoning is of no value unless we define $\arg(z-a)$ in a unique way. We could do this, but there is an easier way to proceed.
+This lemma may seem trivial, for we can write $$\int_{\gamma}\dfrac{dz}{z-a}=\int_{\gamma} d(\log(z-a))=\int_{\gamma}d(\log \abs{z-a})+i\int_{\gamma}d(\arg(z-a)).$$ When $z$ describes a closed curve, $\log\abs{z-a}$ returns to its initial value and $\arg(z-a)$ increases or decreases by a multiple of $2\pi$. This would seem to imply the lemma, but more careful thought shows that the reasoning is of no value unless we define $\arg(z-a)$ in a unique way. We could do this, but there is an easier way to proceed.
 
 The simplest proof is computational, exploiting the theory of first-order ordinary differential equations. If the equation of $\gamma$ is $z=z(t)$, $\alpha \le t \le \beta$, let us consider the function $$h(t)=\int_{\alpha}^{t}\dfrac{z'(t)}{z(t)-a}dt.$$ It is defined and continuous on the closed interval $[\alpha, \beta]$, and it has the derivative $$h'(t)=\dfrac{z'(t)}{z(t)-a}$$ whenever $z'(t)$ is continuous. From this equation it follows that the derivative of $e^{-h(t)}(z(t)-a)$ is $$e^{-h(t)} \cdot z'(t)-h'(t)e^{-h(t)}(z(t)-a)=e^{-h(t)} \cdot z'(t)-e^{-h(t)} \cdot z'(t)=0$$ except perhaps at a finite number of points, and since this function is continuous it must reduce to a constant.
 
@@ -40,12 +40,20 @@ Let $z_1,z_2$ be two points on a closed curve $\gamma$ which does not pass throu
 \end{lemma}
 
 \begin{proof}
-The proof, as is usually the case in complex analysis, is quite beautiful and elementary. Draw the half lines $L_1$ and $L_2$ from the origin through $z_1$ and $z_2$. Let $\zeta_1,\zeta_2$ be the points in which $L_1,L_2$ intersect a circle $C$ about the origin. If $C$ is described in the positive sense, the arc $C_1$ from $\zeta_1$ to $\zeta_2$ does not intersect the negative axis, and the arc $C_2$ from $\zeta_2$ to $\zeta_1$ does intersect the positive axis (since $z_1$ lies in the lower half plane while $z_2$ lies in the upper half plane). Denote the directed line segments from $z_1$ to $\zeta_1$ and from $z_2$ to $\zeta_2$ by $\delta_1$ and $\delta_2$, respectively. Introducing the closed curves $\sigma_1=\gamma_1+\delta_2-C_1-\delta_1$ and $\sigma_2=\gamma_2+\delta_1-C_2-\delta_2$, we find that $$W(\gamma, 0)=W(C_1,0)+W(C_2,0)+W(\sigma_1,0)+W(\sigma_2,0)-W(\delta_2,0)+W(\delta_1,0)+W(\delta_2,0)-W(\delta_1,0)=W(C,0)+W(\sigma_1,0)+W(\sigma_2,0).$$ But $\sigma_1$ does not meet the negative axis. Hence the origin belongs to the unbounded region determined by $\sigma_1$, and therefore $W(\sigma_1,0)=0$. Similarly, $\sigma_2$ does not meet the positive axis, so $W(\sigma_2,0)=0$. Finally, since $C$ is a circle about the origin, $W(C,0)=1$. Thus we conclude that $$W(\gamma, 0)=1+0+0=1.$$
+The proof, as is usually the case in complex analysis, is quite beautiful and elementary. Draw the half lines $L_1$ and $L_2$ from the origin through $z_1$ and $z_2$. Let $\zeta_1,\zeta_2$ be the points in which $L_1,L_2$ intersect a circle $C$ about the origin. If $C$ is described in the positive sense, the arc $C_1$ from $\zeta_1$ to $\zeta_2$ does not intersect the negative axis, and the arc $C_2$ from $\zeta_2$ to $\zeta_1$ does intersect the positive axis (since $z_1$ lies in the lower half plane while $z_2$ lies in the upper half plane). Denote the directed line segments from $z_1$ to $\zeta_1$ and from $z_2$ to $\zeta_2$ by $\delta_1$ and $\delta_2$, respectively. Introducing the closed curves $\sigma_1=\gamma_1+\delta_2-C_1-\delta_1$ and $\sigma_2=\gamma_2+\delta_1-C_2-\delta_2$, we find that 
+\begin{align*}
+W(\gamma, 0) &= W(C_1,0)+W(C_2,0)+W(\sigma_1,0)+W(\sigma_2,0) \\
+&\quad -W(\delta_2,0)+W(\delta_1,0)+W(\delta_2,0)-W(\delta_1,0) \\
+&= W(C,0)+W(\sigma_1,0)+W(\sigma_2,0).
+\end{align*} But $\sigma_1$ does not meet the negative axis. Hence the origin belongs to the unbounded region determined by $\sigma_1$, and therefore $W(\sigma_1,0)=0$. Similarly, $\sigma_2$ does not meet the positive axis, so $W(\sigma_2,0)=0$. Finally, since $C$ is a circle about the origin, $W(C,0)=1$. Thus we conclude that $$W(\gamma, 0)=1+0+0=1.$$
 
 \begin{figure}[h]
 \centering
 \begin{asy}
 import graph;
+// Custom pens (not built-in) to avoid undefined identifier errors
+pen heavygreen = rgb(0,0.55,0);
+pen orange = rgb(1,0.55,0);
 size(10cm);
 
 // Set up coordinate system
@@ -147,7 +155,7 @@ Suppose that $f(z)$ is analytic in an open disk $\Delta$, and let $\gamma$ be a 
 \begin{proof}
 If $a \notin \Delta$, then $W(\gamma, a)=0$ and $\int_{\gamma} \frac{f(z)dz}{z-a}=0$ since the integrand is analytic in $\Delta$, so the theorem is vacuously true regardless of what value $f$ takes on at $a$. We may therefore assume that $a \in \Delta$.
 
-We apply Cauchy's Theorem to the function $$F(z)=\dfrac{f(z)-f(a)}{z-a}$$, which is analytc for all $z \neq a$. For $z \neq a$ it is not defined, but it satisfies the condition $$\lim_{z \rightarrow a}F(z)(z-a)=\lim_{z \rightarrow a}(f(z)-f(a))=0,$$ which is the condition of Theorem \ref{thm:cauchy-disk-stronger}. We conclude that $$\int_{\gamma} \dfrac{f(z)-f(a)}{z-a}dz=0.$$ This equation can be written in the form $$\int_{\gamma} \dfrac{f(z)dz}{z-a}=f(a)\int_{\gamma} \dfrac{dz}{z-a},$$ and we observe that the integral on the right-hand side is by definition $2\pi i \cdot W(\gamma, a)$. This completes the proof.
+We apply Cauchy's Theorem to the function $$F(z)=\dfrac{f(z)-f(a)}{z-a}$$, which is analytic for all $z \neq a$. At $z=a$ it is not defined, but it satisfies the condition $$\lim_{z \rightarrow a}F(z)(z-a)=\lim_{z \rightarrow a}(f(z)-f(a))=0,$$ which is the condition of Theorem \ref{thm:cauchy-disk-stronger}. We conclude that $$\int_{\gamma} \dfrac{f(z)-f(a)}{z-a}dz=0.$$ This can be written as $$\int_{\gamma} \dfrac{f(z)dz}{z-a}=f(a)\int_{\gamma} \dfrac{dz}{z-a},$$ and the integral on the right-hand side is $2\pi i \cdot W(\gamma, a)$. This completes the proof.
 \end{proof}
 
 The most common application of Cauchy's Integral Formula is the case $W(\gamma, a)=1$; we have then $$f(a)=\dfrac{1}{2\pi i}\int_{\gamma} \dfrac{f(z)dz}{z-a},$$ and this we interpret as a \emph{representation formula}. Indeed, it permits us to compute $f(a)$ as soon as the values of $f(z)$ on $\gamma$ are given, together with the fact that $f(z)$ is analytic in $\Delta$. Letting $a$ take different values, provided that its winding number with respect to $\gamma$ remains $1$, we can treat it as a parameter in and of itself, and change the notation to write
@@ -170,18 +178,17 @@ Compute the following integrals.
 $ $
 \begin{enumerate}
 \item[(a)] The answer is $\boxed{2\pi i}$. Since $e^z$ is analytic everywhere, by Cauchy's Integral Formula, we have $$\int_{\abs{z}=1}\dfrac{e^z}{z}dz=2\pi i \cdot W(\{\abs{z}=1\},0) \cdot e^0=1 \cdot 1=2\pi i.$$
-\item[(b)] The answer is $\boxed{0}$. Decompose the integrand into partial fractions: $$\int_{\abs{z}=2} \dfrac{dz}{z^2+1}=\dfrac{1}{2i}\left(\int_{\abs{z}=2}\dfrac{dz}{z-i}-\int_{\abs{z}=2}\dfrac{dz}{z+i}\right).$$ Obviously, the constant function $f(z)=1$ is analytic everywhere, so we get \begin{align*}
-\int_{\abs{z}=2}\dfrac{dz}{z-i} &= 2\pi i \cdot W(\{\abs{z}=2\},i) \cdot f(i) &=2\pi i \cdot 1 \cdot 1=2\pi i,\\
-\int_{\abs{z}=2}\dfrac{dz}{z+i} &= 2\pi i \cdot W(\{\abs{z}=2\},-i) \cdot f(-i) &=2\pi i \cdot 1 \cdot 1 &=2\pi i.
+\item[(b)] The answer is $\boxed{0}$. Decompose the integrand into partial fractions: $$\int_{\abs{z}=2} \dfrac{dz}{z^2+1}=\dfrac{1}{2i}\left(\int_{\abs{z}=2}\dfrac{dz}{z-i}-\int_{\abs{z}=2}\dfrac{dz}{z+i}\right).$$ Since $f(z)=1$ is analytic everywhere,
+\begin{align*}
+\int_{\abs{z}=2}\dfrac{dz}{z-i} &= 2\pi i \cdot W(\{\abs{z}=2\},i)=2\pi i,\\
+\int_{\abs{z}=2}\dfrac{dz}{z+i} &= 2\pi i \cdot W(\{\abs{z}=2\},-i)=2\pi i.
 \end{align*}
-The winding number of any point inside the circle is always $1$.
-
-Hence, the two integrals over the partial fractions cancel, and we are left with $0$.
-\item[(c)] The answer is $\boxed{\dfrac{2\pi r}{\abs{\rho^2-\abs{a}^2}}}$.
+The winding number of any point inside the circle is $1$, so the two terms cancel and the integral is $0$.
+\item[(c)] The answer is $\boxed{\dfrac{2\pi \rho}{\abs{\rho^2-\abs{a}^2}}}$.
 
 This is a fairly involved computational problem. The key insight is to express the real-valued arc-length integral as a complex integral so that we can apply Cauchy's Integral Formula.
 
-First, observe that, on the circle $\abs{z}=\rho$, parameterized as $z(t)=\rho e^{it}$, $0 \le t \le 2\pi$, we have
+First, observe that on the circle $\abs{z}=\rho$, parameterized as $z(t)=\rho e^{it}$, $0 \le t \le 2\pi$, we have
 \begin{align*}
 \abs{dz} &=\abs{z'(t)}dt \\
 &=\rho dt \\
@@ -189,32 +196,33 @@ First, observe that, on the circle $\abs{z}=\rho$, parameterized as $z(t)=\rho e
 &=-i \rho \cdot \dfrac{i \rho e^{it}}{\rho e^{it}}dt \\
 &=-i \rho \cdot \dfrac{dz}{z}.
 \end{align*}
-Hence, we can reframe the integral as \begin{align*}
-\int_{\abs{z}-\rho}\dfrac{\abs{dz}}{\abs{z-a}^2} &= -i \rho\int_{\abs{z}=\rho}\dfrac{dz}{z\abs{z-a}^2} \\
-&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(z-a)(\overline{z}-\overline{a})} \\
-&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(z\overline{z}-\overline{a}z-a\overline{z}+a\overline{a})} \\
-&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{z(\rho^2-\overline{a}z-a\overline{z}+\abs{a}^2)} \\
-&=-ir \int_{\abs{z}=\rho}\dfrac{dz}{-\overline{a}z^2+(\rho^2+\abs{a}^2)z-a\rho^2} \\
-&=ir \int_{\abs{z}=\rho}\dfrac{dz}{\overline{a}z^2+(\rho^2-\abs{a}^2)z+a\rho^2}.
+Hence, we can reframe the integral as
+\begin{align*}
+\int_{\abs{z}=\rho}\dfrac{\abs{dz}}{\abs{z-a}^2} &= -i \rho\int_{\abs{z}=\rho}\dfrac{dz}{z\abs{z-a}^2} \\
+&=-i\rho \int_{\abs{z}=\rho}\dfrac{dz}{z(z-a)(\overline{z}-\overline{a})} \\
+&=-i\rho \int_{\abs{z}=\rho}\dfrac{dz}{z(z\overline{z}-\overline{a}z-a\overline{z}+a\overline{a})} \\
+&=-i\rho \int_{\abs{z}=\rho}\dfrac{dz}{z(\rho^2-\overline{a}z-a\overline{z}+\abs{a}^2)} \\
+&=-i\rho \int_{\abs{z}=\rho}\dfrac{dz}{-\overline{a}z^2+(\rho^2+\abs{a}^2)z-a\rho^2} \\
+&=i\rho \int_{\abs{z}=\rho}\dfrac{dz}{\overline{a}z^2+(\rho^2-\abs{a}^2)z+a\rho^2}.
 \end{align*}
-Let us now decompose the denominator into partial fractions. The roots of the quadratic polynomial $\overline{a}z^2-(\rho^2+\abs{a}^2)z+a\rho^2$, by the quadratic formula, are
+Let us now decompose the denominator into partial fractions. The roots of the quadratic polynomial $\overline{a}z^2-(\rho^2+\abs{a}^2)z+a\rho^2$ are
 \begin{align*}
 z &=\dfrac{\rho^2+\abs{a}^2 \pm \sqrt{(\rho^2+\abs{a}^2)^2-4\overline{a}a\rho^2}}{2\overline{a}} \\
 &=\dfrac{\rho^2+\abs{a}^2 \pm \sqrt{(\rho^2+\abs{a}^2)^2-4\abs{a}^2\rho^2}}{2\overline{a}} \\
 &=\dfrac{\rho^2+\abs{a}^2 \pm (\rho^2-\abs{a}^2)}{2\overline{a}} \\
 &=a, \dfrac{\rho^2}{\overline{a}}.
 \end{align*}
-These are two points that are symmetric about the circle $\abs{z}=\rho$. The partial fraction decomposition of $\frac{1}{\overline{a}\left(z-a\right)\left(z-\rho^2/\overline{a}\right)}$ is $$\dfrac{1}{\rho^2-\abs{a}^2}\left(\dfrac{1}{z-\frac{\rho^2}{\overline{a}}}-\dfrac{1}{z-a}\right).$$ We consider two cases: (1) $\abs{a}<\rho$ and (2) $\abs{a}>\rho$. In the first case, $\rho^2/\overline{a}$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=0$, $W(\{\abs{z}=\rho\},a)=1$, and the integral is equal to
+These are symmetric with respect to the circle $\abs{z}=\rho$. The partial fraction decomposition of $\frac{1}{\overline{a}\left(z-a\right)\left(z-\rho^2/\overline{a}\right)}$ is $$\dfrac{1}{\rho^2-\abs{a}^2}\left(\dfrac{1}{z-\frac{\rho^2}{\overline{a}}}-\dfrac{1}{z-a}\right).$$ Consider the cases (1) $\abs{a}<\rho$ and (2) $\abs{a}>\rho$. In the first case, $\rho^2/\overline{a}$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=0$, $W(\{\abs{z}=\rho\},a)=1$, and the integral equals
 \begin{align*}
-\dfrac{ir}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{ir}{\rho^2-\abs{a}^2}\left(0-2\pi i\right) \\
-&=\frac{2\pi r}{\rho^2-\abs{a}^2}.
+\dfrac{i\rho}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{i\rho}{\rho^2-\abs{a}^2}\left(0-2\pi i\right) \\
+&=\frac{2\pi \rho}{\rho^2-\abs{a}^2}.
 \end{align*}
-In case (2), $a$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=1$, $W(\{\abs{z}=\rho\},a)=0$, and the integral is equal to
+In case (2), $a$ is outside the circle, $W(\{\abs{z}=\rho\},\rho^2/\overline{a})=1$, $W(\{\abs{z}=\rho\},a)=0$, and the integral equals
 \begin{align*}
-\dfrac{ir}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{ir}{\rho^2-\abs{a}^2}\left(2\pi i-0\right) \\
-&=-\frac{2\pi r}{\rho^2-\abs{a}^2}.
+\dfrac{i\rho}{\rho^2-\abs{a}^2}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\frac{\rho^2}{\overline{a}}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) &= \dfrac{i\rho}{\rho^2-\abs{a}^2}\left(2\pi i-0\right) \\
+&=-\frac{2\pi \rho}{\rho^2-\abs{a}^2}.
 \end{align*}
-In either case, the positive value of $\rho^2-\abs{a}^2$ is taken, so we can combine both cases to get a final answer of $$\dfrac{2\pi r}{\abs{\rho^2-\abs{a}^2}}.$$
+In either case we take the positive value of $\rho^2-\abs{a}^2$, giving the unified answer $$\dfrac{2\pi \rho}{\abs{\rho^2-\abs{a}^2}}.$$
 \end{enumerate}
 \end{sol}
 \end{exercise}
@@ -224,15 +232,141 @@ The representation formula \ref{eq:representation-formula} gives us an ideal too
 
 We consider a function $f(z)$ which is analytic in an arbitrary region $\Omega$. To a point $a \in \Omega$ we determine an $\eps$-neighborhood $\Delta$ contained in $\Omega$, and in $\Delta$ a circle $C$ about $a$ (this is just using the fact that an open set contains an open ball around each point). Theorem \ref{thm:cauchy-integral-formula} can be applied to $f(z)$ in $\Delta$. Since $W(C,a)=1$ and the winding number is locally constant, we have $W(C,z)=1$ for all points $z$ inside of $C$. For such $z$ we obtain by \ref{eq:representation-formula} $$f(z)=\dfrac{1}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{\zeta-z}.$$ Provided that the integral can be differentiated under the sign of integration we find
 \begin{equation}
+\label{eq:first-derivative}
 f'(z)=\dfrac{1}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{(\zeta-z)^2}
 \end{equation}
 and 
 \begin{equation}
+\label{eq:higher-derivatives}
 f^{(n)}(z)=\dfrac{n!}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{(\zeta-z)^{n+1}}.
 \end{equation}
 If the differentations can be justified, we shall have proved the existence of all derivatives at the points inside of $C$. Since every point in $\Omega$ lies inside of some such circle, the existence will be proved in the whole region $\Omega$. At the same time, we shall have obtained a convenient representation formula for the derivatives.
 
 For the justification we could either refer to corresponding theorems in the real case, or we could prove a general theorem concerning line integrals whose integrand depends analytically on a parameter. Actually, we shall prove only the following lemma which is all we need in the present case:
 \begin{lemma}
+\label{lem:derivative-integral}
 Suppose that $\varphi(\zeta)$ is continuous on the arc $\gamma$. Then the function $$F_n(z)=\int_{\gamma}\dfrac{\varphi(\zeta)d\zeta}{(\zeta-z)^n}$$ is analytic in each of the regions determined by $\gamma$, and its derivative is $F_n'(z)=nF_{n+1}(z)$.
 \end{lemma}
+
+\begin{proof}
+The proof is by induction on $n$.
+
+We prove first that $F_1(z)$ is continuous. Let $z_0$ be a point not on $\gamma$, and choose the neighborhood $\abs{z-z_0}<\delta$ so that it does not meet $\gamma$ (we know that we can do this because the complement of $\gamma$ is an open set). Restrict $z$ to the smaller neighborhood $\abs{z-z_0}<\delta/2$. Then, we get that \begin{align*}
+\abs{\zeta-z} &\ge \abs{\zeta-z_0}-\abs{z-z_0} \\
+&>\delta-\dfrac{\delta}{2} \\
+&=\dfrac{\delta}{2}
+\end{align*}
+for all $\zeta \in \gamma$. From $$F_1(z)-F_1(z_0)=(z-z_0)\int_{\gamma}\dfrac{\varphi(\zeta)d\zeta}{(\zeta-z)(\zeta-z_0)}$$ we obtain at once by another application of the Triangle Inequality for integrals
+\begin{equation}
+\label{eq:integral-continuous}
+\abs{F_1(z)-F_1(z_0)}\le \abs{z-z_0} \cdot \dfrac{2}{\delta^2}\int_{\gamma}\abs{\varphi} \abs{d\zeta},
+\end{equation} so $F_1$ is Lipschitz-continuous.
+
+The bound in \ref{eq:integral-continuous} allows us to apply the dominated convergence theorem from measure theory to the difference quotient $$\dfrac{F_1(z)-F_1(z_0)}{z-z_0}=\int_{\gamma}\dfrac{\varphi(\zeta)d\zeta}{(\zeta-z)(\zeta-z_0)}.$$ As $z \rightarrow z_0$, we may pass the limit into the integral to get that the left-hand side tends to $F_2(z_0)$. This proves the base case.
+
+Assume now for the inductive hypothesis that $F_{n-1}'(z)=(n-1)F_n(z)$. First, consider the general algebraic identity 
+\begin{align*}
+\dfrac{y^n-x^n}{x^ny^n} &=\dfrac{xy^{n-1}-x^n+y^n-xy^{n-1}}{x^ny^n} \\
+&=\dfrac{xy^{n-1}-x^n+(y-x)y^{n-1}}{x^ny^n} \\
+&=\dfrac{1}{x^{n-1}y}-\dfrac{1}{y^n}+\dfrac{y-x}{x^ny}.
+\end{align*}
+Inserting $\zeta-z_0$ for $y$ and $\zeta-z$ for $x$ multiplying by $\phi$, and taking the integral over $d\zeta$ gives\begin{align*}
+F_n(z)-F_n(z_0) &=\left[\int_{\gamma} \dfrac{\varphi(\zeta)d\zeta}{(\zeta-z)^{n-1}(\zeta-z_0)} - \int_{\gamma} \dfrac{\varphi(\zeta)d\zeta}{(\zeta-z_0)^n}\right]+(z-z_0)\int_{\gamma}\dfrac{\varphi d\zeta}{(\zeta-z)^n(\zeta-z_0)}.
+\end{align*}
+By the inductive hypothesis, the first addend tends to $0$ as $z \rightarrow z_0$, and in the second term the factor of $z-z_0$ is bounded in a neighborhood of $z_0$. Hence, $F_n(z)$ is continuous.
+
+Now, if we divide the identity by $z-z_0$ and let $z$ tend to $z_0$, the quotient in the first term tends to a derivative which by the induction hypothesis equals $(n-1)F_{n+1}(z_0)$. The remaining factor in the second term is continuous, by what we have already proved, and has the limit $F_{n+1}(z_0)$. Hence, $F_n'(z_0)$ exists and equals $nF_{n+1}(z_0)$.
+\end{proof}
+
+It is clear that Lemma \ref{lem:derivative-integral} is just what is needed in order to deduce \ref{eq:first-derivative} and \ref{eq:higher-derivatives} in a rigorous way. We have thus proved that an analytic function has derivatvies of all orders which are analytic and can be represented by the formula \ref{eq:higher-derivatives}.
+
+Among the consequences of this result we'd like to single out two classical theorems.
+
+\begin{theorem}[Morera]
+If $f(z)$ is defined and continuous in a region $\Omega$, and if $\int_{\gamma} f dz=0$ for all closed curves $\gamma$ in $\Omega$, then $f(z)$ is analytic in $\Omega$.
+\end{theorem}
+\begin{proof}
+The hypothesis implies that $f(z)$ is the derivative of an analytic function $F(z)$. We now know that $f$ itself is analytic in $\Omega$.
+\end{proof}
+
+\begin{theorem}[Liouville]
+A function which is analytic and bounded in the whole plane must reduce to a constant.
+\end{theorem}
+\begin{proof}
+We make use of a simple estimate derived from \ref{eq:higher-derivatives}, known as \emph{Cauchy's estimate}. Let the radius of $C$ be $r$, and assume that $\abs{f(\zeta)} \le M$ on $C$. If we apply \ref{eq:higher-derivatives} with $z=a$, we obtain at once
+\begin{align*}
+\abs{f^{(n)}(a)} &= \left\abs{\dfrac{n!}{2\pi i}\int_{C} \dfrac{f(\zeta)d\zeta}{(\zeta-a)^{n+1}}\right} \\
+&\le \dfrac{M n!}{2\pi} \cdot \int_{C}\dfrac{\abs{d\zeta}}{\abs{\zeta-a}^{n+1}} \\
+&=\dfrac{M n!}{2\pi} \cdot \int_{C}\abs{d\zeta}r^{-(n+1)} \\
+&=\dfrac{M n!}{2\pi} \cdot \int_{0}^{2\pi}r^{-n}dt \\
+&=Mn!r^{-n}.
+\end{align*}
+For Liouville's theorem we only need the case $n=1$. The hypothesis means that $\abs{f(\zeta)} \le M$ on all circles. Hence we can let $r$ tend to $\infty$, and the estimate leads to $f'(a)=0$ for all $a$. We conclude that the function is constant.hvfffcvc
+\end{proof}
+Liouville's theorem leads to an almost trivial proof of the Fundamental Theorem of Algebra. Suppose that $P(z)$ is a polynomial of degree $>0$. If $P(z)$ were never zero, the function $1/P(z)$ would be analytic in the whole plane. We know that $P(z) \rightarrow \infty$ for $z \rightarrow \infty$, and therefore $1/P(z)$ tends to zero. This implies boundedness (the absolute value is continuous on the compact Riemann sphere and thus has a finite maximum), and by Liouville's theorem $1/P(z)$ would be constant. But this is absurd, so the equation $F(z)=0$ must have a root.
+
+The reader is free to choose between this purely analytical proof or the topological one by Milnor (1963). Both are quite beautiful.
+
+Cauchy's estimate shows that the successive derivatives of an analytic function cannot be arbitrary; there must always exist an $M$ and an $r$ so that the inequality is fulfilled. In order to make the best use of the inequality it is important that $r$ be judiciously chosen, the object being to minimize the function $M(r)r^{-n}$, where $M(r)$ is the maximum of $\abs{f}$ on $\abs{\zeta-a}=r$.
+
+\begin{exercise}
+Compute
+\begin{enumerate}
+\item[(a)] $\int_{\abs{z}=1}e^z z^{-n}dz$,
+\item[(b)] $\int_{\abs{z}=\rho} \abs{z-a}^{-4}\abs{dz}$ for $\abs{a} \neq \rho$.
+\end{enumerate}
+\begin{sol}
+$ $
+\begin{enumerate}
+\item[(a)] The answer is $\dfrac{2\pi i}{(n-1)!}$.
+
+The function $f(z)=e^z$ is obviously analytic in any disk about $0$, so we have $$\int_{\abs{z}=1}e^z z^{-n}=\dfrac{2\pi i f(0)}{(n-1)!}=\dfrac{2\pi i}{(n-1)!}.$$
+
+\item[(b)] The answer is $\boxed{\dfrac{2\pi \rho (\rho^2+\abs{a}^2)}{\abs{\rho^2-\abs{a}^2}^3}}$.
+
+Recalling the exercise at the end of the last section, we transform the integrand:
+\begin{align*}
+\dfrac{\abs{dz}}{\abs{z-a}^4} &=-i\rho \cdot \dfrac{dz}{(z-a)^2(\overline{a}z-\rho^2)(\overline{z}-\overline{a})}.
+\end{align*}
+The second and third factors in the denominator can be refactored as follows:
+\begin{align*}
+\left(\overline{a}z-\rho^2\right)\left(\overline{z}-\overline{a}\right) &=\overline{a}\rho^2-\overline{a}^2z-\rho^2\overline{z}+\overline{a}\rho^2 \\
+&=2\overline{a}\rho^2-\overline{a}^2z-\dfrac{\rho^4}{z} \\
+&=\dfrac{2\overline{a}\rho^2z-\overline{a}^2z^2-\rho^4}{z} \\
+&=-\dfrac{(\rho^2-\overline{a}z)^2}{z}.
+\end{align*}
+Hence, $$\dfrac{\abs{dz}}{\abs{z-a}^4}=\dfrac{i\rho}{\overline{a}^2} \cdot \dfrac{zdz}{(z-a)^2(z-\rho^2/\overline{a})^2}.$$ For convenience, set $a^*=\rho^2/a$ (it is the point of symmetry of $a$ with respect to the circle $\abs{z}=\rho$). We decompose the integrant into partial fractions as follows:
+\begin{align*}
+\dfrac{z}{(z-a)^2(z-a^*)^2} &=\dfrac{A_1}{z-a}+\dfrac{A_2}{(z-a)^2}+\dfrac{B_1}{z-a^*}+\dfrac{B_2}{(z-a^*)^2} \\
+\then z &=A_1(z-a)(z-a^*)^2+A_2(z-a^*)^2 \\ &+B_1(z-a)^2(z-a^*)+B_2(z-a)^2.
+\end{align*}
+Plugging in $a$ and $a^*$ immediately gives $$A_2=\dfrac{a}{(a-a^*)^2}, \quad B_2=\dfrac{a^*}{(a-a^*)^2}.$$ Next, taking the derivative of both sides yields
+\begin{align*}
+1 &=A_1\left(2(z-a)(z-a^*)+(z-a^*)^2\right)+2A_2(z-a^*) \\ &+B_1(2(z-a)(z-a^*)+(z-a)^2)+2B_2(z-a)^2.
+\end{align*}
+Plugging in $a$ and $a^*$ into the above equation, we get $$A_1=-\dfrac{a+a^*}{(a-a^*)^3}, \quad B_1=\dfrac{a+a^*}{(a-a^*)^3}.$$ Finally, we can write the integral, decomposed into partial fractions, as
+\begin{align*}
+\dfrac{\abs{dz}}{\abs{z-a}^4} &=\dfrac{i\rho}{\overline{a}^2(a-a^*)^3}\left(\int_{\abs{z}=\rho}\dfrac{a(a-a^*)dz}{(z-a)^2}+\int_{\abs{z}=\rho}\dfrac{a^*(a-a^*)dz}{(z-a^*)^2}\right) \\ &+\dfrac{i\rho(a+a^*)}{\overline{a}^2(a-a^*)^3}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-a^*}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) \\
+&=\dfrac{i\rho(a+a^*)}{\overline{a}^2(a-a^*)^3}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-a^*}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) \\
+&=-\dfrac{i\rho(\rho^2+\abs{a}^2)}{(\rho^2-\abs{a}^2)^3}\left(\int_{\abs{z}=\rho}\dfrac{dz}{z-\rho^2/\overline{a}}-\int_{\abs{z}=\rho}\dfrac{dz}{z-a}\right) \\
+&=\dfrac{2\pi \rho (\rho^2+\abs{a}^2)}{\abs{\rho^2-\abs{a}^2}^3},
+\end{align*}
+where in the third step we used Cauchy's formula for higher derivatives to eliminate the integrals in the first term.
+\end{enumerate}
+\end{sol}
+\end{exercise}
+\begin{exercise}
+Show that the successive derivatives of an analytic function at a point can never satisfy $\abs{f^{(n)}(z)}>n! n^n$ for all $n$.
+
+\begin{sol}
+Assume for the sake of contradiction that $\abs{f^{(n)}(z)}>n! n^n$ for all $n$. Since $f$ is analytic at $0$, it is analytic in some closed disk of radius $\eps$ about $0$. On the circle $\abs{z}=\eps$, which is compact, $\abs{f}$ is bounded by some $M$, so by Cauchy's estimate, we have $$Mn!\eps^{-n}>n! n^n \then M>(\eps n)^n$$ for all $n$. But this is impossible since $M$ is finite, so we conclude that $\abs{f^{(n)}(z)}$ cannot be greater than $n! n^n$ for all $n$.
+\end{sol}
+\end{exercise}
+\begin{exercise}
+Prove that a function which is analytic in the whole plane and satisfies an equality $\abs{f(z)}<\abs{z}^n$ for some $n$ and all sufficiently large $\abs{z}$ reduces to a polynomial.
+
+\begin{sol}
+Let $R$ be such that for all $\abs{z} \ge R$, the inequality holds; that is, $\abs{f(z)}<R^n$ on the circle $\abs{z}=R$. Using Cauchy's estimate, we have that $$\abs{f^{(m)}(0)}<m! R^{n-m}.$$ Letting $R \rightarrow \infty$, we see that for $m>n$, $f'(0)=0$. Hence, the Taylor series expansion of $f$ about $0$ terminates, and so $f$ can be written as $$f(z)=\sum_{m=0}^{n}\dfrac{f^{(m)}(0)}{m!}z^m,$$ which is a polynomial of degree at most $n$.
+\end{sol}
+\end{exercise}
+
